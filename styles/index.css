@@ -1,0 +1,50 @@
+.container {
+    max-width: 520px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.card {
+    display: block;
+    padding: 16px;
+
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+
+    text-decoration: none;
+    color: inherit;
+}
+
+.title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
