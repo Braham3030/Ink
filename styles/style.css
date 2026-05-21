@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    --ink-blue: #0342df;
+    --white: #ffffff;
+    --background-color: #f5f7fb;
+    --text-color: #0b1220;
+}
+
+body {
+    font-family: system-ui, Arial, sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+}
