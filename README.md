@@ -44,3 +44,51 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+## Code Coventions
+Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
+
+### Naamgeving
+* Gebruik duidelijke naamgeving, iedereen moet het kunnen begrijpen
+* Gebruik kebab-case voor ids, classes en css variabelen
+* Gebruik camelCase voor JavaScript variabelen en functies
+* Gebruik altijd Engels in de code
+* Wees consistent
+* Gebruik geen afkorting, schrijf alles voluit
+
+### Algemene conventies
+* Gebruik altijd 1 tab voor indentation
+* Gebruik van global.css voor algemene styling die voor meerdere pagina's gelden
+
+### HTML Conventions
+* Schrijf gestructureerde en semantische HTML
+* Niet content onnodig diep nesten
+* Maak gebruik van HTML features als die mogelijk zijn
+* Gebruik dubbele quotes voor attributen
+
+### CSS Conventions
+* Volg de volgorde van HTML in de CSS
+* Structureer code van algemeen naar specifiek
+* Maak gebruik van cascade, inheritance en  utility classes om dubbele code te voorkomen
+* Maak gebruik van nesting voor meer compacte code
+* Maak gebruik van HSL in custom properties om een kleurvolle website te maken
+* Dark-mode optie moet beschikbaar zijn
+
+### Javascript Conventions
+* Gebruik enkele quotes voor strings
+* Geen ; aan het einde van regels
+* Schrijf comments voor eventueel onduidelijke code
+* Gebruik geen ' om variabelen toe te voegen aan een string, gebruik $
+* Gebruik voor variabelen altijd const, tenzij je de waarde later moet veranderen, anders let. Probeer var compleet te vermijden
+
+### Typography
+* Gebruik minimaal 16px voor font-size
+* Gebruik minimaal 1.5 line-height
+* 10 - 12 woorden / 55 -75 karakters per regel
+* Na een paragraaf minimaal 2x de font-size als wit-ruimte
+* Letter-spacing meer dan 0.12 keer de font-size
+* Word-spacing meer dan 0.16 keer de font-size
+
+### Text alignment
+* Standaard links uitgelijnd, met uitzondering midden
