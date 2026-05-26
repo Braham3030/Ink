@@ -37,8 +37,12 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 
 	if (startButton && home && miniGameBlind) {
 	startButton.addEventListener('click', () => {
-		home.style.display = 'none';
-		miniGameBlind.style.display = 'block';
+		// home.style.opacity = '0';
+		// home.style.width = '0%';
+
+		home.classList.add('hidden');
+		// miniGameBlind.style.opacity = '1';
+		// miniGameBlind.style.width = '100%';
 
 		miniGameBlind.classList.remove('hidden');
 	});
@@ -58,12 +62,31 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 
 		> main {
 			/* background-color: green; */
+			display: grid;
 			height: 100%;
 			width: 100%;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr;
 		}
 	}
 
+	#home, #minigame-blind {
+		grid-area: 1 / 1;
+		opacity: 1;
+		width: 100%;
+		height: 100%;
+		visibility: visible;
+		pointer-events: auto;
+
+		transition: opacity 0.6s cubic-bezier(0.33, 0.72, 0, 1.18), width 0.4s cubic-bezier(0.33, 0.72, 0, 1.18);
+	}
+
 	.hidden {
-		display: none;
+		opacity: 0 !important;
+		width: 0%;
+		visibility: hidden !important;
+		pointer-events: none !important;
+
+		transition: opacity 0.6s cubic-bezier(0.33, 0.72, 0, 1.18), width 0.5s cubic-bezier(0.33, 0.72, 0, 1.18), visibility 0.6s cubic-bezier(0.33, 0.72, 0, 1.18) 0.5s;
 	}
 </style>
