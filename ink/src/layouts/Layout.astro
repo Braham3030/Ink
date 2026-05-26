@@ -17,11 +17,35 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 	<body>
 		<Header />
 		<main>
-			<MinigameBlind />
+			<div id="home">
+				<Home />
+			</div>
+			<div id="minigame-blind" class="hidden">
+				<MinigameBlind />
+			</div>
 		</main>
 		<slot />
 	</body>
 </html>
+
+<script>
+	// Javascript dynamically changes the components on the page.
+	const startButton = document.querySelector('.startButton');
+
+	const home = document.getElementById('home');
+	const miniGameBlind = document.getElementById('minigame-blind');
+
+	if (startButton && home && miniGameBlind) {
+	startButton.addEventListener('click', () => {
+		home.style.display = 'none';
+		miniGameBlind.style.display = 'block';
+
+		miniGameBlind.classList.remove('hidden');
+	});
+}
+</script>
+
+
 
 <style>
 	html,
@@ -37,5 +61,9 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 			height: 100%;
 			width: 100%;
 		}
+	}
+
+	.hidden {
+		display: none;
 	}
 </style>
