@@ -31,13 +31,30 @@
     > button {
         margin: 16px auto;
         display: block;
-        padding: 1em 2em;
+        /* padding: 1em 2em; */
         background-color: green;
         color: white;
         border: none;
         border-radius: 8px;
         font-size: 4rem;
         cursor: pointer;
+
+        width: 0%;
+        padding: 0;
+        overflow: hidden;
+
+        animation: expand 0.5s cubic-bezier(0.33, 0.72, 0, 1.18) forwards;
+    }
+}
+
+@keyframes expand {
+    from {
+        width: 0%;
+        padding: 0;
+    }
+    to {
+        width: fit-content;
+        padding: 1em 2em;
     }
 }
 </style>

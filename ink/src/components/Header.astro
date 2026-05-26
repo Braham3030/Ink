@@ -2,10 +2,10 @@
 ---
 
 <header>
-    <button >
-        Bacl
+    <button>
+        ←
     </button>
-    <h1>Welcome to Ink!</h1>
+        <h1>Welcome to Ink!</h1>
 </header>
 
 <style>
@@ -19,6 +19,44 @@
         position: fixed;
         top: 0;
         left: 0;
+        transform: translateY(-100%);
         width: 100%;
+
+        animation: slideDown 0.6s cubic-bezier(0.33, 0.72, 0, 1.18) forwards;
+
+        > button {
+            position: absolute;
+            left: 16px;
+            transform: translateX(-100%);
+            padding: 2px 10px;
+            background-color: transparent;
+            border: 2px solid black;
+            border-radius: 8px;
+            font-size: 3em;
+            cursor: pointer;
+            opacity: 0;
+
+            animation: slideIn 0.6s cubic-bezier(0.33, 0.72, 0, 1.18) forwards 0.3s;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 </style>
