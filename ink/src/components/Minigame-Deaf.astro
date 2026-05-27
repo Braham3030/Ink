@@ -1,0 +1,123 @@
+---
+import { blindItems } from '../data/blindData.ts'
+
+// Randomize the items
+function shuffleArray(array) {
+  return [...array].sort(() => Math.random() - 0.5)
+}
+
+// Select 4 random items for the game
+const selectedItems = shuffleArray(blindItems).slice(0, 4)
+
+// Get the remaining items that were not selected
+const remainingItems = blindItems.filter(
+  (item) => !selectedItems.some((selected) => selected.id === item.id)
+)
+
+// Select 2 wrong answers from the remaining items
+const wrongAnswers = shuffleArray(remainingItems)
+  .slice(0, 2)
+  .map((item) => item.answer)
+
+  // Combine the correct answers with the wrong answers and shuffle them for the draggable texts
+const draggableTexts = shuffleArray([
+  ...selectedItems.map((item) => item.answer),
+  ...wrongAnswers,
+])
+---
+
+<h2>Sleep de betekenis naar het juiste gebaar</h2>>
+
+<div class="game-wrapper">
+  
+  <!-- LEFT SIDE -->
+  <div class="text-column">
+    {
+      draggableTexts.map((text) => (
+        <div
+          class="draggable"
+          draggable="true"
+          data-text={text}
+        >
+          {text}
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="image-column">
+    {
+      selectedItems.map((item) => (
+        <div class="card">
+          <img
+            src={item.image}
+            alt={item.answer}
+          />
+
+          <div
+            class="dropzone"
+            data-answer={item.answer}
+          >
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <button id="done-button">Klaar</button>
+</div>
+
+<style>
+
+</style>
+
+<script>
+  // @ts-nocheck
+  const draggables = document.querySelectorAll('.draggable')
+  const dropzones = document.querySelectorAll('.dropzone')
+
+  let draggedText = ''
+
+  draggables.forEach((item) => {
+    item.addEventListener('dragstart', () => {
+      draggedText = item.dataset.text || ''
+    })
+  })
+
+  dropzones.forEach((zone) => {
+
+    zone.addEventListener('dragover', (e) => {
+      e.preventDefault()
+      zone.classList.add('hovered')
+    })
+
+    zone.addEventListener('dragleave', () => {
+      zone.classList.remove('hovered')
+    })
+
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault()
+
+      zone.classList.remove('hovered')
+
+      const correctAnswer = zone.dataset.answer
+
+      if (draggedText === correctAnswer) {
+
+        zone.textContent = draggedText
+
+        zone.classList.add('correct')
+
+      } else {
+
+        zone.classList.add('wrong')
+
+        setTimeout(() => {
+          zone.classList.remove('wrong')
+        }, 500)
+      }
+    })
+
+  })
+</script>

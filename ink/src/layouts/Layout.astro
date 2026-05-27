@@ -2,6 +2,7 @@
 import Home from '../components/Home.astro';
 import Header from '../components/Header.astro';
 import MinigameBlind from '../components/Minigame-Blind.astro';
+import MinigameDeaf from '../components/Minigame-Deaf.astro';
 import DisabilityChoice from '../components/Disability-choice.astro';
 ---
 
@@ -27,6 +28,9 @@ import DisabilityChoice from '../components/Disability-choice.astro';
 			</div>
 			<div id="minigame-blind" class="hidden">
 				<MinigameBlind />
+			</div>
+			<div id="minigame-deaf">
+				<MinigameDeaf />
 			</div>
 		</main>
 		<slot />
