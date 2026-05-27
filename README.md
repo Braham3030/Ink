@@ -59,7 +59,7 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 
 ### Algemene conventies
 * Gebruik altijd 1 tab voor indentation
-* Gebruik van global.css voor algemene styling die voor meerdere pagina's gelden
+* Gebruik van global.css voor algemene styling die voor meerdere pagina's gelden. Denk aan header grootes en kleuren
 
 ### HTML Conventions
 * Schrijf gestructureerde en semantische HTML
@@ -92,3 +92,11 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 
 ### Text alignment
 * Standaard links uitgelijnd, met uitzondering midden
+
+### Design
+* Er wordt altijd gewerkt vanuit mobile first, daarna responsive voor desktop
+* Er wordt em of rem gebruikt voor elementen die mee moeten schalen met schermformaat. Zoals gap, margin, padding, etc...
+* Px wordt gebruikt voor elementen die niet hoeven mee te schalen. Zoals borders. drop-shadows, specifieke styling dingen
+* vw/vh worden gebruikt voor elementen die mee moeten groeien met het hele scherm. Zoals header, main, footer
+* Deze eenheden kunnen samengevoegd worden in de vorm van clamps. Voor een gemakkelijk responsive design.
+* Er is altijd genoeg ruimte tussen tekst en eventuele border
