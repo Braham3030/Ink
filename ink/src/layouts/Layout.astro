@@ -30,18 +30,20 @@ import { ClientRouter } from 'astro:transitions';
 	const startButton = document.querySelector('.startButton');
 
 	const home = document.getElementById('home');
+	const disabilityChoice = document.getElementById('disability-choice');
 	const miniGameBlind = document.getElementById('minigame-blind');
 
 	if (startButton && home && miniGameBlind) {
 	startButton.addEventListener('click', () => {
-		// home.style.opacity = '0';
-		// home.style.width = '0%';
+		home.style.opacity = '0';
+		home.style.width = '0%';
 
 		home.classList.add('hidden');
+		disabilityChoice.classList.remove('hidden');
 		// miniGameBlind.style.opacity = '1';
 		// miniGameBlind.style.width = '100%';
 
-		miniGameBlind.classList.remove('hidden');
+		// miniGameBlind.classList.remove('hidden');
 	});
 }
 </script> -->
