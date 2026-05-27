@@ -28,3 +28,12 @@ h3 {
 p {
     font-size: var(--p-font-size);
 }
+
+.button-wide {
+    font-size: var(--p-font-size);
+    padding: 1rem 4rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 0 black;
+    background: white;
+}
