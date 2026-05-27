@@ -1,8 +1,5 @@
 ---
-import Home from '../components/Home.astro';
 import Header from '../components/Header.astro';
-import MinigameBlind from '../components/Minigame-Blind.astro';
-import DisabilityChoice from '../components/Disability-choice.astro';
 ---
 
 <!doctype html>
@@ -19,15 +16,6 @@ import DisabilityChoice from '../components/Disability-choice.astro';
 	<body>
 		<Header />
 		<main>
-			<div id="home">
-				<Home />
-			</div>
-			<div id="disability-choice" class="hidden">
-				<DisabilityChoice/>
-			</div>
-			<div id="minigame-blind" class="hidden">
-				<MinigameBlind />
-			</div>
 		</main>
 		<slot />
 	</body>
@@ -38,18 +26,20 @@ import DisabilityChoice from '../components/Disability-choice.astro';
 	const startButton = document.querySelector('.startButton');
 
 	const home = document.getElementById('home');
+	const disabilityChoice = document.getElementById('disability-choice');
 	const miniGameBlind = document.getElementById('minigame-blind');
 
 	if (startButton && home && miniGameBlind) {
 	startButton.addEventListener('click', () => {
-		// home.style.opacity = '0';
-		// home.style.width = '0%';
+		home.style.opacity = '0';
+		home.style.width = '0%';
 
 		home.classList.add('hidden');
+		disabilityChoice.classList.remove('hidden');
 		// miniGameBlind.style.opacity = '1';
 		// miniGameBlind.style.width = '100%';
 
-		miniGameBlind.classList.remove('hidden');
+		// miniGameBlind.classList.remove('hidden');
 	});
 }
 </script>
