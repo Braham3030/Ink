@@ -2,14 +2,12 @@
 ---
 
     <div>
-        <h2>
+        <h1>
             Start de module
-        </h2>
-        <button class="startButton">
-            <span>
+        </h1>
+        <a href="/Blind" class="start-button">
                 Start
-            </span>
-        </button>
+        </a>
     </div>
 
 
@@ -19,25 +17,29 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 20vh;
         /* height: 100%; */
-    > h2 {
+    > h1 {
         /* margin: 0 auto; */
-        font-size: 5rem;
         color: black;
-        border: 2px solid black;
         width: fit-content;
     }
 
-    > button {
+    > .start-button {
         margin: 16px auto;
         display: block;
-        padding: 1em 2em;
         background-color: green;
         color: white;
         border: none;
-        border-radius: 8px;
-        font-size: 4rem;
+        border-radius: 16px;
+        font-size: 3rem;
         cursor: pointer;
+
+        width: fit-content;
+        padding: 1em 2em;
+        overflow: hidden;
+        text-decoration: none;
+
     }
 }
 </style>
