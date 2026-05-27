@@ -1,7 +1,8 @@
 ---
-import Home from '../components/Home.astro';
 import Header from '../components/Header.astro';
-import MinigameBlind from '../components/Minigame-Blind.astro';
+// View-transitions for animations between pages, and less load time.
+// https://docs.astro.build/en/guides/view-transitions/
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -13,23 +14,18 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="stylesheet" href="/styles/style.css" />
 		<meta name="generator" content={Astro.generator} />
+		<ClientRouter />
 		<title>Ink</title>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<div id="home">
-				<Home />
-			</div>
-			<div id="minigame-blind" class="hidden">
-				<MinigameBlind />
-			</div>
 		</main>
 		<slot />
 	</body>
 </html>
 
-<script>
+<!-- <script>
 	// Javascript dynamically changes the components on the page.
 	const startButton = document.querySelector('.startButton');
 
@@ -48,7 +44,7 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 		miniGameBlind.classList.remove('hidden');
 	});
 }
-</script>
+</script> -->
 
 
 
@@ -60,35 +56,7 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
 		padding: 0;
 		width: 100%;
 		height: 100%;
+		background-color: #ffdb79;
 
-		> main {
-			/* background-color: green; */
-			display: grid;
-			margin-top: 10em;
-			height: 100%;
-			width: 100%;
-			grid-template-columns: 1fr;
-			grid-template-rows: 1fr;
-		}
-	}
-
-	#home, #minigame-blind {
-		grid-area: 1 / 1;
-		opacity: 1;
-		width: 100%;
-		height: 100%;
-		visibility: visible;
-		pointer-events: auto;
-
-		transition: opacity 0.6s cubic-bezier(0.33, 0.72, 0, 1.18), width 0.4s cubic-bezier(0.33, 0.72, 0, 1.18);
-	}
-
-	.hidden {
-		opacity: 0 !important;
-		width: 0%;
-		visibility: hidden !important;
-		pointer-events: none !important;
-
-		transition: opacity 0.6s cubic-bezier(0.33, 0.72, 0, 1.18), width 0.5s cubic-bezier(0.33, 0.72, 0, 1.18), visibility 0.6s cubic-bezier(0.33, 0.72, 0, 1.18) 0.5s;
 	}
 </style>

@@ -5,11 +5,9 @@
         <h2>
             Start de module
         </h2>
-        <button class="startButton">
-            <span>
+        <a href="/Blind" class="startButton">
                 Start
-            </span>
-        </button>
+        </a>
     </div>
 
 
@@ -19,6 +17,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 20vh;
         /* height: 100%; */
     > h2 {
         /* margin: 0 auto; */
@@ -28,7 +27,7 @@
         width: fit-content;
     }
 
-    > button {
+    > .startButton {
         margin: 16px auto;
         display: block;
         /* padding: 1em 2em; */
@@ -39,22 +38,11 @@
         font-size: 4rem;
         cursor: pointer;
 
-        width: 0%;
-        padding: 0;
-        overflow: hidden;
-
-        animation: expand 0.5s cubic-bezier(0.33, 0.72, 0, 1.18) forwards;
-    }
-}
-
-@keyframes expand {
-    from {
-        width: 0%;
-        padding: 0;
-    }
-    to {
         width: fit-content;
         padding: 1em 2em;
+        overflow: hidden;
+        text-decoration: none;
+
     }
 }
 </style>
