@@ -1,4 +1,5 @@
 ---
+import Popup from "./Popup.astro"
 ---
 
 <h2>Verwijs Tim naar de WC</h2>
@@ -6,22 +7,25 @@
 <canvas id="game" width="400" height="400"></canvas>
 
 <div class="buttons">
-  <button onclick="runPath(1)">Voorbij de bar naar rechts</button>
-  <button onclick="runPath(2)">Voorbij de bar naar rechts en dan links</button>
-  <button onclick="runPath(3)">De wc's bevinden zich rechtsachter in de kamer</button>
-  <button onclick="runPath(4)">De wc's zijn daar</button>
-  <button class="reset" onclick="resetGame()">Reset</button>
+  <button data-path="1">Voorbij de bar naar rechts</button>
+  <button data-path="2">Voorbij de bar naar rechts en dan links</button>
+  <button data-path="3">De wc's bevinden zich rechtsachter in de kamer</button>
+  <button data-path="4">De wc's zijn daar</button>
+  <button id="resetBtn" class="reset">Reset</button>
+</div>
+
+<div id="popupContainer" class="hidden">
+  <Popup />
 </div>
 
 <style>
 body {
-  background-color: #ffdb79;
+  background: #ffdb79;
   font-family: sans-serif;
 }
 
 h2 {
   text-align: center;
-  color: black;
 }
 
 canvas {
@@ -31,7 +35,6 @@ canvas {
   background: white;
 }
 
-/* container */
 .buttons {
   width: 400px;
   margin: 0 auto;
@@ -40,50 +43,40 @@ canvas {
   gap: 10px;
 }
 
-/* base button */
 button {
   width: 100%;
   padding: 12px;
-  font-size: 14px;
   border: 2px solid black;
   background: white;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-/* hover */
 button:hover {
   background: black;
   color: white;
 }
 
-/* active click */
-button:active {
-  transform: scale(0.98);
+.reset {
+  background: #ddd;
 }
 
-/* reset knop speciaal */
-.reset {
-  background: #d2d2d2;
-  border: 2px solid #000;
+.hidden {
+  display: none;
 }
 </style>
 
 <script is:inline>
 let canvas, ctx
+
 const tileSize = 50
 
 const startPosition = { x: 3, y: 7 }
 const player = { x: 3, y: 7 }
 
-const goal = { x: 6, y: 0, w: 2, h: 2, name: "WC" }
+let locked = false
+let showQuestionMark = false
 
-document.addEventListener("DOMContentLoaded", () => {
-  canvas = document.getElementById("game")
-  ctx = canvas.getContext("2d")
-
-  render()
-})
+let buttons = []
 
 const obstacles = [
   { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
@@ -101,10 +94,45 @@ const obstacles = [
   { x: 6, y: 4, w: 1, h: 3, name: "Bar" }
 ]
 
+const goal = { x: 6, y: 0, w: 2, h: 2 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  canvas = document.getElementById("game")
+  ctx = canvas.getContext("2d")
+
+  setupUI()
+  render()
+})
+
+function setupUI() {
+  buttons = [
+    ...document.querySelectorAll("[data-path]"),
+    document.getElementById("resetBtn")
+  ]
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (locked) return
+
+      if (btn.dataset.path) {
+        runPath(Number(btn.dataset.path))
+      } else {
+        resetGame()
+      }
+    })
+  })
+}
+
+function setLocked(state) {
+  locked = state
+}
+
+/* DRAW */
 function drawGrid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.clearRect(0, 0, 400, 400)
 
   ctx.strokeStyle = "#000"
+  ctx.lineWidth = 1   // 👈 DIT FIXT HET
 
   for (let x = 0; x <= 8; x++) {
     ctx.beginPath()
@@ -123,17 +151,16 @@ function drawGrid() {
 
 function drawObstacles() {
   obstacles.forEach(o => {
-    const x = o.x * tileSize
-    const y = o.y * tileSize
-
     ctx.fillStyle = "#444"
-    ctx.fillRect(x, y, o.w * tileSize, o.h * tileSize)
+    ctx.fillRect(o.x * tileSize, o.y * tileSize, o.w * tileSize, o.h * tileSize)
 
     ctx.strokeStyle = "#000"
-    ctx.strokeRect(x, y, o.w * tileSize, o.h * tileSize)
+    ctx.lineWidth = 2
+    ctx.strokeRect(o.x * tileSize, o.y * tileSize, o.w * tileSize, o.h * tileSize)
 
     ctx.fillStyle = "white"
-    ctx.fillText(o.name, x + 4, y + 16)
+    ctx.font = "12px sans-serif"
+    ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16)
   })
 }
 
@@ -142,21 +169,26 @@ function drawGoal() {
   ctx.fillRect(goal.x * tileSize, goal.y * tileSize, goal.w * tileSize, goal.h * tileSize)
 
   ctx.strokeStyle = "#000"
+  ctx.lineWidth = 3
   ctx.strokeRect(goal.x * tileSize, goal.y * tileSize, goal.w * tileSize, goal.h * tileSize)
-
-  ctx.fillStyle = "black"
-  ctx.fillText("WC", goal.x * tileSize + 4, goal.y * tileSize + 16)
 }
 
 function drawPlayer() {
-  ctx.fillStyle = "blue"
+  const px = player.x * tileSize
+  const py = player.y * tileSize
 
-  ctx.fillRect(
-    player.x * tileSize,
-    player.y * tileSize,
-    tileSize,
-    tileSize
-  )
+  ctx.fillStyle = "blue"
+  ctx.fillRect(px, py, tileSize, tileSize)
+
+  ctx.strokeStyle = "#000"
+  ctx.lineWidth = 3
+  ctx.strokeRect(px, py, tileSize, tileSize)
+
+  if (showQuestionMark) {
+    ctx.fillStyle = "red"
+    ctx.font = "28px sans-serif"
+    ctx.fillText("?", px + 15, py + 32)
+  }
 }
 
 function render() {
@@ -166,73 +198,104 @@ function render() {
   drawPlayer()
 }
 
-function moveTo(path, i = 0) {
-  if (i >= path.length) return
+/* MOVEMENT */
+function moveTo(path, showQ, correct, i = 0) {
+  if (i === 0) setLocked(true)
+
+  if (i >= path.length) {
+    showQuestionMark = showQ
+    render()
+
+    setTimeout(() => showPopup(correct), 200)
+    return
+  }
 
   player.x = path[i].x
   player.y = path[i].y
 
   render()
 
-  setTimeout(() => moveTo(path, i + 1), 300)
+  setTimeout(() => moveTo(path, showQ, correct, i + 1), 200)
 }
 
-/* routes */
+/* ROUTES */
 function runPath(type) {
+  if (locked) return
+
+  showQuestionMark = false
+  hidePopup()
+
   let path = []
 
   if (type === 1) {
     path = [
-      { x: 3, y: 6 },
-      { x: 3, y: 5 },
-      { x: 3, y: 4 },
-      { x: 3, y: 3 },
-      { x: 3, y: 2 },
-      { x: 4, y: 2 },
-      { x: 5, y: 2 },
+      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
+      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 4, y: 2 }, { x: 5, y: 2 }
     ]
   }
 
   if (type === 2) {
     path = [
-      { x: 3, y: 6 },
-      { x: 3, y: 5 },
-      { x: 3, y: 4 },
-      { x: 3, y: 3 },
-      { x: 3, y: 2 },
-      { x: 4, y: 2 },
-      { x: 5, y: 2 },
-      { x: 6, y: 2 },
-      { x: 6, y: 1 },
-      { x: 6, y: 0 }
+      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
+      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+      { x: 5, y: 2 }, { x: 6, y: 2 }, { x: 6, y: 1 }, { x: 6, y: 0 }
     ]
   }
 
   if (type === 3) {
     path = [
-      { x: 3, y: 6 },
-      { x: 3, y: 5 },
-      { x: 3, y: 4 },
-      { x: 3, y: 3 },
-      { x: 3, y: 2 },
-      { x: 3, y: 1 },
-      { x: 3, y: 0 },
-      { x: 4, y: 0 },
+      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
+      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 3, y: 1 },
+      { x: 3, y: 0 }, { x: 4, y: 0 }
     ]
   }
 
   if (type === 4) {
-    path = [
-      { x: 3, y: 7 },
-    ]
+    path = [{ x: 3, y: 7 }]
   }
 
-  moveTo(path)
+  const correct = type === 2
+  moveTo(path, !correct, correct)
 }
 
+/* POPUP */
+function showPopup(correct) {
+  const popup = document.getElementById("popupContainer")
+
+  const title = popup.querySelector("h2")
+  const text = popup.querySelector("p")
+  const button = popup.querySelector("button")
+
+  popup.classList.remove("hidden")
+
+  if (correct) {
+    title.textContent = "Inderdaad!"
+    text.textContent = "Tim heeft de wc gevonden."
+    button.textContent = "Volgende"
+  } else {
+    title.textContent = "Helaas"
+    text.textContent = "Dit was niet de juiste route."
+    button.textContent = "Opnieuw"
+  }
+
+  button.onclick = () => {
+    hidePopup()
+    if (!correct) resetGame()
+  }
+}
+
+function hidePopup() {
+  const popup = document.getElementById("popupContainer")
+  popup.classList.add("hidden")
+  setLocked(false)
+}
+
+/* RESET */
 function resetGame() {
   player.x = startPosition.x
   player.y = startPosition.y
+  showQuestionMark = false
+  hidePopup()
   render()
 }
 </script>
