@@ -80,7 +80,7 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 * Geen ; aan het einde van regels
 * Schrijf comments voor eventueel onduidelijke code
 * Gebruik geen ' om variabelen toe te voegen aan een string, gebruik $
-* Gebruik voor variabelen altijd const, tenzij je de waarde later moet veranderen, anders let. Probeer var compleet te vermijden
+* Gebruik voor variabelen altijd const, tenzij je de waarde later moet veranderen, anders let. Probeer var compleet te vermijden.
 
 ### Typography
 * Gebruik minimaal 16px voor font-size
