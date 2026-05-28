@@ -1,7 +1,8 @@
 ---
 import DisabilityChoice from "../components/Disability-choice.astro"
 import Layout from "../layouts/Layout.astro"
+import { slide } from 'astro:transitions';
 ---
 <Layout>
-    <DisabilityChoice />
+    <DisabilityChoice transition:animate={slide({duration: '0.8s'})}/>
 </Layout>
