@@ -3,19 +3,14 @@ const {
   title = "Popup",
   text = "",
   buttonText = "Volgende"
-} = Astro.props
+} = Astro.props;
 ---
 
-<div class="popup-overlay hidden" id="popupOverlay">
-  <div class="popup" id="popupBox">
+<div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+  <div class="popup">
     <h2>{title}</h2>
     <p>{text}</p>
-
-    <div class="buttons">
-      <button class="primary" id="popupButton">
-        {buttonText}
-      </button>
-    </div>
+    <button id="popupButton">{buttonText}</button>
   </div>
 </div>
 
@@ -23,102 +18,86 @@ const {
 .popup-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+
+  z-index: 9999;
 }
 
-.hidden {
-  display: none;
+.popup-overlay.show {
+  display: flex;
 }
 
 .popup {
   background: white;
-  border: 3px solid black;
-  border-radius: 18px;
-
-  width: min(420px, 90vw);
-  min-height: 320px;
-
   padding: 24px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
+  border: 2px solid black;
+  width: 300px;
   text-align: center;
-}
 
-@media (max-width: 500px) {
-  .popup {
-    width: 92vw;
-    min-height: 380px;
-  }
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .popup h2 {
-  margin: 0;
-  font-size: 28px;
+  margin: 0 0 10px;
 }
 
 .popup p {
-  margin: 12px 0 0;
-  font-size: 16px;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0 0 20px;
 }
 
-.buttons {
-  display: flex;
-}
-
-button {
-  flex: 1;
-  padding: 12px;
+.popup button {
+  width: 100%;
+  padding: 10px;
   border: 2px solid black;
   background: white;
   cursor: pointer;
 }
 
-button:hover {
+.popup button:hover {
   background: black;
   color: white;
-}
-
-.primary {
-  background: #848484;
 }
 </style>
 
 <script is:inline>
-function openPopup() {
-  const overlay = document.getElementById("popupOverlay")
-  overlay?.classList.remove("hidden")
+function getOverlay() {
+  return document.getElementById("popupOverlay");
 }
 
-function closePopup() {
-  const overlay = document.getElementById("popupOverlay")
-  overlay?.classList.add("hidden")
+function showPopup({ title, text, buttonText }) {
+  const overlay = getOverlay();
+
+  if (!overlay) {
+    console.warn("Popup overlay not found");
+    return;
+  }
+
+  const h2 = overlay.querySelector("h2");
+  const p = overlay.querySelector("p");
+  const btn = overlay.querySelector("button");
+
+  if (h2) h2.textContent = title;
+  if (p) p.textContent = text;
+  if (btn) btn.textContent = buttonText;
+
+  overlay.classList.add("show");
+  overlay.setAttribute("aria-hidden", "false");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.getElementById("popupOverlay")
-  const box = document.getElementById("popupBox")
-  const button = document.getElementById("popupButton")
+function hidePopup() {
+  const overlay = getOverlay();
+  if (!overlay) return;
 
-  if (!overlay) return
+  overlay.classList.remove("show");
+  overlay.setAttribute("aria-hidden", "true");
+}
 
-  // klik buiten popup sluit
-  overlay.addEventListener("click", closePopup)
-
-  // klik binnen popup niet sluiten
-  box.addEventListener("click", (e) => e.stopPropagation())
-
-  // knop sluit popup
-  button?.addEventListener("click", closePopup)
-})
+window.popup = {
+  show: showPopup,
+  hide: hidePopup,
+};
 </script>

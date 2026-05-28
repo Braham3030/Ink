@@ -1,5 +1,5 @@
 ---
-import Popup from "./Popup.astro"
+import Popup from "./Popup.astro";
 ---
 
 <h2>Verwijs Tim naar de WC</h2>
@@ -7,295 +7,332 @@ import Popup from "./Popup.astro"
 <canvas id="game" width="400" height="400"></canvas>
 
 <div class="buttons">
-  <button data-path="1">Voorbij de bar naar rechts</button>
-  <button data-path="2">Voorbij de bar naar rechts en dan links</button>
-  <button data-path="3">De wc's bevinden zich rechtsachter in de kamer</button>
-  <button data-path="4">De wc's zijn daar</button>
-  <button id="resetBtn" class="reset">Reset</button>
+    <button data-path="1">Voorbij de bar naar rechts</button>
+    <button data-path="2">Voorbij de bar naar rechts en dan links</button>
+    <button data-path="3">De wc's bevinden zich rechtsachter in de kamer</button
+    >
+    <button data-path="4">De wc's zijn daar</button>
+    <button id="resetBtn" class="reset">Reset</button>
 </div>
 
-<div id="popupContainer" class="hidden">
-  <Popup />
-</div>
+<Popup />
 
 <style>
-body {
-  background-color: #ffdb79;
-  font-family: sans-serif;
-} 
+    body {
+        background-color: #ffdb79;
+        font-family: sans-serif;
+    }
 
-h2 {
-  text-align: center;
-}
+    h2 {
+        text-align: center;
+    }
 
-canvas {
-  display: block;
-  margin: 20px auto;
-  border: 2px solid black;
-  background: white;
-}
+    canvas {
+        display: block;
+        margin: 20px auto;
+        border: 2px solid black;
+        background: white;
+    }
 
-.buttons {
-  width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    .buttons {
+        width: 400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-button {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid black;
-  background: white;
-  cursor: pointer;
-}
+    button {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid black;
+        background: white;
+        cursor: pointer;
+    }
 
-button:hover {
-  background: black;
-  color: white;
-}
+    button:hover {
+        background: black;
+        color: white;
+    }
 
-.reset {
-  background: #ddd;
-}
-
-.hidden {
-  display: none;
-}
+    .reset {
+        background: #ddd;
+    }
 </style>
 
 <script is:inline>
-let canvas, ctx
+    let canvas, ctx;
 
-const tileSize = 50
+    const tileSize = 50;
 
-const startPosition = { x: 3, y: 7 }
-const player = { x: 3, y: 7 }
+    const startPosition = { x: 3, y: 7 };
+    const player = { x: 3, y: 7 };
 
-let locked = false
-let showQuestionMark = false
+    let locked = false;
+    let showQuestionMark = false;
 
-let buttons = []
+    const optionTexts = {
+        1: "Nadat Tim voorbij de bar naar rechts is gegaan, wist hij verder niet waar hij naar toe moest...",
+        2: "Je hebt duidelijke en nauwkeurige instructies gegeven.",
+        3: "Tim is voorbij de WC's helemaal naar het einde van de kamer gelopen.",
+        4: "Tim weet niet welke kant hij naar toe moet lopen.",
+    };
 
-const obstacles = [
-  { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
-  { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
-  { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
-  { x: 2, y: 4, w: 1, h: 1, name: "Stoel" },
-  { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
-  { x: 1, y: 6, w: 1, h: 1, name: "Stoel" },
-  { x: 0, y: 4, w: 1, h: 2, name: "TV" },
-  { x: 5, y: 4, w: 1, h: 1, name: "Kruk" },
-  { x: 5, y: 5, w: 1, h: 1, name: "Kruk" },
-  { x: 5, y: 6, w: 1, h: 1, name: "Kruk" },
-  { x: 5, y: 0, w: 1, h: 2, name: "Muur" },
-  { x: 5, y: 3, w: 3, h: 1, name: "Muur" },
-  { x: 6, y: 4, w: 1, h: 3, name: "Bar" }
-]
+    const obstacles = [
+        { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
+        { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
+        { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
+        { x: 2, y: 4, w: 1, h: 1, name: "Stoel" },
+        { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
+        { x: 1, y: 6, w: 1, h: 1, name: "Stoel" },
+        { x: 0, y: 4, w: 1, h: 2, name: "TV" },
+        { x: 4, y: 4, w: 1, h: 1, name: "Kruk" },
+        { x: 4, y: 5, w: 1, h: 1, name: "Kruk" },
+        { x: 4, y: 6, w: 1, h: 1, name: "Kruk" },
+        { x: 5, y: 0, w: 1, h: 2, name: "Muur" },
+        { x: 5, y: 3, w: 3, h: 1, name: "Muur" },
+        { x: 5, y: 4, w: 1, h: 3, name: "Bar" },
+    ];
 
-const goal = { x: 6, y: 0, w: 2, h: 2 }
+    const goal = { x: 6, y: 0, w: 2, h: 2 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  canvas = document.getElementById("game")
-  ctx = canvas.getContext("2d")
+    /* INIT */
+    // ChatGPT gebruikt om ervoor te zorgen dat de canvas pas laadt wanneer de astro pagina wordt geladen
+    // Prompt: "De canvas is niet gelijk geladen, ik moetelke keer de pagina refreshen
+    // Prompt 2: "Op het begin wel goed nu maar als ik andere pagina ga, dan weer terug dan is canvas weer niet geladen"
+    function init() {
+        canvas = document.getElementById("game");
+        if (!canvas) return;
 
-  setupUI()
-  render()
-})
+        ctx = canvas.getContext("2d");
 
-function setupUI() {
-  buttons = [
-    ...document.querySelectorAll("[data-path]"),
-    document.getElementById("resetBtn")
-  ]
+        setupUI();
+        render();
+    }
 
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (locked) return
+    document.addEventListener("astro:page-load", init);
 
-      if (btn.dataset.path) {
-        runPath(Number(btn.dataset.path))
-      } else {
-        resetGame()
-      }
-    })
-  })
-}
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
 
-function setLocked(state) {
-  locked = state
-}
+    /* UI */
+    function setupUI() {
+        document.querySelectorAll("[data-path]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                if (!locked) runPath(Number(btn.dataset.path));
+            });
+        });
 
-/* DRAW */
-function drawGrid() {
-  ctx.clearRect(0, 0, 400, 400)
+        document.getElementById("resetBtn") .addEventListener("click", resetGame);
 
-  ctx.strokeStyle = "#000"
-  ctx.lineWidth = 1   // 👈 DIT FIXT HET
+        document.getElementById("popupButton").addEventListener("click", () => {
+            resetGame();
+        });
+    }
 
-  for (let x = 0; x <= 8; x++) {
-    ctx.beginPath()
-    ctx.moveTo(x * tileSize, 0)
-    ctx.lineTo(x * tileSize, 400)
-    ctx.stroke()
-  }
+    function setLocked(state) {
+        locked = state;
+    }
 
-  for (let y = 0; y <= 8; y++) {
-    ctx.beginPath()
-    ctx.moveTo(0, y * tileSize)
-    ctx.lineTo(400, y * tileSize)
-    ctx.stroke()
-  }
-}
+    /* DRAW */
+    function drawGrid() {
+        ctx.clearRect(0, 0, 400, 400);
 
-function drawObstacles() {
-  obstacles.forEach(o => {
-    ctx.fillStyle = "#444"
-    ctx.fillRect(o.x * tileSize, o.y * tileSize, o.w * tileSize, o.h * tileSize)
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 1;
 
-    ctx.strokeStyle = "#000"
-    ctx.lineWidth = 2
-    ctx.strokeRect(o.x * tileSize, o.y * tileSize, o.w * tileSize, o.h * tileSize)
+        for (let x = 0; x <= 8; x++) {
+            ctx.beginPath();
+            ctx.moveTo(x * tileSize, 0);
+            ctx.lineTo(x * tileSize, 400);
+            ctx.stroke();
+        }
 
-    ctx.fillStyle = "white"
-    ctx.font = "12px sans-serif"
-    ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16)
-  })
-}
+        for (let y = 0; y <= 8; y++) {
+            ctx.beginPath();
+            ctx.moveTo(0, y * tileSize);
+            ctx.lineTo(400, y * tileSize);
+            ctx.stroke();
+        }
+    }
 
-function drawGoal() {
-  ctx.fillStyle = "#2ecc71"
-  ctx.fillRect(goal.x * tileSize, goal.y * tileSize, goal.w * tileSize, goal.h * tileSize)
+    function drawObstacles() {
+        obstacles.forEach((o) => {
+            ctx.fillStyle = "#444";
+            ctx.fillRect(
+                o.x * tileSize,
+                o.y * tileSize,
+                o.w * tileSize,
+                o.h * tileSize,
+            );
 
-  ctx.strokeStyle = "#000"
-  ctx.lineWidth = 3
-  ctx.strokeRect(goal.x * tileSize, goal.y * tileSize, goal.w * tileSize, goal.h * tileSize)
-}
+            ctx.strokeStyle = "#000";
+            ctx.strokeRect(
+                o.x * tileSize,
+                o.y * tileSize,
+                o.w * tileSize,
+                o.h * tileSize,
+            );
 
-function drawPlayer() {
-  const px = player.x * tileSize
-  const py = player.y * tileSize
+            ctx.fillStyle = "white";
+            ctx.font = "12px sans-serif";
+            ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
+        });
+    }
 
-  ctx.fillStyle = "blue"
-  ctx.fillRect(px, py, tileSize, tileSize)
+    function drawGoal() {
+        ctx.fillStyle = "#2ecc71";
+        ctx.fillRect(
+            goal.x * tileSize,
+            goal.y * tileSize,
+            goal.w * tileSize,
+            goal.h * tileSize,
+        );
 
-  ctx.strokeStyle = "#000"
-  ctx.lineWidth = 3
-  ctx.strokeRect(px, py, tileSize, tileSize)
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(
+            goal.x * tileSize,
+            goal.y * tileSize,
+            goal.w * tileSize,
+            goal.h * tileSize,
+        );
+    }
 
-  if (showQuestionMark) {
-    ctx.fillStyle = "red"
-    ctx.font = "28px sans-serif"
-    ctx.fillText("?", px + 15, py + 32)
-  }
-}
+    function drawPlayer() {
+        const px = player.x * tileSize;
+        const py = player.y * tileSize;
 
-function render() {
-  drawGrid()
-  drawObstacles()
-  drawGoal()
-  drawPlayer()
-}
+        ctx.fillStyle = "blue";
+        ctx.fillRect(px, py, tileSize, tileSize);
 
-/* MOVEMENT */
-function moveTo(path, showQ, correct, i = 0) {
-  if (i === 0) setLocked(true)
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(px, py, tileSize, tileSize);
 
-  if (i >= path.length) {
-    showQuestionMark = showQ
-    render()
+        if (showQuestionMark) {
+            ctx.fillStyle = "red";
+            ctx.font = "28px sans-serif";
+            ctx.fillText("?", px + 15, py + 32);
+        }
+    }
 
-    setTimeout(() => showPopup(correct), 200)
-    return
-  }
+    function render() {
+        drawGrid();
+        drawObstacles();
+        drawGoal();
+        drawPlayer();
+    }
 
-  player.x = path[i].x
-  player.y = path[i].y
+    /* MOVEMENT */
+    function moveTo(path, showQ, correct, optionText, i = 0) {
+        if (i === 0) setLocked(true);
 
-  render()
+        if (i >= path.length) {
+            showQuestionMark = showQ;
+            render();
 
-  setTimeout(() => moveTo(path, showQ, correct, i + 1), 200)
-}
+            setTimeout(() => {
+                window.popup.show(
+                    correct
+                        ? {
+                              title: "Inderdaad!",
+                              text:
+                                  optionText + "\n\nTim heeft de wc gevonden.",
+                              buttonText: "Volgende",
+                          }
+                        : {
+                              title: "Helaas",
+                              text:
+                                  optionText +
+                                  "\n\nDit was niet de juiste route.",
+                              buttonText: "Opnieuw",
+                          },
+                );
 
-/* ROUTES */
-function runPath(type) {
-  if (locked) return
+                setLocked(false);
+            }, 800);
 
-  showQuestionMark = false
-  hidePopup()
+            return;
+        }
 
-  let path = []
+        player.x = path[i].x;
+        player.y = path[i].y;
 
-  if (type === 1) {
-    path = [
-      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
-      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 4, y: 2 }, { x: 5, y: 2 }
-    ]
-  }
+        render();
 
-  if (type === 2) {
-    path = [
-      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
-      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 4, y: 2 },
-      { x: 5, y: 2 }, { x: 6, y: 2 }, { x: 6, y: 1 }, { x: 6, y: 0 }
-    ]
-  }
+        setTimeout(() => moveTo(path, showQ, correct, optionText, i + 1), 200);
+    }
 
-  if (type === 3) {
-    path = [
-      { x: 3, y: 6 }, { x: 3, y: 5 }, { x: 3, y: 4 },
-      { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 3, y: 1 },
-      { x: 3, y: 0 }, { x: 4, y: 0 }
-    ]
-  }
+    /* ROUTES */
+    function runPath(type) {
+        if (locked) return;
 
-  if (type === 4) {
-    path = [{ x: 3, y: 7 }]
-  }
+        showQuestionMark = false;
+        window.popup.hide();
 
-  const correct = type === 2
-  moveTo(path, !correct, correct)
-}
+        let path = [];
 
-/* POPUP */
-function showPopup(correct) {
-  const popup = document.getElementById("popupContainer")
+        if (type === 1) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 4, y: 2 },
+                { x: 5, y: 2 },
+            ];
+        }
 
-  const title = popup.querySelector("h2")
-  const text = popup.querySelector("p")
-  const button = popup.querySelector("button")
+        if (type === 2) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 4, y: 2 },
+                { x: 5, y: 2 },
+                { x: 6, y: 2 },
+                { x: 6, y: 1 },
+                { x: 6, y: 0 },
+            ];
+        }
 
-  popup.classList.remove("hidden")
+        if (type === 3) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 3, y: 1 },
+                { x: 3, y: 0 },
+                { x: 4, y: 0 },
+            ];
+        }
 
-  if (correct) {
-    title.textContent = "Inderdaad!"
-    text.textContent = "Tim heeft de wc gevonden."
-    button.textContent = "Volgende"
-  } else {
-    title.textContent = "Helaas"
-    text.textContent = "Dit was niet de juiste route."
-    button.textContent = "Opnieuw"
-  }
+        if (type === 4) {
+            path = [{ x: 3, y: 7 }];
+        }
 
-  button.onclick = () => {
-    hidePopup()
-    if (!correct) resetGame()
-  }
-}
+        const correct = type === 2;
+        const text = optionTexts[type];
 
-function hidePopup() {
-  const popup = document.getElementById("popupContainer")
-  popup.classList.add("hidden")
-  setLocked(false)
-}
+        moveTo(path, !correct, correct, text);
+    }
 
-/* RESET */
-function resetGame() {
-  player.x = startPosition.x
-  player.y = startPosition.y
-  showQuestionMark = false
-  hidePopup()
-  render()
-}
+    /* RESET */
+    function resetGame() {
+        player.x = startPosition.x;
+        player.y = startPosition.y;
+        showQuestionMark = false;
+        window.popup.hide();
+        setLocked(false);
+        render();
+    }
 </script>
