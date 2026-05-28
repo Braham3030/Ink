@@ -52,9 +52,28 @@
             justify-content: center;
             line-height: 1;
 
+            backdrop-filter: blur(0px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+            transform: scale(0.5);
+            opacity: 0;
+            /* opacity: 1; */
+
+            animation: popIn 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) forwards 0.2s;
+        }
+    }
+
+    @keyframes popIn {
+        0% {
+            backdrop-filter: blur(0px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+            transform: scale(0.1);
+            opacity: 0;
+        }
+        100% {
             backdrop-filter: blur(4px);
             box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-            /* opacity: 1; */
+            transform: scale(1);
+            opacity: 1;
         }
     }
 </style>
