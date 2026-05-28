@@ -1,0 +1,74 @@
+---
+import './deaf.css'
+import './deaf.js'
+
+import { blindItems } from '../../../data/deafData.js'
+
+// Randomize the items
+function shuffleArray(array) {
+  return [...array].sort(() => Math.random() - 0.5)
+}
+
+// Select 4 random items for the game
+const selectedItems = shuffleArray(blindItems).slice(0, 4)
+
+// Get the remaining items that were not selected
+const remainingItems = blindItems.filter(
+  (item) => !selectedItems.some((selected) => selected.id === item.id)
+)
+
+// Select 2 wrong answers from the remaining items
+const wrongAnswers = shuffleArray(remainingItems)
+  .slice(0, 2)
+  .map((item) => item.answer)
+
+  // Combine the correct answers with the wrong answers and shuffle them for the draggable texts
+const draggableTexts = shuffleArray([
+  ...selectedItems.map((item) => item.answer),
+  ...wrongAnswers,
+])
+---
+<div class="content">
+  <h2>Sleep de betekenis naar het juiste gebaar</h2>
+
+  <div class="game-wrapper">
+    
+    <!-- LEFT SIDE -->
+    <div class="text-column">
+      {
+        draggableTexts.map((text) => (
+          <div
+            class="draggable"
+            draggable="true"
+            data-text={text}
+          >
+            {text}
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="image-column">
+      {
+        selectedItems.map((item) => (
+          <div class="card">
+            <img
+              // src={item.image}
+              src="https://www.placekittens.com/200/200";
+              alt={item.answer}
+            />
+
+            <div
+              class="dropzone"
+              data-answer={item.answer}
+            >
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+  <button id="done-button" class="button-wide">Klaar!</button>
+</div>
