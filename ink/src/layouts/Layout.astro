@@ -59,20 +59,20 @@ import { ClientRouter } from 'astro:transitions';
 
 
 <style>
-	html,
 	body {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
-		width: 100%;
-		height: 100%;
+		width: 100vw;
+		min-height: 100vh;
 		background: conic-gradient(
     from 330deg at 50% 50%,
     var(--detail-bg-light) 0deg 115deg,
     var(--detail-bg-dark) 115deg 220deg,
     var(--detail-bg-normal) 220deg 360deg
   );
-  object-fit: contain;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 
 	}
 
@@ -81,8 +81,9 @@ import { ClientRouter } from 'astro:transitions';
 	}
 
 	svg {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		right: 0;
+		z-index: -1;
 	}
 </style>
