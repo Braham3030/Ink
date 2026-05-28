@@ -6,7 +6,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+<div class="popup-overlay" id="popupOverlay" aria-hidden="true" hidden>
   <div class="popup">
     <h2>{title}</h2>
     <p>{text}</p>
@@ -20,15 +20,20 @@ const {
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
 
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 
   z-index: 9999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
 .popup-overlay.show {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .popup {
