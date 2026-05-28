@@ -1,6 +1,5 @@
 ---
 import './deaf.css'
-import './deaf.js'
 
 import { blindItems } from '../../../data/deafData.js'
 
@@ -55,7 +54,7 @@ const draggableTexts = shuffleArray([
           <div class="card">
             <img
               // src={item.image}
-              src="https://www.placekittens.com/200/200";
+              src={item.image}
               alt={item.answer}
             />
 
@@ -72,3 +71,5 @@ const draggableTexts = shuffleArray([
   </div>
   <button id="done-button" class="button-wide">Klaar!</button>
 </div>
+
+<script src="./deaf.js"></script>
