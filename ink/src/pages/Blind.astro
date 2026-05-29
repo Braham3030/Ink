@@ -1,12 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import MinigameBlind from '../components/Minigame-Blind.astro';
-
-import { slide } from 'astro:transitions';
 ---
 
 <Layout>
-    <div id="minigame-blind" transition:animate={slide({duration: '0.8s'})}>
+    <div id="minigame-blind" transition:name="blind-window">
         <MinigameBlind />
     </div>
 </Layout>

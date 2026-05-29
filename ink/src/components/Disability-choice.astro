@@ -6,7 +6,7 @@
     <h2>Kies een onderdeel</h2>
 
     <div class="choice-grid">
-      <a class="choice" href="/blind">
+      <a href="/blind" class="choice">
         <img src="images/disabilities/visual.jpg" alt="" />
         <h2>Visuele beperking</h2>
       </a>
@@ -31,6 +31,26 @@
         <h2>Spraakgebrek</h2>
       </a>
     </div>
+
+
+    <script>
+    // @ts-nocheck
+
+    // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
+    document.addEventListener('astro:page-load', () => {
+        const blindChoice = document.querySelector('.choice');
+
+        if (blindChoice) {
+            blindChoice.style.viewTransitionName = 'none'
+
+            blindChoice.addEventListener('click', () => {
+                blindChoice.style.viewTransitionName = 'blind-window'
+            })
+        }
+    })
+</script>
+
+
 
   <style>
     h1 {

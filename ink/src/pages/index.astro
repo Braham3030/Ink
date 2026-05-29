@@ -2,7 +2,6 @@
 // import Welcome from '../components/Welcome.astro';
 import Home from '../components/Home.astro';
 import Layout from '../layouts/Layout.astro';
-import { slide } from 'astro:transitions';
 
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -11,7 +10,7 @@ import { slide } from 'astro:transitions';
 
 <Layout>
 	<!-- <Welcome /> -->
-	 <div class="home" id="home" transition:animate={slide({duration: '0.8s'})}>
+	 <div class="home" id="home">
 	 	<Home />
 	 </div>
 </Layout>
