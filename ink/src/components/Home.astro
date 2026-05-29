@@ -1,34 +1,45 @@
 ---
 ---
 
-        <h2>
+    <div>
+        <h1>
             Start de module
-        </h2>
-        <button>
-            <span>
+        </h1>
+        <a href="/modules" class="start-button" transition:name="module-window">
                 Start
-            </span>
-        </button>
+        </a>
+    </div>
 
 
 <style>
-    h2 {
-        margin: 0 auto;
-        font-size: 2rem;
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20vh;
+        /* height: 100%; */
+    > h1 {
+        /* margin: 0 auto; */
         color: black;
-        border: 2px solid black;
         width: fit-content;
     }
 
-    button {
+    > .start-button {
         margin: 16px auto;
         display: block;
-        padding: 12px 24px;
         background-color: green;
         color: white;
         border: none;
-        border-radius: 8px;
-        font-size: 1rem;
+        border-radius: 16px;
+        font-size: 3rem;
         cursor: pointer;
+
+        width: fit-content;
+        padding: 1em 2em;
+        overflow: hidden;
+        text-decoration: none;
+
     }
+}
 </style>

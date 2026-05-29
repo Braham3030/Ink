@@ -1,50 +1,4 @@
-# Astro Starter Kit: Basics
-
-```sh
-npm create astro@latest -- --template basics
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
+# {ink}lusive, Training
 
 ## Code Coventions
 Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
@@ -59,7 +13,7 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 
 ### Algemene conventies
 * Gebruik altijd 1 tab voor indentation
-* Gebruik van global.css voor algemene styling die voor meerdere pagina's gelden
+* Gebruik van global.css voor algemene styling die voor meerdere pagina's gelden. Denk aan header grootes en kleuren
 
 ### HTML Conventions
 * Schrijf gestructureerde en semantische HTML
@@ -92,3 +46,12 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 
 ### Text alignment
 * Standaard links uitgelijnd, met uitzondering midden
+
+### Design
+* Er wordt altijd gewerkt vanuit mobile first, daarna responsive voor desktop
+* Er wordt em of rem gebruikt voor elementen die mee moeten schalen met schermformaat. Zoals gap, margin, padding, etc...
+* Px wordt gebruikt voor elementen die niet hoeven mee te schalen. Zoals borders. drop-shadows, specifieke styling dingen
+* vw/vh worden gebruikt voor elementen die mee moeten groeien met het hele scherm. Zoals header, main, footer
+* Deze eenheden kunnen samengevoegd worden in de vorm van clamps. Voor een gemakkelijk responsive design.
+* Er is altijd genoeg ruimte tussen tekst en eventuele border
+

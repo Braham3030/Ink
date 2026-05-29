@@ -1,0 +1,163 @@
+---
+import Popup from "./Popup.astro";
+---
+
+<div class="screen">
+  <h2>Praat met Eduard</h2>
+
+  <div class="chat-area">
+    <img
+      class="avatar"
+      src="/images/disabilities/looks.jpeg"
+      alt="afbeelding van Eduard"
+    />
+
+    <div class="speech-bubble">
+      <p class="bubble-name">Eduard</p>
+      <p class="bubble-text">
+        "Hey! Jij bent vast mijn nieuwe collega, leuk om je te ontmoeten!"
+      </p>
+    </div>
+  </div>
+
+  <div class="choices">
+    <button id="btn1">1: Hoi Eduard, leuk om je te ontmoeten.</button>
+    <button id="btn2"
+      >2: Hey Eduard, mag ik vragen wat er met je gezicht is gebeurd?</button
+    >
+    <button id="btn3">3: *Wegkijken zodat je niet staart*</button>
+  </div>
+</div>
+
+<Popup />
+
+<style>
+  .screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .chat-area {
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .avatar {
+    position: absolute;
+    top: -77px;
+    right: -9px;
+    width: 100px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .speech-bubble {
+    position: relative;
+    z-index: 1;
+    margin-right: 3rem; /* ruimte voor avatar */
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+  }
+
+  .bubble-name {
+    font-size: 1.2rem;
+    color: black;
+    margin: 0 0 4px;
+  }
+
+  .bubble-text {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  button {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border: 1px solid #6f6f6f;
+    border-radius: 6px;
+    background: rgb(246, 228, 228);
+    cursor: pointer;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .screen {
+      max-width: 480px;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .bubble-name {
+      font-size: 1.4rem;
+    }
+
+    .bubble-text {
+      font-size: 1.1rem;
+    }
+
+    button {
+      font-size: 1.1rem;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 130px;
+      top: -90px;
+    }
+  }
+</style>
+
+<script is:inline>
+  // @ts-nocheck
+  document.getElementById("btn1").addEventListener("click", () => {
+    window.popup.show({
+      title: "Goed gedaan!",
+      text: "Dit is een respectvolle manier om iemand te begroeten.",
+      buttonText: "Volgende",
+    });
+  });
+
+  document.getElementById("btn2").addEventListener("click", () => {
+    window.popup.show({
+      title: "Niet handig!",
+      text: "Het is onbeleefd om direct naar iemands uiterlijk te vragen.",
+      buttonText: "Probeer opnieuw",
+    });
+  });
+
+  document.getElementById("btn3").addEventListener("click", () => {
+    window.popup.show({
+      title: "Helaas!",
+      text: "Wegkijken kan onbeleefd overkomen.",
+      buttonText: "Probeer opnieuw",
+    });
+  });
+
+  document.getElementById("popupButton").addEventListener("click", () => {
+    window.popup.hide();
+  });
+</script>
