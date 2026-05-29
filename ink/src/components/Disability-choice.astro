@@ -32,6 +32,26 @@
       </a>
     </div>
 
+
+    <script>
+    // @ts-nocheck
+
+    // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
+    document.addEventListener('astro:page-load', () => {
+        const blindChoice = document.querySelector('.choice');
+
+        if (blindChoice) {
+            blindChoice.style.viewTransitionName = 'none'
+
+            blindChoice.addEventListener('click', () => {
+                blindChoice.style.viewTransitionName = 'blind-window'
+            })
+        }
+    })
+</script>
+
+
+
   <style>
     h1 {
       text-align: center;
