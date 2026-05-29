@@ -16,7 +16,7 @@ function initGame() {
   // value = dragged text
   const placements = {}
 
-  Draggable.create(draggables, {
+  const draggablesArray = Draggable.create(draggables, {
     type: "x,y",
     bounds: document.querySelector(".game-wrapper"),
     edgeResistance: 0.65,
@@ -74,6 +74,7 @@ function initGame() {
         // Move draggable INTO the dropzone
         matchedZone.innerHTML = ""
         matchedZone.appendChild(draggedEl)
+        draggedEl.classList.add("filled")
 
         // Reset transforms after append
         gsap.set(draggedEl, {
@@ -111,6 +112,11 @@ function initGame() {
 
           // Move back to left column
           textColumn.appendChild(draggedEl)
+          draggedEl.classList.remove(
+            "filled",
+            "correct",
+            "incorrect"
+          )
 
           gsap.set(draggedEl, {
             x: 0,
@@ -131,20 +137,34 @@ function initGame() {
   })
 
   doneButton.addEventListener("click", () => {
+
+    // Reset visual states first
+    draggables.forEach((el) => {
+      el.classList.remove("correct", "incorrect")
+    })
+
     dropzones.forEach((zone) => {
       const correctAnswer = zone.dataset.answer
       const placed = placements[correctAnswer]
 
-      if (!placed) {
-        zone.style.background = "#eee"
-        return
-      }
+      if (!placed) return
 
       const isCorrect = placed.text === correctAnswer
 
-      zone.style.background = isCorrect
-        ? "#b6fcb6"
-        : "#ffb3b3"
+      placed.element.classList.add(
+        isCorrect ? "correct" : "incorrect"
+      )
+
+      // LOCK correct items
+      if (isCorrect) {
+        const draggableInstance = draggablesArray.find(
+          d => d.target === placed.element
+        )
+
+        if (draggableInstance) {
+          draggableInstance.disable()
+        }
+      }
     })
   })
 }
