@@ -11,6 +11,11 @@
     --h2-font-size: 2rem;
     --h3-font-size: 1.5rem;
     --p-font-size: 1rem;
+
+    /* Background colors */
+    --detail-bg-normal: #93D7C0;
+    --detail-bg-dark: #2BB687;
+    --detail-bg-light: #d0d0d0;
 }
 
 h1 {
