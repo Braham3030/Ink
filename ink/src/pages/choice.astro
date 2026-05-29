@@ -4,5 +4,9 @@ import Layout from "../layouts/Layout.astro"
 import { slide } from 'astro:transitions';
 ---
 <Layout>
-    <DisabilityChoice transition:animate={slide({duration: '0.8s'})}/>
+    <div id="choice" transition:name="choice1-window">
+        <DisabilityChoice/>
+    </div>
+</div>
+    <!-- <DisabilityChoice transition:name="choice1-window"/> -->
 </Layout>

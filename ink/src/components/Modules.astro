@@ -1,0 +1,76 @@
+---
+---
+
+<div class="full-container">
+    <h2>
+        Kies een module om te starten
+    </h2>
+    <div class="module-container">
+    <h3>Module 1:</h3>
+    <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
+        bewustwoording en vooroordelen
+    </a>
+    <h3>Module 2:</h3>
+    <a href="" class="module-choice">
+        Leren door te ervaren
+    </a>
+    <h3>Module 3:</h3>
+    <a href="" class="module-choice">
+        Vertaling naar werkplek
+    </a>
+    </div>
+</div>
+
+<script>
+    // @ts-nocheck
+
+    // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
+    document.addEventListener('astro:page-load', () => {
+        const btn1 = document.querySelector('.module-choice');
+
+        if (btn1) {
+            btn1.style.viewTransitionName = 'none'
+
+            btn1.addEventListener('click', () => {
+                btn1.style.viewTransitionName = 'choice1-window'
+            })
+        }
+    })
+</script>
+
+<style>
+    .full-container {
+        margin: 0 auto;
+        width: 90%;
+    
+    .module-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin: 0;
+        padding: 1em;
+
+        > .module-choice {
+            text-decoration: none;
+            color: black;
+            width: 90%;
+            padding: 2.5rem 1rem;
+            border: 4px solid #e7f079;
+            border-radius: 5px;
+            background-color: #e6f07924;
+
+            font-size: var(--button-font-size);
+            text-align: center;
+            text-wrap: nowrap;
+
+            /* > h3 {
+                padding: 1.5rem;
+                border: 4px solid #e7f079;
+                border-radius: 5px;
+                background-color: #e6f07924;
+            } */
+        }
+    }
+}
+</style>
