@@ -1,5 +1,3 @@
-// Source https://shopify.github.io/draggable/examples/unique-dropzone.html
-
 import { gsap } from "gsap"
 import { Draggable } from "gsap/Draggable"
 
@@ -8,10 +6,17 @@ gsap.registerPlugin(Draggable)
 function initGame() {
   const draggables = document.querySelectorAll(".draggable")
   const dropzones = document.querySelectorAll(".dropzone")
+  const textColumn = document.querySelector(".text-column")
+  const doneButton = document.querySelector("#done-button")
 
   if (!draggables.length || !dropzones.length) return
 
-  Draggable.create(draggables, {
+  // Stores placed answers
+  // key = dropzone answer
+  // value = dragged text
+  const placements = {}
+
+  const draggablesArray = Draggable.create(draggables, {
     type: "x,y",
     bounds: document.querySelector(".game-wrapper"),
     edgeResistance: 0.65,
@@ -39,28 +44,148 @@ function initGame() {
       })
 
       if (matchedZone) {
-        const correct = matchedZone.dataset.answer === draggedText
 
-        matchedZone.style.background = correct ? "#b6fcb6" : "#ffb3b3"
-        matchedZone.innerText = draggedText
+        // Clear previous zone this draggable was in
+        dropzones.forEach((zone) => {
+          if (zone.contains(draggedEl)) {
+            zone.innerHTML = ""
+          }
+        })
 
-        if (correct) {
+        // If another draggable already exists in this zone,
+        // move it back to the start
+        const existing = matchedZone.querySelector(".draggable")
+
+        // ❌ BLOCK replacing locked (correct) items
+        if (existing && existing.classList.contains("correct")) {
           gsap.to(draggedEl, {
-            opacity: 0.4,
-            pointerEvents: "none",
+            x: 0,
+            y: 0,
+            duration: 0.2,
           })
+          return
+        }
+
+        // normal swap behavior (only for non-locked items)
+        if (existing && existing !== draggedEl) {
+          document.querySelector(".text-column").appendChild(existing)
+
+          gsap.set(existing, {
+            x: 0,
+            y: 0,
+          })
+        }
+
+        if (existing && existing !== draggedEl) {
+          document.querySelector(".text-column").appendChild(existing)
+
+          gsap.set(existing, {
+            x: 0,
+            y: 0,
+          })
+        }
+
+        // Save placement
+        placements[matchedZone.dataset.answer] = {
+          text: draggedText,
+          element: draggedEl,
+        }
+
+        // Move draggable INTO the dropzone
+        matchedZone.innerHTML = ""
+        matchedZone.appendChild(draggedEl)
+        draggedEl.classList.add("filled")
+
+        // Reset transforms after append
+        gsap.set(draggedEl, {
+          x: 0,
+          y: 0,
+        })
+      } else {
+
+        const dragRect = draggedEl.getBoundingClientRect()
+        const textRect = textColumn.getBoundingClientRect()
+
+        const overTextColumn = !(
+          dragRect.right < textRect.left ||
+          dragRect.left > textRect.right ||
+          dragRect.bottom < textRect.top ||
+          dragRect.top > textRect.bottom
+        )
+
+        // If dragged back to left column
+        if (overTextColumn) {
+
+          // Remove placement data
+          Object.keys(placements).forEach((key) => {
+            if (placements[key]?.element === draggedEl) {
+              delete placements[key]
+            }
+          })
+
+          // Remove from current dropzone
+          dropzones.forEach((zone) => {
+            if (zone.contains(draggedEl)) {
+              zone.innerHTML = ""
+            }
+          })
+
+          // Move back to left column
+          textColumn.appendChild(draggedEl)
+          draggedEl.classList.remove(
+            "filled",
+            "correct",
+            "incorrect"
+          )
+
+          gsap.set(draggedEl, {
+            x: 0,
+            y: 0,
+          })
+
         } else {
+
+          // Snap back
           gsap.to(draggedEl, {
             x: 0,
             y: 0,
             duration: 0.3,
           })
         }
-      } else {
-        // snap back if not dropped anywhere
-        gsap.to(draggedEl, { x: 0, y: 0, duration: 0.3 })
       }
     },
+  })
+
+  doneButton.addEventListener("click", () => {
+
+    // Reset visual states first
+    draggables.forEach((el) => {
+      el.classList.remove("correct", "incorrect")
+    })
+
+    dropzones.forEach((zone) => {
+      const correctAnswer = zone.dataset.answer
+      const placed = placements[correctAnswer]
+
+      if (!placed) return
+
+      const isCorrect = placed.text === correctAnswer
+
+      placed.element.classList.add(
+        isCorrect ? "correct" : "incorrect"
+      )
+
+      // LOCK correct items
+      if (isCorrect) {
+        const draggableInstance = draggablesArray.find(
+          d => d.target === placed.element
+        )
+
+        if (draggableInstance) {
+          draggableInstance.disable()
+        }
+      }
+    })
   })
 }
 
