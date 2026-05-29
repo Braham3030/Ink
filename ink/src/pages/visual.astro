@@ -1,12 +1,12 @@
-<!-- ---
-import Layout from '../layouts/Layout.astro';
-import MinigameDeaf from '../components/Minigames/Deaf/Minigame-Deaf.astro';
+---
+import Layout from "../layouts/Layout.astro";
 
-import { slide } from 'astro:transitions';
+import { slide } from "astro:transitions";
+import MinigameVisual from "../components/Minigame-visual.astro";
 ---
 
 <Layout>
-    <div id="minigame-deaf" transition:animate={slide({duration: '0.8s'})}>
-        <MinigameDeaf />
-    </div>
-</Layout> -->
+  <div id="minigame-visual" transition:animate={slide({ duration: "0.8s" })}>
+    <MinigameVisual />
+  </div>
+</Layout>
