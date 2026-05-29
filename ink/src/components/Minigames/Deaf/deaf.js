@@ -56,6 +56,26 @@ function initGame() {
         // move it back to the start
         const existing = matchedZone.querySelector(".draggable")
 
+        // ❌ BLOCK replacing locked (correct) items
+        if (existing && existing.classList.contains("correct")) {
+          gsap.to(draggedEl, {
+            x: 0,
+            y: 0,
+            duration: 0.2,
+          })
+          return
+        }
+
+        // normal swap behavior (only for non-locked items)
+        if (existing && existing !== draggedEl) {
+          document.querySelector(".text-column").appendChild(existing)
+
+          gsap.set(existing, {
+            x: 0,
+            y: 0,
+          })
+        }
+
         if (existing && existing !== draggedEl) {
           document.querySelector(".text-column").appendChild(existing)
 
