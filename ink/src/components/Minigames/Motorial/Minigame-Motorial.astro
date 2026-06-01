@@ -1,62 +1,8 @@
 ---
+import './motorial.css';
 import Popup from "../../Popup.astro";
 
-const obstacles = [
-  {
-    id: "inconvenient-door",
-    label: "Onhandige deur",
-    top: "30%",
-    left: "32%",
-    width: "18%",
-    height: "30%",
-    rotate: 0,
-  },
-  {
-    id: "rotating-door",
-    label: "Roterende deur",
-    top: "26%",
-    left: "52%",
-    width: "23%",
-    height: "35%",
-    rotate: 0,
-  },
-  {
-    id: "small-door",
-    label: "Smalle deur",
-    top: "25%",
-    left: "78%",
-    width: "9%",
-    height: "36%",
-    rotate: 0,
-  },
-  {
-    id: "stairs",
-    label: "Trap",
-    top: "62%",
-    left: "10%",
-    width: "63%",
-    height: "17%",
-    rotate: 0,
-  },
-  {
-    id: "threshold",
-    label: "Hoge drempel",
-    top: "64%",
-    left: "75%",
-    width: "23%",
-    height: "20%",
-    rotate: 0,
-  },
-  {
-    id: "curb",
-    label: "Stoeprand",
-    top: "90%",
-    left: "0%",
-    width: "80%",
-    height: "7%",
-    rotate: 6,
-  },
-];
+import { obstacles } from "../../../data/motorialData";
 ---
 
 <div class="content">
@@ -69,30 +15,29 @@ const obstacles = [
       alt="Entrance Office Building"
     />
 
-    {
-      obstacles.map((obstacle) => (
-        <button
-          class="hotspot"
-          data-id={obstacle.id}
-          data-label={obstacle.label}
-          style={`
-            top:${obstacle.top};
-            left:${obstacle.left};
-            width:${obstacle.width};
-            height:${obstacle.height};
-            transform: rotate(${obstacle.rotate}deg);
-            transform-origin: center;
-          `}
-        />
-      ))
-    }
+    {obstacles.map((obstacle) => (
+      <button
+        class="hotspot"
+        data-id={obstacle.id}
+        data-label={obstacle.label}
+        style={`
+          top:${obstacle.top};
+          left:${obstacle.left};
+          width:${obstacle.width};
+          height:${obstacle.height};
+          transform: rotate(${obstacle.rotate}deg);
+          transform-origin: center;
+        `}
+      />
+    ))}
   </div>
 
   <h2>Gevonden obstakels</h2>
-
   <ul id="found-list"></ul>
 
-  <button id="done-button" class="button-wide">Klaar!</button>
+  <button id="done-button" class="button-wide">
+    Klaar!
+  </button>
 </div>
 
 <Popup
@@ -101,92 +46,6 @@ const obstacles = [
   buttonText="Volgende"
 />
 
-<style>
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-
-  .image-wrapper img {
-    width: 100%;
-    display: block;
-    border: 2px solid black;
-  }
-
-  .hotspot {
-    position: absolute;
-    background: rgba(255, 0, 0, 0.15);
-    border: 2px dashed red;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-
-  .hotspot:hover {
-    background: rgba(255, 0, 0, 0.3);
-  }
-
-  .hotspot.found {
-    background: rgba(0, 200, 0, 0.35);
-    border-color: green;
-  }
-
-  #found-list {
-    margin-bottom: 24px;
-  }
-
-  #found-list li {
-    margin-bottom: 8px;
-  }
-</style>
-
-<script is:inline>
-  // @ts-nocheck
-  const hotspots = document.querySelectorAll(".hotspot");
-  const foundList = document.getElementById("found-list");
-  const doneButton = document.getElementById("done-button");
-
-  const foundObstacles = new Set();
-
-  hotspots.forEach((hotspot) => {
-    hotspot.addEventListener("click", () => {
-      const id = hotspot.dataset.id;
-      const label = hotspot.dataset.label;
-
-      if (foundObstacles.has(id)) return;
-
-      foundObstacles.add(id);
-
-      hotspot.classList.add("found");
-
-      const li = document.createElement("li");
-      li.textContent = label;
-
-      foundList.appendChild(li);
-    });
-  });
-
-  doneButton.addEventListener("click", () => {
-    if (foundObstacles.size === hotspots.length) {
-      window.popup.show({
-        title: "Goed gedaan!",
-        text: "Je hebt alle obstakels gevonden.",
-        buttonText: "Volgende",
-      });
-    } else {
-      window.popup.show({
-        title: "Nog niet compleet",
-        text: "Je hebt nog niet alle obstakels gevonden.",
-        buttonText: "Verder zoeken",
-      });
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if (e.target.id === "popupButton") {
-      window.popup.hide();
-    }
-  });
+<script>
+  import "./motorial.js";
 </script>
