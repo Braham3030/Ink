@@ -38,15 +38,23 @@
 
     // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
     document.addEventListener('astro:page-load', () => {
-        const blindChoice = document.querySelector('.choice');
+        const choices = document.querySelectorAll('.choice');
 
-        if (blindChoice) {
+        choices.forEach(choice => {
+          const transitionName = choice.getAttribute('data-transition-name');
+
+        if (transitionName) {
             blindChoice.style.viewTransitionName = 'none'
 
             blindChoice.addEventListener('click', () => {
-                blindChoice.style.viewTransitionName = 'blind-window'
+                blindChoice.style.viewTransitionName = transitionName;
+
+                setTimeout(() => {
+                  
+                }, 300);
             })
         }
+      })
     })
 </script>
 
