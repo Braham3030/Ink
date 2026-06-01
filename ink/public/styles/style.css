@@ -13,7 +13,7 @@
     --p-font-size: 1rem;
     --button-font-size: 1.5rem;
 
-    /* Background colors */
+    /* Dynamic background colors */
     --detail-bg-normal: #93D7C0;
     --detail-bg-dark: #2BB687;
     --detail-bg-light: #d0d0d0;
