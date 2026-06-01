@@ -1,0 +1,31 @@
+---
+import './speech.css'
+import { speechData } from '../../../data/speechData.js'
+import Popup from "../../Popup.astro";
+---
+
+<div class="content">
+  <h2>Praat met Evelin</h2>
+
+  <div id="dialogue">
+    <div id="dialogue-box">
+        <p id="speaker-name"></p>
+        <p id="dialogue-text"></p>
+    </div>
+  </div>
+
+  <button id="interruptBtn">Onderbreek</button>
+</div>
+
+<Popup
+  title="Goed gedaan!"
+  text="Gesprek is beëindigd."
+  buttonText="Volgende"
+/>
+
+<script is:inline define:vars={{ speechData }}>
+    // @ts-nocheck
+  window.speechData = speechData;
+</script>
+
+<script src="./speech.js"></script>
