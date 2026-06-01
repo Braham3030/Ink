@@ -2,11 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import MinigameDeaf from '../components/Minigames/Deaf/Minigame-Deaf.astro';
 
-import { slide } from 'astro:transitions';
 ---
 
 <Layout>
-    <div id="minigame-deaf" transition:animate={slide({duration: '0.8s'})}>
+    <div id="minigame-deaf" transition:name="deaf-window">
         <MinigameDeaf />
     </div>
 </Layout>

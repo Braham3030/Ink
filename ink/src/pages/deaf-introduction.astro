@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro"
+import DisabilityIntroduction from "../components/Disability-Introduction.astro"
+---
+
+<Layout>
+    <div transition:name="deaf-introduction-window">
+        <DisabilityIntroduction 
+        name="Nick"
+        image="/images/disabilities/auditory.jpg"
+        description="Nick is volledig doof en gebruikt een taal. Jij en Nick zitten samen in een café. Nick vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+        link="/deaf"
+        animation="deaf-window"
+        />
+    </div>
+</Layout>
