@@ -61,15 +61,26 @@ const { name, description, image, link } = Astro.props;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    width: 80%;
+
+    width: fit-content;
+    width: clamp(150px, 121.4286px + 8.9286vw, 250px);
+    padding: 0.85rem;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    background: #111827;
+    color: white;
+    transition: 0.2s ease;
+    font-size: var(--button-font-size);
+    /* width: 80%;
     max-width: 250px;
     padding: 0.85rem;
-    border: 2px solid black;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 3px;
-    box-shadow: 0 2px 0 0 #000;
     background-color: rgb(255, 255, 255);
     color: black;
     cursor: pointer;
+    font-size: var(--button-font-size); */
   }
 
   img {
