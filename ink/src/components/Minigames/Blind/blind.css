@@ -1,0 +1,40 @@
+body {
+    background-color: #ffdb79;
+    font-family: sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid black;
+    background: white;
+}
+
+.buttons {
+    width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid black;
+    background: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: black;
+    color: white;
+}
+
+.reset {
+    background: #ddd;
+}

@@ -25,7 +25,9 @@ import Popup from "./Popup.astro";
     <button id="btn2"
       >2: Hey Eduard, mag ik vragen wat er met je gezicht is gebeurd?</button
     >
-    <button id="btn3">3: *Wegkijken zodat je niet staart*</button>
+    <button id="btn3"
+      >3: Alleen in zijn ogen kijken om er geen aandacht op te vestigen</button
+    >
   </div>
 </div>
 
@@ -43,7 +45,6 @@ import Popup from "./Popup.astro";
   }
 
   h2 {
-    font-size: 1.4rem;
     text-align: center;
     margin-bottom: 1rem;
   }
@@ -152,7 +153,7 @@ import Popup from "./Popup.astro";
   document.getElementById("btn3").addEventListener("click", () => {
     window.popup.show({
       title: "Helaas!",
-      text: "Wegkijken kan onbeleefd overkomen.",
+      text: "Hoewel je het goed bedoelt, kan het staren naar iemands ogen ongemakkelijk zijn.",
       buttonText: "Probeer opnieuw",
     });
   });

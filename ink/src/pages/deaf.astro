@@ -1,11 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import MinigameDeaf from '../components/Minigames/Deaf/Minigame-Deaf.astro';
-
+import Layout from "../layouts/Layout.astro";
+import MinigameDeaf from "../components/Minigames/Deaf/Minigame-Deaf.astro";
 ---
 
 <Layout>
-    <div id="minigame-deaf" transition:name="deaf-window">
-        <MinigameDeaf />
-    </div>
+  <div id="minigame-deaf" transition:name="deaf-window">
+    <MinigameDeaf />
+  </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-light: #ffffff;
+  }
+</style>
