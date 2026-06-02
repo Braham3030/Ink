@@ -1,170 +1,189 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { Image } from 'astro:assets';
-import visualDisability from '../assets/images/disabilities/visual.jpg';
-import auditoryDisability from '../assets/images/disabilities/auditory.jpg';
-import motorialDisability from '../assets/images/disabilities/motor.jpg';
-import looksDisability from '../assets/images/disabilities/looks.jpeg';
-import speechDisability from '../assets/images/disabilities/speech.jpg';
-
+import { Image } from "astro:assets";
+import visualDisability from "../assets/images/disabilities/visual.jpg";
+import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+import motorialDisability from "../assets/images/disabilities/motor.jpg";
+import looksDisability from "../assets/images/disabilities/looks.jpeg";
+import speechDisability from "../assets/images/disabilities/speech.jpg";
 ---
 
-<!-- Braham: usage of "Image" tag to reduce stutter and lag -->
-<!-- https://docs.astro.build/en/guides/images/ -->
+<!-- Braham: usage of "Image" tag to reduce stutter and lag --><!-- https://docs.astro.build/en/guides/images/ -->
+<h2>Kies een onderdeel</h2>
 
+<div class="choice-grid">
+  <a
+    href="/blind-introduction"
+    class="choice"
+    transition:name="blind-introduction-window"
+  >
+    <Image
+      src={visualDisability}
+      alt="Visueel beperkt persoon"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <h3>Visuele beperking</h3>
+  </a>
 
-    <h2>Kies een onderdeel</h2>
+  <a
+    href="/deaf-introduction"
+    class="choice"
+    transition:name="deaf-introduction-window"
+  >
+    <Image
+      src={auditoryDisability}
+      alt="Auditief beperkt persoon"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <h3>Auditieve beperking</h3>
+  </a>
 
-    <div class="choice-grid">
-      <a href="/blind-introduction" class="choice" transition:name="blind-introduction-window">
-        <Image src={visualDisability} alt="Visueel beperkt persoon" loading="eager" fetchpriority="high"/>
-        <h3>Visuele beperking</h3>
-      </a>
+  <a
+    href="/motorial-introduction"
+    class="choice"
+    transition:name="motorial-introduction-window"
+  >
+    <Image src={motorialDisability} alt="Motorisch beperkt persoon" />
+    <h3>Motorische beperking</h3>
+  </a>
 
-      <a href="/deaf-introduction" class="choice" transition:name="deaf-introduction-window">
-        <Image src={auditoryDisability} alt="Auditief beperkt persoon" loading="eager" fetchpriority="high"/>
-        <h3>Auditieve beperking</h3>
-      </a>
+  <a
+    href="/visual-introduction"
+    class="choice"
+    transition:name="visual-introduction-window"
+  >
+    <Image src={looksDisability} alt="Opvallend uiterlijk persoon" />
+    <h3>Opvallend uiterlijk</h3>
+  </a>
 
-      <a href="/motorial-introduction" class="choice" transition:name="motorial-introduction-window">
-        <Image src={motorialDisability} alt="Motorisch beperkt persoon" />
-        <h3>Motorische beperking</h3>
-      </a>
+  <a
+    href="/speech-introduction"
+    class="choice"
+    transition:name="speech-introduction-window"
+  >
+    <Image src={speechDisability} alt="Spraakgebrek persoon" />
+    <h3>Spraakgebrek</h3>
+  </a>
+</div>
 
-      <a href="/visual-introduction" class="choice" transition:name="visual-introduction-window">
-        <Image src={looksDisability} alt="Opvallend uiterlijk persoon" />
-        <h3>Opvallend uiterlijk</h3>
-      </a>
+<script>
+  // @ts-nocheck
 
-      <a href="/speech-introduction" class="choice" transition:name="speech-introduction-window">
-        <Image src={speechDisability} alt="Spraakgebrek persoon" />
-        <h3>Spraakgebrek</h3>
-      </a>
-    </div>
+  // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
+  document.addEventListener("astro:page-load", () => {
+    const choices = document.querySelectorAll(".choice");
 
+    choices.forEach((choice) => {
+      const transitionName = choice.getAttribute("data-transition-name");
 
-    <script>
-    // @ts-nocheck
+      if (transitionName) {
+        blindChoice.style.viewTransitionName = "none";
 
-    // Transition name will be given upon page load. This script will contain the current animation, so the animation to the next screen will occur more precise
-    document.addEventListener('astro:page-load', () => {
-        const choices = document.querySelectorAll('.choice');
+        blindChoice.addEventListener("click", () => {
+          blindChoice.style.viewTransitionName = transitionName;
 
-        choices.forEach(choice => {
-          const transitionName = choice.getAttribute('data-transition-name');
-
-        if (transitionName) {
-            blindChoice.style.viewTransitionName = 'none'
-
-            blindChoice.addEventListener('click', () => {
-                blindChoice.style.viewTransitionName = transitionName;
-
-                setTimeout(() => {
-                  
-                }, 300);
-            })
-        }
-      })
-    })
+          setTimeout(() => {}, 300);
+        });
+      }
+    });
+  });
 </script>
 
+<style>
+  h2 {
+    margin-top: 2em;
+  }
 
+  h3 {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.75);
+    text-align: center;
 
-  <style>
-    h2 {
-      text-align: center;
-      margin-top: 2em;
-      /* --h2-font-size: 2.5rem; */
-    }
+    animation: slideIn 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) 0.6s forwards;
+  }
 
-    h3 {
-      opacity: 0;
+  @keyframes slideIn {
+    0% {
       transform: translateY(-40px) scale(0.75);
-      text-align: center;
-
-      animation: slideIn 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) 0.6s forwards;
-    }
-
-    @keyframes slideIn {
-      0% {
-        transform: translateY(-40px) scale(0.75);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-    }
-
-    img {
-      display: block;
-      width: 75%;
-      height: auto;
-      border: 3px solid;
-      border-radius: 16px;
       opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  img {
+    display: block;
+    width: 75%;
+    height: auto;
+    border: 3px solid;
+    border-radius: 16px;
+    opacity: 0;
+    transform: scale(0.2);
+    transition: all 0.3s ease-in-out;
+
+    animation: zoomInFrame 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
+
+    &:hover {
+      cursor: pointer;
+      scale: 1.05;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @keyframes zoomInFrame {
+    0% {
+      border-radius: 16px;
       transform: scale(0.2);
-      transition: all 0.3s ease-in-out;
-
-      animation: zoomInFrame 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
-
-      &:hover {
-        cursor: pointer;
-        scale: 1.05;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      }
+      opacity: 0;
     }
-
-    @keyframes zoomInFrame {
-      0% {
-        border-radius: 16px;
-        transform: scale(0.2);
-        opacity: 0;
-      }
-      100% {
-        border-radius: 5px;
-        transform: scale(1);
-        opacity: 1;
-      }
+    100% {
+      border-radius: 5px;
+      transform: scale(1);
+      opacity: 1;
     }
+  }
 
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 1em;
-      max-width: 1200px;
-      margin: 0 auto;
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1em;
+    max-width: 1200px;
+    margin: 0 auto;
 
-      @media (min-width: 380px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    @media (min-width: 380px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     @media (min-width: 1024px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    .choice {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: black;
+  .choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
 
-      &:nth-child(1) img {
-        border-color: #e7f079;
-      }
-      &:nth-child(2) img {
-        border-color: #2bb687;
-      }
-      &:nth-child(3) img {
-        border-color: #7194ff;
-      }
-      &:nth-child(4) img {
-        border-color: #ff93df;
-      }
-      &:nth-child(5) img {
-        border-color: #ff6631;
-      }
+    &:nth-child(1) img {
+      border-color: #e7f079;
     }
-  </style>
+    &:nth-child(2) img {
+      border-color: #2bb687;
+    }
+    &:nth-child(3) img {
+      border-color: #7194ff;
+    }
+    &:nth-child(4) img {
+      border-color: #ff93df;
+    }
+    &:nth-child(5) img {
+      border-color: #ff6631;
+    }
+  }
+</style>
