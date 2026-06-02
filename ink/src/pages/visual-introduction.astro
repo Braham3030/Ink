@@ -1,16 +1,24 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import DisabilityIntroduction from "../components/Disability-Introduction.astro"
+import Layout from "../layouts/Layout.astro";
+import DisabilityIntroduction from "../components/Disability-Introduction.astro";
 ---
 
 <Layout>
-    <div transition:name="visual-introduction-window">
-        <DisabilityIntroduction 
-        name="Eduard"
-        image="/images/disabilities/looks.jpeg"
-        description="Eduard is volledig blind en loopt met een stok. Jij en Eduard zitten samen in een café. Eduard vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
-        link="/visual"
-        animation="speech-window"
-        />
-    </div>
+  <div transition:name="visual-introduction-window">
+    <DisabilityIntroduction
+      name="Eduard"
+      image="/images/disabilities/looks.jpeg"
+      description="Eduard is volledig blind en loopt met een stok. Jij en Eduard zitten samen in een café. Eduard vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+      link="/visual"
+      animation="speech-window"
+    />
+  </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-normal: #ff93df;
+    --detail-bg-dark: #ffd1f1;
+    --detail-bg-light: #ffffff;
+  }
+</style>
