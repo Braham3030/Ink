@@ -13,59 +13,57 @@ const { name, description, image, link } = Astro.props;
 ---
 
 <div class="card">
-    <h2>Dit is {name}</h2>
+  <h2>Dit is {name}</h2>
 
-    <div class="avatar">
-        <img src={image} alt={`afbeelding van ${name}`} />
-    </div>
+  <div class="avatar">
+    <img src={image} alt={`afbeelding van ${name}`} />
+  </div>
 
-    <p>{description}</p>
+  <p>{description}</p>
 
-    <a href={link}>Begin</a>
+  <a href={link}>Begin</a>
 </div>
 
 <style>
-    .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        padding: 2rem 1.5rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 
-    h2 {
-        font-size: 2rem;
-        text-align: center;
-    }
+  h2 {
+    text-align: center;
+  }
 
-    p {
-        font-size: 1.2rem;
-        text-align: center;
-        line-height: 1.6;
-    }
+  p {
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.6;
+  }
 
-    a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        width: 80%;
-        max-width: 250px;
-        padding: 0.75rem;
-        border: 1px solid black;
-        border-radius: 3px;
-        box-shadow: 0 2px 0 0 #000;
-        background-color: white;
-        color: black;
-        cursor: pointer;
-    }
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 80%;
+    max-width: 250px;
+    padding: 0.85rem;
+    border: 2px solid black;
+    border-radius: 3px;
+    box-shadow: 0 2px 0 0 #000;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+  }
 
-    img {
-      display: block;
-      width: 75%;
-      margin: 0 auto;
-    }
+  img {
+    display: block;
+    width: 75%;
+    margin: 0 auto;
+  }
 </style>
-
