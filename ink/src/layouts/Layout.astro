@@ -3,6 +3,15 @@ import Header from '../components/Header.astro';
 // View-transitions for animations between pages, and less load time.
 // https://docs.astro.build/en/guides/view-transitions/
 import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+
+import visualDisability from '../assets/images/disabilities/visual.jpg';
+import auditoryDisability from '../assets/images/disabilities/auditory.jpg';
+
+const preloadVisual = await getImage({ src: visualDisability, format: 'webp' });
+const preloadAuditory = await getImage({ src: auditoryDisability, format: 'webp' });
+
+
 ---
 
 <!doctype html>
@@ -15,6 +24,8 @@ import { ClientRouter } from 'astro:transitions';
 		<link rel="stylesheet" href="/styles/style.css" />
 		<meta name="generator" content={Astro.generator} />
 		<ClientRouter />
+		<link rel="preload" as="image" href={preloadVisual.src} type="image/webp"fetchpriority='high' />
+		<link rel="preload" as="image" href={preloadAuditory.src} type="image/webp"fetchpriority='high' />
 		<title>Ink</title>
 	</head>
 	<body>
