@@ -1,11 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import MinigameMotorial from '../components/Minigames/Motorial/Minigame-Motorial.astro';   
-
+import Layout from "../layouts/Layout.astro";
+import MinigameMotorial from "../components/Minigames/Motorial/Minigame-Motorial.astro";
 ---
 
 <Layout>
-    <div id="minigame-motorial" transition:name="motorial-window">
-        <MinigameMotorial />
-    </div>
+  <div id="minigame-motorial" transition:name="motorial-window">
+    <MinigameMotorial />
+  </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-normal: #c8d6ff;
+    --detail-bg-dark: #7194ff;
+    --detail-bg-light: #ffffff;
+  }
+</style>
