@@ -1,34 +1,44 @@
 ---
+import type { GetStaticPaths } from "astro";
+import { Image } from 'astro:assets';
+import visualDisability from '../assets/images/disabilities/visual.jpg';
+import auditoryDisability from '../assets/images/disabilities/auditory.jpg';
+import motorialDisability from '../assets/images/disabilities/motor.jpg';
+import looksDisability from '../assets/images/disabilities/looks.jpeg';
+import speechDisability from '../assets/images/disabilities/speech.jpg';
 
 ---
+
+<!-- Braham: usage of "Image" tag to reduce stutter and lag -->
+<!-- https://docs.astro.build/en/guides/images/ -->
 
 
     <h2>Kies een onderdeel</h2>
 
     <div class="choice-grid">
       <a href="/blind-introduction" class="choice" transition:name="blind-introduction-window">
-        <img src="images/disabilities/visual.jpg" alt="Visueel beperkt persoon" />
-        <h2>Visuele beperking</h2>
+        <Image src={visualDisability} alt="Visueel beperkt persoon" loading="eager" fetchpriority="high"/>
+        <h3>Visuele beperking</h3>
       </a>
 
       <a href="/deaf-introduction" class="choice" transition:name="deaf-introduction-window">
-        <img src="images/disabilities/auditory.jpg" alt="Auditief beperkt persoon" />
-        <h2>Auditieve beperking</h2>
+        <Image src={auditoryDisability} alt="Auditief beperkt persoon" loading="eager" fetchpriority="high"/>
+        <h3>Auditieve beperking</h3>
       </a>
 
       <a href="/motorial-introduction" class="choice" transition:name="motorial-introduction-window">
-        <img src="images/disabilities/motor.jpg" alt="Motorisch beperkt persoon" />
-        <h2>Motorische beperking</h2>
+        <Image src={motorialDisability} alt="Motorisch beperkt persoon" />
+        <h3>Motorische beperking</h3>
       </a>
 
       <a href="/visual-introduction" class="choice" transition:name="visual-introduction-window">
-        <img src="images/disabilities/looks.jpeg" alt="Opvallend uiterlijk persoon" />
-        <h2>Opvallend uiterlijk</h2>
+        <Image src={looksDisability} alt="Opvallend uiterlijk persoon" />
+        <h3>Opvallend uiterlijk</h3>
       </a>
 
       <a href="/speech-introduction" class="choice" transition:name="speech-introduction-window">
-        <img src="images/disabilities/speech.jpg" alt="Spraakgebrek persoon" />
-        <h2>Spraakgebrek</h2>
+        <Image src={speechDisability} alt="Spraakgebrek persoon" />
+        <h3>Spraakgebrek</h3>
       </a>
     </div>
 
@@ -61,26 +71,60 @@
 
 
   <style>
-    h1 {
-      text-align: center;
-      margin-top: 2em;
-    }
-
     h2 {
       text-align: center;
+      margin-top: 2em;
+      /* --h2-font-size: 2.5rem; */
+    }
+
+    h3 {
+      opacity: 0;
+      transform: translateY(-40px) scale(0.75);
+      text-align: center;
+
+      animation: slideIn 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) 0.6s forwards;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(-40px) scale(0.75);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
     }
 
     img {
       display: block;
       width: 75%;
+      height: auto;
       border: 3px solid;
-      border-radius: 5px;
+      border-radius: 16px;
+      opacity: 0;
+      transform: scale(0.2);
       transition: all 0.3s ease-in-out;
+
+      animation: zoomInFrame 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
 
       &:hover {
         cursor: pointer;
         scale: 1.05;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @keyframes zoomInFrame {
+      0% {
+        border-radius: 16px;
+        transform: scale(0.2);
+        opacity: 0;
+      }
+      100% {
+        border-radius: 5px;
+        transform: scale(1);
+        opacity: 1;
       }
     }
 
