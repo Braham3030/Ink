@@ -1,12 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import { slide } from "astro:transitions";
-import MinigameVisual from "../components/Minigame-visual.astro";
+import MinigameVisual from "../components/Minigame-Visual.astro";
 ---
 
 <Layout>
-  <div id="minigame-visual" transition:animate={slide({ duration: "0.8s" })}>
+  <div id="minigame-visual" transition:name="visual-window">
     <MinigameVisual />
   </div>
 </Layout>

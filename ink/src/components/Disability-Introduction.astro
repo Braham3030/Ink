@@ -9,7 +9,7 @@
         description="Tim is blind en..."
     />
 */
-const { name, description, image } = Astro.props;
+const { name, description, image, link } = Astro.props;
 ---
 
 <div class="card">
@@ -21,7 +21,7 @@ const { name, description, image } = Astro.props;
 
     <p>{description}</p>
 
-    <button>Begin</button>
+    <a href={link}>Begin</a>
 </div>
 
 <style>
@@ -46,13 +46,19 @@ const { name, description, image } = Astro.props;
         line-height: 1.6;
     }
 
-    button {
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
         width: 80%;
         max-width: 250px;
         padding: 0.75rem;
         border: 1px solid black;
         border-radius: 3px;
         box-shadow: 0 2px 0 0 #000;
+        background-color: white;
+        color: black;
         cursor: pointer;
     }
 
