@@ -6,15 +6,19 @@ import Popup from "../../Popup.astro";
 
 <div class="content">
   <h2>Praat met Evelin</h2>
-
   <div id="dialogue">
     <div id="dialogue-box">
         <p id="speaker-name"></p>
         <p id="dialogue-text"></p>
     </div>
   </div>
+  <div id="start-container">
+    <button id="start-button">Start</button>
+  </div>
 
-  <button id="interruptBtn">Onderbreek</button>
+  <div id="interrupt-container">
+    <button id="interrupt-button" class="hidden">Help zin afmaken</button>
+  </div>
 </div>
 
 <Popup
