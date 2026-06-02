@@ -4,8 +4,8 @@ import { speechData } from '../../../data/speechData.js'
 import Popup from "../../Popup.astro";
 ---
 
-<div class="content">
-  <h2>Praat met Evelin</h2>
+<div class="content" transition:name="avatar-Evelin">
+  <h2 transition:name="title-text">Praat met Evelin</h2>
   <div id="dialogue">
     <div id="dialogue-box">
         <p id="speaker-name"></p>
@@ -17,7 +17,7 @@ import Popup from "../../Popup.astro";
   </div>
 
   <div id="interrupt-container">
-    <button id="interrupt-button" class="hidden">Help zin afmaken</button>
+    <button id="interrupt-button" class="hidden" transition:name="button-Evelin">Help zin afmaken</button>
   </div>
 </div>
 
