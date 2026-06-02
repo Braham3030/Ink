@@ -76,17 +76,26 @@ function init() {
 
   async function nextLine() {
     if (interrupted) return
+
     if (index >= conversation.length) {
-      setInterruptEnabled(false)
-      return
+        setInterruptEnabled(false)
+        console.log("Dialogue finished (no more lines)")
+        return
     }
 
     await renderLine(conversation[index++])
 
-    if (!interrupted) {
-      setTimeout(nextLine, CONFIG.lineDelay)
+    // is dit de laatste lijn die net is afgerond?
+    if (index >= conversation.length && !interrupted) {
+        console.log(" Dialogue finished (after last line render)")
+        setInterruptEnabled(false)
+        return
     }
-  }
+
+    if (!interrupted) {
+        setTimeout(nextLine, CONFIG.lineDelay)
+    }
+    }
 
   // START
   startBtn.onclick = () => {
