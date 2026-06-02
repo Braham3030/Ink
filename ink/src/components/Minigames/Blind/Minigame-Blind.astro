@@ -1,0 +1,24 @@
+---
+import Popup from "../../Popup.astro";
+import "./blind.css";
+---
+
+<h2>Verwijs Tim naar de WC</h2>
+
+<canvas id="game" width="400" height="400"></canvas>
+
+<div class="buttons">
+    <button data-path="1">Voorbij de bar naar rechts</button>
+    <button data-path="2">Voorbij de bar naar rechts en dan links</button>
+    <button data-path="3">
+        De wc's bevinden zich rechtsachter in de kamer
+    </button>
+    <button data-path="4">De wc's zijn daar</button>
+    <!-- <button id="resetBtn" class="reset">Reset</button> -->
+</div>
+
+<Popup />
+
+<script>
+  import "./blind.js";
+</script>
