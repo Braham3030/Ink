@@ -1,135 +1,146 @@
 // @ts-nocheck
 
 const CONFIG = {
-    speakers: {
-        Evelin: {
-            typingSpeed: 55,
-            pauseChance: 0.11,
-            pauseMin: 500,
-            pauseMax: 900
-        },
-        default: {
-            typingSpeed: 25,
-            pauseChance: 0,
-            pauseMin: 0,
-            pauseMax: 0
-        }
+  speakers: {
+    Evelin: {
+      typingSpeed: 55,
+      pauseChance: 0.11,
+      pauseMin: 500,
+      pauseMax: 900
     },
-
-    lineDelay: 1200
+    default: {
+      typingSpeed: 25,
+      pauseChance: 0,
+      pauseMin: 0,
+      pauseMax: 0
+    }
+  },
+  lineDelay: 1200
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    const conversation = window.speechData?.[0]?.dialogue
-    if (!conversation) return
+function init() {
+  const conversation = window.speechData?.[0]?.dialogue
+  if (!conversation) return
 
-    let index = 0
-    let interrupted = false
-    let typingInterval = null
+  let index = 0
+  let interrupted = false
+  let started = false
 
-    const speakerName = document.getElementById("speaker-name")
-    const dialogueText = document.getElementById("dialogue-text")
-    const interruptBtn = document.getElementById("interruptBtn")
+  const speakerName = document.getElementById("speaker-name")
+  const dialogueText = document.getElementById("dialogue-text")
+  const interruptBtn = document.getElementById("interrupt-button")
+  const startBtn = document.getElementById("start-button")
 
-    function setInterruptEnabled(enabled) {
-        interruptBtn.disabled = !enabled
-        interruptBtn.classList.toggle("disabled", !enabled)
+  if (!speakerName || !dialogueText || !interruptBtn || !startBtn) return
+
+  function setInterruptEnabled(enabled) {
+    interruptBtn.disabled = !enabled
+    interruptBtn.classList.toggle("disabled", !enabled)
+  }
+
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  async function typeText(element, text, speed, settings) {
+    element.textContent = ""
+    let i = 0
+
+    while (i < text.length) {
+      if (interrupted) return
+
+      element.textContent += text[i]
+      i++
+
+      if (settings.pauseChance && Math.random() < settings.pauseChance) {
+        const pause =
+          settings.pauseMin +
+          Math.random() * (settings.pauseMax - settings.pauseMin)
+
+        await wait(pause)
+      }
+
+      await wait(speed)
+    }
+  }
+
+  async function renderLine(line) {
+    const settings =
+      CONFIG.speakers[line.speaker] || CONFIG.speakers.default
+
+    speakerName.textContent = line.speaker
+    setInterruptEnabled(line.speaker !== "U")
+
+    await typeText(dialogueText, line.text, settings.typingSpeed, settings)
+  }
+
+  async function nextLine() {
+    if (interrupted) return
+
+    if (index >= conversation.length) {
+        setInterruptEnabled(false)
+        console.log("Dialogue finished (no more lines)")
+        return
     }
 
-    function typeText(element, text, speed = 20, speaker = "", settings = {}) {
-        return new Promise(async (resolve) => {
-            element.textContent = ""
-            let i = 0
+    await renderLine(conversation[index++])
 
-            while (i < text.length) {
-                if (interrupted) return resolve()
-
-                element.textContent += text[i]
-                i++
-
-                // 🧠 Evelin hesitation system (config-driven)
-                if (settings.pauseChance && Math.random() < settings.pauseChance) {
-                    const pause =
-                        settings.pauseMin +
-                        Math.random() * (settings.pauseMax - settings.pauseMin)
-
-                    await wait(pause)
-                }
-
-                await wait(speed)
-            }
-
-            resolve()
-        })
+    // is dit de laatste lijn die net is afgerond?
+    if (index >= conversation.length && !interrupted) {
+        console.log(" Dialogue finished (after last line render)")
+        setInterruptEnabled(false)
+        return
     }
 
-    async function renderLine(line) {
-        const isNpcSpeaking = line.speaker !== "U"
-
-        setInterruptEnabled(isNpcSpeaking)
-
-        speakerName.textContent = line.speaker
-
-        const settings = CONFIG.speakers[line.speaker] || CONFIG.speakers.default
-
-        await typeText(
-            dialogueText,
-            line.text,
-            settings.typingSpeed,
-            line.speaker,
-            settings
-        )
-    }
-
-    function wait(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
-    async function nextLine() {
-        if (interrupted) return
-        if (index >= conversation.length) {
-            setInterruptEnabled(false)
-            return
-        }
-
-        await renderLine(conversation[index])
-
-        index++
-
-        if (interrupted) return
-
+    if (!interrupted) {
         setTimeout(nextLine, CONFIG.lineDelay)
     }
+    }
 
-    interruptBtn.addEventListener("click", () => {
-        if (interruptBtn.disabled) return
+  // START
+  startBtn.onclick = () => {
+    if (started) return
 
-        interrupted = true
+    started = true
+    startBtn.classList.add("hidden")
+    interruptBtn.classList.remove("hidden")
 
-        clearInterval(typingInterval)
-        typingInterval = null
+    nextLine()
+  }
 
-        setInterruptEnabled(false)
+  // INTERRUPT
+  interruptBtn.onclick = () => {
+    if (interruptBtn.disabled) return
 
-        window.popup.show({
-            title: "Heb geduld",
-            text: "Je kan met iemand met spraakgebrek beter geduld hebben en hem/ haar zin laten maken.",
-            buttonText: "Volgende",
-        })
+    interrupted = true
+    setInterruptEnabled(false)
 
-        function handlePopupClick(e) {
-            if (e.target.id === "popupButton") {
-                window.popup.hide()
-
-                document.removeEventListener("click", handlePopupClick)
-                interrupted = false
-                nextLine()
-            }
-        }
-
-        document.addEventListener("click", handlePopupClick)
+    window.popup.show({
+      title: "Heb geduld",
+      text: "Laat iemand zijn zin rustig afmaken.",
+      buttonText: "Volgende",
     })
 
-    setInterruptEnabled(false)
-    nextLine()
-})
+    document.addEventListener("click", function handler(e) {
+      if (e.target.id === "popupButton") {
+        window.popup.hide()
+        document.removeEventListener("click", handler)
+
+        interrupted = false
+        nextLine()
+      }
+    })
+  }
+
+  setInterruptEnabled(false)
+}
+
+// init helper
+function run() {
+  init()
+}
+
+run()
+
+// Astro client-side navigation fix
+document.addEventListener("astro:page-load", run)
