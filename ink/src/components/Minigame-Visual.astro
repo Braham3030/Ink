@@ -1,15 +1,18 @@
 ---
 import Popup from "./Popup.astro";
+import { Image } from "astro:assets";
+import looksDisability from "../assets/images/disabilities/looks.jpeg";
 ---
 
 <div class="screen">
-  <h2>Praat met Eduard</h2>
+  <h2 transition:name="title-text">Praat met Eduard</h2>
 
   <div class="chat-area">
-    <img
-      class="avatar"
-      src="src/assets/images/disabilities/looks.jpeg"
+    <Image
+      src={looksDisability}
       alt="afbeelding van Eduard"
+      class="avatar"
+      transition:name="avatar-Eduard"
     />
 
     <div class="speech-bubble">

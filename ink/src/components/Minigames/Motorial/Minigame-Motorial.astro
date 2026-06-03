@@ -6,13 +6,14 @@ import { obstacles } from "../../../data/motorialData";
 ---
 
 <div class="content">
-  <h2>Ga het gebouw in</h2>
+  <h2 transition:name="title-text">Ga het gebouw in</h2>
   <p>Klik op de onderdelen die voor Anna een obstakel zouden kunnen zijn.</p>
 
   <div class="image-wrapper">
     <img
       src="../../images/motorial-obstacles/Entrance_Building.png"
       alt="Entrance Office Building"
+      transition:name="avatar-Anna"
     />
 
     {obstacles.map((obstacle) => (
