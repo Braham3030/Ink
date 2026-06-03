@@ -48,7 +48,6 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
   }
 
   h2 {
-    text-align: center;
     margin-bottom: 1rem;
   }
 
@@ -68,15 +67,19 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
     z-index: 0;
   }
 
-  .speech-bubble {
-    position: relative;
-    z-index: 1;
-    margin-right: 3rem; /* ruimte voor avatar */
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-  }
+.speech-bubble {
+  position: relative;
+  z-index: 1;
+  margin-right: 3rem;
+
+  background: linear-gradient(180deg, #ffffff 0%, #f6f7ff 100%);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+
+  padding: 0.9rem 1rem;
+
+  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.12);
+}
 
   .bubble-name {
     font-size: 1.2rem;
@@ -92,19 +95,26 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
   .choices {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
     margin-top: 1rem;
   }
 
   button {
-    text-align: left;
-    padding: 0.75rem 1rem;
-    border: 1px solid #6f6f6f;
-    border-radius: 6px;
-    background: rgb(246, 228, 228);
-    cursor: pointer;
-    line-height: 1.6;
-  }
+  position: relative;
+
+  background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+  border: 2px solid rgba(70, 80, 180, 0.35);
+  border-radius: 14px;
+
+  padding: 0.9rem 1rem 0.9rem 2.5rem;
+  text-align: left;
+
+  color: #1a1a1a;
+
+  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
+
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
+}
 
   @media (min-width: 768px) {
     .screen {
