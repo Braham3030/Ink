@@ -16,13 +16,19 @@ const { name, description, image, link } = Astro.props;
 <div class="card">
   <h2 transition:name="title-text">Dit is {name}</h2>
 
-    <div class="avatar">
-        <Image src={image} alt={`afbeelding van ${name}`} loading="eager" transition:name={`avatar-${name}`}/>
-    </div>
+  <div class="avatar">
+    <Image
+      src={image}
+      alt={`afbeelding van ${name}`}
+      loading="eager"
+      transition:name={`avatar-${name}`}
+    />
+  </div>
 
   <p>{description}</p>
 
-  <a href={link} transition:name={`button-${name}`}>Begin</a>
+  <a href={link} transition:name={`button-${name}`} class="link-button">Begin</a
+  >
 </div>
 
 <style>
@@ -61,41 +67,15 @@ const { name, description, image, link } = Astro.props;
     }
   }
 
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-
-    width: fit-content;
-    width: clamp(150px, 121.4286px + 8.9286vw, 250px);
-    padding: 0.85rem;
-    border-radius: 7px;
-    border: none;
-    cursor: pointer;
-    background: #111827;
-    color: white;
-    transition: 0.2s ease;
-    font-size: var(--button-font-size);
-    /* width: 80%;
-    max-width: 250px;
-    padding: 0.85rem;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 3px;
-    background-color: rgb(255, 255, 255);
-    color: black;
-    cursor: pointer;
-    font-size: var(--button-font-size); */
-  }
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
-      opacity: 0;
-      transform: scale(0.2);
-      border-radius: 18px;
+  img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0;
+    transform: scale(0.2);
+    border-radius: 18px;
 
     animation: zoomIn 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) both;
   }

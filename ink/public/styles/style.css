@@ -42,6 +42,24 @@ p {
   font-size: var(--p-font-size);
 }
 
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  width: fit-content;
+  width: clamp(150px, 121.4286px + 8.9286vw, 250px);
+  padding: 0.85rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  background: #111827;
+  color: white;
+  transition: 0.2s ease;
+  font-size: var(--button-font-size);
+}
+
 .button-wide {
   font-size: var(--p-font-size);
   padding: 1rem 4rem;
