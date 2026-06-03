@@ -8,7 +8,7 @@ import Popup from "./Popup.astro";
   <div class="chat-area">
     <img
       class="avatar"
-      src="/images/disabilities/looks.jpeg"
+      src="src/assets/images/disabilities/looks.jpeg"
       alt="afbeelding van Eduard"
     />
 
@@ -45,7 +45,6 @@ import Popup from "./Popup.astro";
   }
 
   h2 {
-    text-align: center;
     margin-bottom: 1rem;
   }
 
@@ -69,7 +68,7 @@ import Popup from "./Popup.astro";
     position: relative;
     z-index: 1;
     margin-right: 3rem; /* ruimte voor avatar */
-    background-color: white;
+    background-color: hsl(20, 80%, 80%);
     border: 1px solid black;
     border-radius: 8px;
     padding: 0.75rem 1rem;
@@ -89,18 +88,21 @@ import Popup from "./Popup.astro";
   .choices {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
     margin-top: 1rem;
   }
 
   button {
     text-align: left;
     padding: 0.75rem 1rem;
-    border: 1px solid #6f6f6f;
+    border: 2px solid #000000;
     border-radius: 6px;
-    background: rgb(246, 228, 228);
+    background: hsl(200 80% 80%);
+
     cursor: pointer;
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: var(--button-font-size);
+    margin-top: 1rem;
   }
 
   @media (min-width: 768px) {
