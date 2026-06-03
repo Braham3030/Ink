@@ -92,10 +92,12 @@ const preloadAuditory = await getImage({ src: auditoryDisability, format: 'webp'
 		padding-top: 1rem;
 	}
 
-	svg {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-		z-index: -1;
-	}
+ svg {
+  width: clamp(60px, 10vw, 120px);
+  height: clamp(60px, 10vw, 120px);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
 </style>
