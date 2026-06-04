@@ -25,7 +25,7 @@ const { name, description, animation, image, link } = Astro.props;
     />
   </div>
 
-  <p transition:name={animation}>{description}</p>
+  <p class="introduction-text" transition:name={`text-${name}`}>{description}</p>
 
   <a href={link} transition:name={`button-${name}`} class="link-button">Begin</a
   >
