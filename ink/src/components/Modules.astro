@@ -38,9 +38,11 @@
 </script>
 
 <style>
+
+
+
   .full-container {
-    margin: 0 auto;
-    text-align: center;
+    margin-top: 3rem;
   }
 
   .module-container {
@@ -66,10 +68,16 @@
     display: block;
     text-decoration: none;
     color: white;
-    background-color: green;
+    background: #111827;
     padding: 1.3rem 1rem;
     border-radius: 5px;
     font-size: var(--button-font-size);
     text-align: center;
   }
+
+.module-item:nth-child(2) .module-choice,
+.module-item:nth-child(3) .module-choice {
+  opacity: 0.5;
+  pointer-events: none;
+}
 </style>
