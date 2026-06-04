@@ -9,9 +9,9 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
 ---
 
 <!-- Braham: usage of "Image" tag to reduce stutter and lag --><!-- https://docs.astro.build/en/guides/images/ -->
-<h2>Kies een onderdeel</h2>
+<h2 transition:name="title-text">Kies een onderdeel</h2>
 
-<div class="choice-grid">
+<div class="choice-grid" data-astro-prefetch="viewport">
   <a
     href="/blind-introduction"
     class="choice"
@@ -22,6 +22,7 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
       alt="Visueel beperkt persoon"
       loading="eager"
       fetchpriority="high"
+      transition:name="avatar-Tim"
     />
     <h3>Visuele beperking</h3>
   </a>
@@ -36,6 +37,7 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
       alt="Auditief beperkt persoon"
       loading="eager"
       fetchpriority="high"
+      transition:name="avatar-Nick"
     />
     <h3>Auditieve beperking</h3>
   </a>
@@ -45,7 +47,11 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
     class="choice"
     transition:name="motorial-introduction-window"
   >
-    <Image src={motorialDisability} alt="Motorisch beperkt persoon" />
+    <Image
+      src={motorialDisability}
+      alt="Motorisch beperkt persoon"
+      transition:name="avatar-Anna"
+    />
     <h3>Motorische beperking</h3>
   </a>
 
@@ -54,7 +60,11 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
     class="choice"
     transition:name="visual-introduction-window"
   >
-    <Image src={looksDisability} alt="Opvallend uiterlijk persoon" />
+    <Image
+      src={looksDisability}
+      alt="Opvallend uiterlijk persoon"
+      transition:name="avatar-Eduard"
+    />
     <h3>Opvallend uiterlijk</h3>
   </a>
 
@@ -63,7 +73,11 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
     class="choice"
     transition:name="speech-introduction-window"
   >
-    <Image src={speechDisability} alt="Spraakgebrek persoon" />
+    <Image
+      src={speechDisability}
+      alt="Spraakgebrek persoon"
+      transition:name="avatar-Evelin"
+    />
     <h3>Spraakgebrek</h3>
   </a>
 </div>
@@ -101,6 +115,7 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
     transform: translateY(-40px) scale(0.75);
     text-align: center;
 
+    transition: all 0.6s cubic-bezier(0.25, 1.5, 0.5, 1);
     animation: slideIn 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) 0.6s forwards;
   }
 
@@ -117,20 +132,20 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
 
   img {
     display: block;
-    width: 75%;
+    width: 100%;
     height: auto;
-    border: 3px solid;
+    /* border: 3px solid; */
     border-radius: 16px;
-    opacity: 0;
     transform: scale(0.2);
-    transition: all 0.3s ease-in-out;
+
+    transition: all 0.6s cubic-bezier(0.25, 1.5, 0.5, 1);
 
     animation: zoomInFrame 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
 
     &:hover {
       cursor: pointer;
       scale: 1.05;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      /* box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6); */
     }
   }
 
@@ -141,7 +156,7 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
       opacity: 0;
     }
     100% {
-      border-radius: 5px;
+      border-radius: 0px;
       transform: scale(1);
       opacity: 1;
     }
@@ -150,9 +165,11 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
   .choice-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 1em;
+    gap: 2em;
     max-width: 1200px;
     margin: 0 auto;
+    align-items: center;
+    justify-items: center;
 
     @media (min-width: 380px) {
       grid-template-columns: repeat(2, 1fr);
@@ -169,21 +186,48 @@ import speechDisability from "../assets/images/disabilities/speech.jpg";
     align-items: center;
     text-decoration: none;
     color: black;
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    background-color: white;
+    backdrop-filter: blur(8px);
+    border-radius: 5px;
+    width: 80%;
+    /* padding: 0.1em; */
+    overflow: hidden;
 
-    &:nth-child(1) img {
-      border-color: #e7f079;
+    &:nth-child(1) {
+      border: 4px solid #e7f079;
+
+      &:hover {
+        box-shadow: 0 0px 20px rgba(231, 240, 121, 1);
+      }
     }
-    &:nth-child(2) img {
-      border-color: #2bb687;
+    &:nth-child(2) {
+      border: 4px solid #2bb687;
+
+      &:hover {
+        box-shadow: 0 0px 20px rgba(43, 182, 135, 1);
+      }
     }
-    &:nth-child(3) img {
-      border-color: #7194ff;
+    &:nth-child(3) {
+      border: 4px solid #7194ff;
+
+      &:hover {
+        box-shadow: 0 0px 20px rgba(113, 148, 255, 1);
+      }
     }
-    &:nth-child(4) img {
-      border-color: #ff93df;
+    &:nth-child(4) {
+      border: 4px solid #ff93df;
+
+      &:hover {
+        box-shadow: 0 0px 20px rgba(255, 147, 223, 1);
+      }
     }
-    &:nth-child(5) img {
-      border-color: #ff6631;
+    &:nth-child(5) {
+      border: 4px solid #ff6631;
+
+      &:hover {
+        box-shadow: 0 0px 20px rgba(255, 102, 49, 1);
+      }
     }
   }
 </style>

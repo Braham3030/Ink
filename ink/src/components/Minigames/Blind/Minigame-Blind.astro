@@ -3,11 +3,12 @@ import Popup from "../../Popup.astro";
 import "./blind.css";
 ---
 
-<h2 id="levelTitle"></h2>
+<h2 id="levelTitle" transition:name="title-text"></h2>
 
-<canvas id="game"></canvas>
+<canvas id="game" transition:name="avatar-Tim"></canvas>
 
-<div class="buttons" id="buttons"></div>
+<div class="buttons" id="buttons" transition:name="button-Tim"></div>
+ 
 
 <Popup />
 
