@@ -1,0 +1,17 @@
+---
+// @ts-nocheck
+import Layout from "../layouts/Layout.astro"
+import EndScreen from "../components/End-Screen.astro"
+import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+---
+
+<Layout>
+    <EndScreen 
+    name="Eva"
+      image={auditoryDisability}
+      quote="Als mensen een paar zinnetjes of paar woorden gebarentaal kennen, doet dat zo veel, want je wordt aangesproken in je eigen taal. Al kan het personeel alleen maar goedendag zeggen, voel je je er enorm door welkom geheten."
+      linkChoice="/choice"
+      linkNext="/motorial-introduction"
+      animation="deaf-window"
+      />
+</Layout>

@@ -10,7 +10,7 @@
     />
 */
 import { Image } from "astro:assets";
-const { name, description, image, link } = Astro.props;
+const { name, description, animation, image, link } = Astro.props;
 ---
 
 <div class="card">
@@ -25,7 +25,7 @@ const { name, description, image, link } = Astro.props;
     />
   </div>
 
-  <p>{description}</p>
+  <p transition:name={animation}>{description}</p>
 
   <a href={link} transition:name={`button-${name}`} class="link-button">Begin</a
   >

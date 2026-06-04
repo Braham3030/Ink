@@ -298,22 +298,28 @@ function runPath(type) {
 ========================= */
 
 function nextLevel() {
+    const nextLevelBtn = document.querySelector('.nextScreen');
+    const buttonResume = document.getElementById("popupButton");
     if (currentLevelIndex + 1 < levels.length) {
         loadLevel(currentLevelIndex + 1)
     } else {
+        if (nextLevelBtn) nextLevelBtn.href = "/blind-end-screen";
+        nextLevelBtn.style.display = 'block';
+        buttonResume.style.display = 'none';
         window.popup?.show?.({
             title: "Klaar!",
             text: "Je hebt alle levels voltooid.",
-            buttonText: "Restart",
+            buttonText: "Volgende scherm",
+            endScreenLink: "/blind-end-screen"
         })
 
         setTimeout(() => {
-            const btn = document.getElementById("popupButton")
+            const btn = document.querySelector(".nextScreen")
 
             if (btn) {
                 btn.onclick = () => {
                     window.popup?.hide?.()
-                    loadLevel(0)
+                    window.locate.href = "/blind-end-screen";
                 }
             }
         }, 50)
