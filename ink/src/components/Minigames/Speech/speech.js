@@ -1,5 +1,9 @@
 // @ts-nocheck
 
+window.helpContext = {
+  text: "Dit is een testbericht.",
+}
+
 const CONFIG = {
   // Per-speaker typing behavior configuration
   speakers: {
