@@ -1,0 +1,339 @@
+---
+import Popup from "./Popup.astro";
+---
+
+<h2>Verwijs Tim naar de WC</h2>
+
+<canvas id="game" width="400" height="400"></canvas>
+
+<div class="buttons">
+    <button data-path="1">Voorbij de bar naar rechts</button>
+    <button data-path="2">Voorbij de bar naar rechts en dan links</button>
+    <button data-path="3">De wc's bevinden zich rechtsachter in de kamer</button
+    >
+    <button data-path="4">De wc's zijn daar</button>
+    <button id="resetBtn" class="reset">Reset</button>
+</div>
+
+<Popup />
+
+<style>
+    body {
+        background-color: #ffdb79;
+        font-family: sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    canvas {
+        display: block;
+        margin: 20px auto;
+        border: 2px solid black;
+        background: white;
+    }
+
+    .buttons {
+        width: 400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid black;
+        background: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: black;
+        color: white;
+    }
+
+    .reset {
+        background: #ddd;
+    }
+</style>
+
+<script is:inline>
+    // @ts-nocheck
+    let canvas, ctx;
+
+    const tileSize = 50;
+
+    const startPosition = { x: 3, y: 7 };
+    const player = { x: 3, y: 7 };
+
+    let locked = false;
+    let showQuestionMark = false;
+
+    const optionTexts = {
+        1: "Nadat Tim voorbij de bar naar rechts is gegaan, wist hij verder niet waar hij naar toe moest...",
+        2: "Je hebt duidelijke en nauwkeurige instructies gegeven.",
+        3: "Tim is voorbij de WC's helemaal naar het einde van de kamer gelopen.",
+        4: "Tim weet niet welke kant hij naar toe moet lopen.",
+    };
+
+    const obstacles = [
+        { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
+        { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
+        { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
+        { x: 2, y: 4, w: 1, h: 1, name: "Stoel" },
+        { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
+        { x: 1, y: 6, w: 1, h: 1, name: "Stoel" },
+        { x: 0, y: 4, w: 1, h: 2, name: "TV" },
+        { x: 4, y: 4, w: 1, h: 1, name: "Kruk" },
+        { x: 4, y: 5, w: 1, h: 1, name: "Kruk" },
+        { x: 4, y: 6, w: 1, h: 1, name: "Kruk" },
+        { x: 5, y: 0, w: 1, h: 2, name: "Muur" },
+        { x: 5, y: 3, w: 3, h: 1, name: "Muur" },
+        { x: 5, y: 4, w: 1, h: 3, name: "Bar" },
+    ];
+
+    const goal = { x: 6, y: 0, w: 2, h: 2 };
+
+    /* INIT */
+    // ChatGPT gebruikt om ervoor te zorgen dat de canvas pas laadt wanneer de astro pagina wordt geladen
+    // Prompt: "De canvas is niet gelijk geladen, ik moetelke keer de pagina refreshen
+    // Prompt 2: "Op het begin wel goed nu maar als ik andere pagina ga, dan weer terug dan is canvas weer niet geladen"
+    function init() {
+        canvas = document.getElementById("game");
+        if (!canvas) return;
+
+        ctx = canvas.getContext("2d");
+
+        setupUI();
+        render();
+    }
+
+    document.addEventListener("astro:page-load", init);
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+
+    /* UI */
+    function setupUI() {
+        document.querySelectorAll("[data-path]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                if (!locked) runPath(Number(btn.dataset.path));
+            });
+        });
+
+        document.getElementById("resetBtn") .addEventListener("click", resetGame);
+
+        document.getElementById("popupButton").addEventListener("click", () => {
+            resetGame();
+        });
+    }
+
+    function setLocked(state) {
+        locked = state;
+    }
+
+    /* DRAW */
+    function drawGrid() {
+        ctx.clearRect(0, 0, 400, 400);
+
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 1;
+
+        for (let x = 0; x <= 8; x++) {
+            ctx.beginPath();
+            ctx.moveTo(x * tileSize, 0);
+            ctx.lineTo(x * tileSize, 400);
+            ctx.stroke();
+        }
+
+        for (let y = 0; y <= 8; y++) {
+            ctx.beginPath();
+            ctx.moveTo(0, y * tileSize);
+            ctx.lineTo(400, y * tileSize);
+            ctx.stroke();
+        }
+    }
+
+    function drawObstacles() {
+        obstacles.forEach((o) => {
+            ctx.fillStyle = "#444";
+            ctx.fillRect(
+                o.x * tileSize,
+                o.y * tileSize,
+                o.w * tileSize,
+                o.h * tileSize,
+            );
+
+            ctx.strokeStyle = "#000";
+            ctx.strokeRect(
+                o.x * tileSize,
+                o.y * tileSize,
+                o.w * tileSize,
+                o.h * tileSize,
+            );
+
+            ctx.fillStyle = "white";
+            ctx.font = "12px sans-serif";
+            ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
+        });
+    }
+
+    function drawGoal() {
+        ctx.fillStyle = "#2ecc71";
+        ctx.fillRect(
+            goal.x * tileSize,
+            goal.y * tileSize,
+            goal.w * tileSize,
+            goal.h * tileSize,
+        );
+
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(
+            goal.x * tileSize,
+            goal.y * tileSize,
+            goal.w * tileSize,
+            goal.h * tileSize,
+        );
+    }
+
+    function drawPlayer() {
+        const px = player.x * tileSize;
+        const py = player.y * tileSize;
+
+        ctx.fillStyle = "blue";
+        ctx.fillRect(px, py, tileSize, tileSize);
+
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(px, py, tileSize, tileSize);
+
+        if (showQuestionMark) {
+            ctx.fillStyle = "red";
+            ctx.font = "28px sans-serif";
+            ctx.fillText("?", px + 15, py + 32);
+        }
+    }
+
+    function render() {
+        drawGrid();
+        drawObstacles();
+        drawGoal();
+        drawPlayer();
+    }
+
+    /* MOVEMENT */
+    function moveTo(path, showQ, correct, optionText, i = 0) {
+        if (i === 0) setLocked(true);
+
+        if (i >= path.length) {
+            showQuestionMark = showQ;
+            render();
+
+            setTimeout(() => {
+                window.popup.show(
+                    correct
+                        ? {
+                              title: "Inderdaad!",
+                              text:
+                                  optionText + "\n\nTim heeft de wc gevonden.",
+                              buttonText: "Volgende",
+                          }
+                        : {
+                              title: "Helaas",
+                              text:
+                                  optionText +
+                                  "\n\nDit was niet de juiste route.",
+                              buttonText: "Opnieuw",
+                          },
+                );
+
+                setLocked(false);
+            }, 800);
+
+            return;
+        }
+
+        player.x = path[i].x;
+        player.y = path[i].y;
+
+        render();
+
+        setTimeout(() => moveTo(path, showQ, correct, optionText, i + 1), 200);
+    }
+
+    /* ROUTES */
+    function runPath(type) {
+        if (locked) return;
+
+        showQuestionMark = false;
+        window.popup.hide();
+
+        let path = [];
+
+        if (type === 1) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 4, y: 2 },
+                { x: 5, y: 2 },
+            ];
+        }
+
+        if (type === 2) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 4, y: 2 },
+                { x: 5, y: 2 },
+                { x: 6, y: 2 },
+                { x: 6, y: 1 },
+                { x: 6, y: 0 },
+            ];
+        }
+
+        if (type === 3) {
+            path = [
+                { x: 3, y: 6 },
+                { x: 3, y: 5 },
+                { x: 3, y: 4 },
+                { x: 3, y: 3 },
+                { x: 3, y: 2 },
+                { x: 3, y: 1 },
+                { x: 3, y: 0 },
+                { x: 4, y: 0 },
+            ];
+        }
+
+        if (type === 4) {
+            path = [{ x: 3, y: 7 }];
+        }
+
+        const correct = type === 2;
+        const text = optionTexts[type];
+
+        moveTo(path, !correct, correct, text);
+    }
+
+    /* RESET */
+    function resetGame() {
+        player.x = startPosition.x;
+        player.y = startPosition.y;
+        showQuestionMark = false;
+        window.popup.hide();
+        setLocked(false);
+        render();
+    }
+</script>

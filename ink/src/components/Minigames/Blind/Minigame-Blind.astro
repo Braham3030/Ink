@@ -3,19 +3,12 @@ import Popup from "../../Popup.astro";
 import "./blind.css";
 ---
 
-<h2 transition:name="title-text">Verwijs Tim naar de WC</h2>
+<h2 id="levelTitle" transition:name="title-text"></h2>
 
-<canvas id="game" width="400" height="400" transition:name="avatar-Tim"></canvas>
+<canvas id="game" transition:name="avatar-Tim"></canvas>
 
-<div class="buttons">
-    <button data-path="1">Voorbij de bar naar rechts</button>
-    <button data-path="2">Voorbij de bar naar rechts en dan links</button>
-    <button data-path="3">
-        De wc's bevinden zich rechtsachter in de kamer
-    </button>
-    <button data-path="4" transition:name="button-Tim">De wc's zijn daar</button>
-    <!-- <button id="resetBtn" class="reset">Reset</button> -->
-</div>
+<div class="buttons" id="buttons" transition:name="button-Tim"></div>
+ 
 
 <Popup />
 
