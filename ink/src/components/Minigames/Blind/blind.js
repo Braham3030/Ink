@@ -1,281 +1,336 @@
 // @ts-nocheck
+import { levels } from "../../../data/blindData.js"
 
-let canvas;
-let ctx;
+let canvas
+let ctx
 
-const tileSize = 50;
+const tileSize = 50
+const gridSize = 9
+const canvasSize = tileSize * gridSize
 
-const startPosition = { x: 3, y: 7 };
-const player = { x: 3, y: 7 };
+/* =========================
+   STATE
+========================= */
 
-let locked = false;
-let showQuestionMark = false;
+let currentLevelIndex = 0
+let currentLevel
 
-const optionTexts = {
-    1: "Nadat Tim voorbij de bar naar rechts is gegaan, wist hij verder niet waar hij naar toe moest...",
-    2: "Je hebt duidelijke en nauwkeurige instructies gegeven.",
-    3: "Tim is voorbij de WC's helemaal naar het einde van de kamer gelopen.",
-    4: "Tim weet niet welke kant hij naar toe moet lopen.",
-};
+let player = { x: 0, y: 0 }
 
-const obstacles = [
-    { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
-    { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
-    { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
-    { x: 2, y: 4, w: 1, h: 1, name: "Stoel" },
-    { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
-    { x: 1, y: 6, w: 1, h: 1, name: "Stoel" },
-    { x: 0, y: 4, w: 1, h: 2, name: "TV" },
-    { x: 4, y: 4, w: 1, h: 1, name: "Kruk" },
-    { x: 4, y: 5, w: 1, h: 1, name: "Kruk" },
-    { x: 4, y: 6, w: 1, h: 1, name: "Kruk" },
-    { x: 5, y: 0, w: 1, h: 2, name: "Muur" },
-    { x: 5, y: 3, w: 3, h: 1, name: "Muur" },
-    { x: 5, y: 4, w: 1, h: 3, name: "Bar" },
-];
+let locked = false
+let showQuestionMark = false
 
-const goal = { x: 6, y: 0, w: 2, h: 2 };
+/* =========================
+   INIT
+========================= */
 
-/* INIT */
 function init() {
-    canvas = document.getElementById("game");
-    if (!canvas) return;
+    canvas = document.getElementById("game")
+    if (!canvas) return
 
-    ctx = canvas.getContext("2d");
+    canvas.width = canvasSize
+    canvas.height = canvasSize
 
-    setupUI();
-    render();
+    ctx = canvas.getContext("2d")
+
+    loadLevel(0)
 }
 
-document.addEventListener("astro:page-load", init);
+document.addEventListener("astro:page-load", init)
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", init)
 } else {
-    init();
+    init()
 }
 
-/* UI */
-function setupUI() {
-    document.querySelectorAll("[data-path]").forEach((btn) => {
-        if (btn.dataset.bound) return;
+/* =========================
+   BUTTONS
+========================= */
+
+function renderButtons() {
+    const container = document.getElementById("buttons")
+    if (!container) return
+
+    container.innerHTML = ""
+
+    currentLevel.options.forEach((option, index) => {
+        const btn = document.createElement("button")
+
+        btn.textContent = option.text
 
         btn.addEventListener("click", () => {
-            if (!locked) runPath(Number(btn.dataset.path));
-        });
+            if (!locked) runPath(index + 1)
+        })
 
-        btn.dataset.bound = "true";
-    });
-
-    const popupButton = document.getElementById("popupButton");
-
-    if (popupButton && !popupButton.dataset.bound) {
-        popupButton.addEventListener("click", resetGame);
-        popupButton.dataset.bound = "true";
-    }
+        container.appendChild(btn)
+    })
 }
 
-/* DRAW */
-function drawGrid() {
-    ctx.clearRect(0, 0, 400, 400);
+/* =========================
+   LEVEL LOADING
+========================= */
 
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 1;
+function loadLevel(index) {
+    currentLevelIndex = index
+    currentLevel = levels[index]
 
-    for (let x = 0; x <= 8; x++) {
-        ctx.beginPath();
-        ctx.moveTo(x * tileSize, 0);
-        ctx.lineTo(x * tileSize, 400);
-        ctx.stroke();
+    player = {
+        x: currentLevel.startPosition.x,
+        y: currentLevel.startPosition.y,
     }
 
-    for (let y = 0; y <= 8; y++) {
-        ctx.beginPath();
-        ctx.moveTo(0, y * tileSize);
-        ctx.lineTo(400, y * tileSize);
-        ctx.stroke();
+    const titleElement = document.getElementById("levelTitle")
+    if (titleElement) {
+        titleElement.textContent = currentLevel.title
+    }
+
+    showQuestionMark = false
+    locked = false
+
+    window.popup?.hide?.()
+
+    render()
+    renderButtons()
+}
+
+/* =========================
+   DRAW
+========================= */
+
+function drawGrid() {
+    ctx.clearRect(0, 0, canvasSize, canvasSize)
+
+    ctx.strokeStyle = "#000"
+    ctx.lineWidth = 1
+
+    for (let x = 0; x <= gridSize; x++) {
+        ctx.beginPath()
+        ctx.moveTo(x * tileSize, 0)
+        ctx.lineTo(x * tileSize, canvasSize)
+        ctx.stroke()
+    }
+
+    for (let y = 0; y <= gridSize; y++) {
+        ctx.beginPath()
+        ctx.moveTo(0, y * tileSize)
+        ctx.lineTo(canvasSize, y * tileSize)
+        ctx.stroke()
     }
 }
 
 function drawObstacles() {
-    obstacles.forEach((o) => {
-        ctx.fillStyle = "#444";
+    currentLevel.obstacles.forEach((o) => {
+        ctx.fillStyle = currentLevel.theme?.obstacleColor || "#444"
 
         ctx.fillRect(
             o.x * tileSize,
             o.y * tileSize,
             o.w * tileSize,
             o.h * tileSize
-        );
+        )
 
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = "#000"
         ctx.strokeRect(
             o.x * tileSize,
             o.y * tileSize,
             o.w * tileSize,
             o.h * tileSize
-        );
+        )
 
-        ctx.fillStyle = "white";
-        ctx.font = "12px sans-serif";
+        ctx.fillStyle = "white"
+        ctx.font = "12px sans-serif"
+        ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16)
+    })
+}
 
-        ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
-    });
+function drawMarkers() {
+    if (!currentLevel.markers) return
+
+    currentLevel.markers.forEach((marker) => {
+        ctx.fillStyle = "#d3d3d3"
+
+        ctx.fillRect(
+            marker.x * tileSize,
+            marker.y * tileSize,
+            marker.w * tileSize,
+            marker.h * tileSize
+        )
+
+        ctx.strokeStyle = "#000"
+
+        ctx.strokeRect(
+            marker.x * tileSize,
+            marker.y * tileSize,
+            marker.w * tileSize,
+            marker.h * tileSize
+        )
+
+        ctx.fillStyle = "#000"
+        ctx.font = "12px sans-serif"
+
+        ctx.fillText(
+            marker.name,
+            marker.x * tileSize + 4,
+            marker.y * tileSize + 16
+        )
+    })
 }
 
 function drawGoal() {
-    ctx.fillStyle = "#2ecc71";
+    const goal = currentLevel.goal
+
+    ctx.fillStyle = currentLevel.theme?.goalColor || "#2ecc71"
 
     ctx.fillRect(
         goal.x * tileSize,
         goal.y * tileSize,
         goal.w * tileSize,
         goal.h * tileSize
-    );
+    )
 
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000"
+    ctx.lineWidth = 3
 
     ctx.strokeRect(
         goal.x * tileSize,
         goal.y * tileSize,
         goal.w * tileSize,
         goal.h * tileSize
-    );
+    )
 }
 
 function drawPlayer() {
-    const px = player.x * tileSize;
-    const py = player.y * tileSize;
+    const px = player.x * tileSize
+    const py = player.y * tileSize
 
-    ctx.fillStyle = "blue";
-    ctx.fillRect(px, py, tileSize, tileSize);
+    ctx.fillStyle = "blue"
 
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(px, py, tileSize, tileSize);
+    ctx.fillRect(px, py, tileSize, tileSize)
+
+    ctx.strokeStyle = "#000"
+    ctx.lineWidth = 3
+    ctx.strokeRect(px, py, tileSize, tileSize)
 
     if (showQuestionMark) {
-        ctx.fillStyle = "red";
-        ctx.font = "28px sans-serif";
-        ctx.fillText("?", px + 15, py + 32);
+        ctx.fillStyle = "red"
+        ctx.font = "28px sans-serif"
+        ctx.fillText("?", px + 15, py + 32)
     }
 }
 
 function render() {
-    drawGrid();
-    drawObstacles();
-    drawGoal();
-    drawPlayer();
+    drawGrid()
+    drawObstacles()
+    drawMarkers()
+    drawGoal()
+    drawPlayer()
 }
 
-/* MOVEMENT */
-function moveTo(path, showQ, correct, optionText, i = 0) {
-    if (i === 0) locked = true;
+/* =========================
+   MOVEMENT
+========================= */
+
+function moveTo(path, showQ, correct, feedback, i = 0) {
+    if (i === 0) locked = true
 
     if (i >= path.length) {
-        showQuestionMark = showQ;
-        render();
+        showQuestionMark = showQ
+        render()
 
         setTimeout(() => {
-            window.popup?.show(
-                correct
-                    ? {
-                          title: "Inderdaad!",
-                          text: optionText + "\n\nTim heeft de wc gevonden.",
-                          buttonText: "Volgende",
-                      }
-                    : {
-                          title: "Helaas",
-                          text: optionText + "\n\nDit was niet de juiste route.",
-                          buttonText: "Opnieuw",
-                      }
-            );
+            window.popup?.show?.({
+                title: correct ? "Inderdaad!" : "Helaas",
+                text: feedback,
+                buttonText: correct ? "Volgende" : "Opnieuw",
+            })
 
-            locked = false;
-        }, 800);
+            // 🔥 ROBUUST FIX: DOM fallback (ALTIJD WERKEND)
+            setTimeout(() => {
+                const btn = document.getElementById("popupButton")
 
-        return;
+                if (btn) {
+                    btn.onclick = () => {
+                        window.popup?.hide?.()
+
+                        if (correct) {
+                            nextLevel()
+                        } else {
+                            resetGame()
+                        }
+                    }
+                }
+            }, 50)
+
+            locked = false
+        }, 600)
+
+        return
     }
 
-    player.x = path[i].x;
-    player.y = path[i].y;
+    player.x = path[i].x
+    player.y = path[i].y
 
-    render();
+    render()
 
     setTimeout(() => {
-        moveTo(path, showQ, correct, optionText, i + 1);
-    }, 200);
+        moveTo(path, showQ, correct, feedback, i + 1)
+    }, 200)
 }
 
-/* ROUTES */
+/* =========================
+   ROUTES
+========================= */
+
 function runPath(type) {
-    if (locked) return;
+    if (locked) return
 
-    showQuestionMark = false;
-    window.popup?.hide();
+    showQuestionMark = false
+    window.popup?.hide?.()
 
-    let path = [];
+    const option = currentLevel.options[type - 1]
 
-    if (type === 1) {
-        path = [
-            { x: 3, y: 6 },
-            { x: 3, y: 5 },
-            { x: 3, y: 4 },
-            { x: 3, y: 3 },
-            { x: 3, y: 2 },
-            { x: 4, y: 2 },
-            { x: 5, y: 2 },
-        ];
-    }
-
-    if (type === 2) {
-        path = [
-            { x: 3, y: 6 },
-            { x: 3, y: 5 },
-            { x: 3, y: 4 },
-            { x: 3, y: 3 },
-            { x: 3, y: 2 },
-            { x: 4, y: 2 },
-            { x: 5, y: 2 },
-            { x: 6, y: 2 },
-            { x: 6, y: 1 },
-            { x: 6, y: 0 },
-        ];
-    }
-
-    if (type === 3) {
-        path = [
-            { x: 3, y: 6 },
-            { x: 3, y: 5 },
-            { x: 3, y: 4 },
-            { x: 3, y: 3 },
-            { x: 3, y: 2 },
-            { x: 3, y: 1 },
-            { x: 3, y: 0 },
-            { x: 4, y: 0 },
-        ];
-    }
-
-    if (type === 4) {
-        path = [{ x: 3, y: 7 }];
-    }
-
-    const correct = type === 2;
-    const text = optionTexts[type];
-
-    moveTo(path, !correct, correct, text);
+    moveTo(option.path, !option.correct, option.correct, option.feedback)
 }
 
-/* RESET */
+/* =========================
+   LEVEL FLOW
+========================= */
+
+function nextLevel() {
+    if (currentLevelIndex + 1 < levels.length) {
+        loadLevel(currentLevelIndex + 1)
+    } else {
+        window.popup?.show?.({
+            title: "Klaar!",
+            text: "Je hebt alle levels voltooid.",
+            buttonText: "Restart",
+        })
+
+        setTimeout(() => {
+            const btn = document.getElementById("popupButton")
+
+            if (btn) {
+                btn.onclick = () => {
+                    window.popup?.hide?.()
+                    loadLevel(0)
+                }
+            }
+        }, 50)
+    }
+}
+
+/* =========================
+   RESET
+========================= */
+
 function resetGame() {
-    player.x = startPosition.x;
-    player.y = startPosition.y;
+    player.x = currentLevel.startPosition.x
+    player.y = currentLevel.startPosition.y
 
-    showQuestionMark = false;
+    showQuestionMark = false
+    locked = false
 
-    window.popup?.hide();
-
-    locked = false;
-    render();
+    window.popup?.hide?.()
+    render()
 }
