@@ -200,6 +200,8 @@ function init() {
 
     started = true
 
+    const dialogueContainer = document.getElementById("dialogue")
+    dialogueContainer.classList.remove("hidden")
     startBtn.classList.add("hidden")
     interruptBtn.classList.remove("hidden")
 

@@ -69,3 +69,54 @@ p {
   background: white;
   margin-bottom: 1rem;
 }
+
+.dialogue {
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 90%;
+  width: 35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  .speaker-image {
+    width: 10rem;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: -2rem;
+    align-self: flex-end;
+  }
+
+  .dialogue-box {
+    position: relative;
+    padding:  0 1rem;
+    background: var(--detail-bg-light);
+    border-radius: 0.5rem;
+    border: 2px solid  rgba(0, 0, 0, 0.6);
+    width: 30rem;
+    width: 100%;
+
+    .speaker-name {
+      position: absolute;
+      top: -4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: content;
+      padding: 0.5rem 1.5rem;
+      corner-shape: bevel;
+      border-radius: 0.5rem 0.5rem 0 0;
+      font-size: 1.5rem;
+      z-index: -1;
+      border: 2px solid  rgba(0, 0, 0, 0.6);
+      background: var(--detail-bg-light);
+    }
+
+    .dialogue-text {
+      width: 100%;
+      line-height: 1.5;
+    }
+  }
+}

@@ -6,11 +6,14 @@ import Popup from "../../Popup.astro";
 
 <div class="content" transition:name="avatar-Evelin">
   <h2 transition:name="title-text">Praat met Evelin</h2>
-  <div id="dialogue">
-    <img id="speaker-image" src="../../../../src/assets/images/disabilities/speech.jpg" alt="Speaker Image">
-    <div id="dialogue-box">
-        <p id="speaker-name"></p>
-        <p id="dialogue-text"></p>
+
+
+
+  <div id="dialogue" class="dialogue hidden">
+    <img id="speaker-image" class="speaker-image" src="../../../../src/assets/images/disabilities/speech.jpg" alt="Speaker Image">
+    <div id="dialogue-box" class="dialogue-box">
+        <p id="speaker-name" class="speaker-name"></p>
+        <p id="dialogue-text" class="dialogue-text"></p>
     </div>
   </div>
 
