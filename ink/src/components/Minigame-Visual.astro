@@ -1,7 +1,7 @@
 ---
 import Popup from "./Popup.astro";
 import { Image } from "astro:assets";
-import looksDisability from "../assets/images/disabilities/looks.jpeg";
+import looksDisability from "../assets/images/disabilities/looks.jpg";
 ---
 
 <div class="screen">
@@ -23,7 +23,7 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
     </div>
   </div>
 
-  <div class="choices">
+  <div class="choices" transition:name="button-Eduard">
     <button id="btn1">1: Hoi Eduard, leuk om je te ontmoeten.</button>
     <button id="btn2"
       >2: Hey Eduard, mag ik vragen wat er met je gezicht is gebeurd?</button
@@ -67,7 +67,7 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
     z-index: 0;
   } */
 
-/* .speech-bubble {
+  /* .speech-bubble {
   position: relative;
   z-index: 1;
   margin-right: 3rem;
@@ -106,19 +106,22 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
     border-radius: 6px;
     background: hsl(200 80% 80%);
 
-  background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
-  border: 2px solid rgba(70, 80, 180, 0.50);
-  border-radius: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+    border: 2px solid rgba(70, 80, 180, 0.5);
+    border-radius: 14px;
 
-  padding: 0.9rem 1rem 0.9rem 1rem;
-  text-align: left;
+    padding: 0.9rem 1rem 0.9rem 1rem;
+    text-align: left;
 
-  color: #1a1a1a;
+    color: #1a1a1a;
 
-  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
+    box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
 
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.08s ease;
-}
+    transition:
+      transform 0.08s ease,
+      box-shadow 0.08s ease,
+      background 0.08s ease;
+  }
 
   @media (min-width: 768px) {
     .screen {
@@ -151,6 +154,19 @@ import looksDisability from "../assets/images/disabilities/looks.jpeg";
 
 <script is:inline>
   // @ts-nocheck
+
+  // Help popup content
+  window.helpContext = {
+    text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
+  };
+
+  // Closing popup
+  document.addEventListener("click", (e) => {
+    if (e.target?.id === "popupButton") {
+      e.target.blur();
+      window.popup.hide();
+    }
+  });
   document.getElementById("btn1").addEventListener("click", () => {
     window.popup.show({
       title: "Goed gedaan!",

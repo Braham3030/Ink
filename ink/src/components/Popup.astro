@@ -2,8 +2,10 @@
 const {
   title = "Popup",
   text = "",
-  buttonText = "Volgende"
+  buttonText = "Volgende",
+  endScreenLink = ""
 } = Astro.props;
+// const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
 ---
 
 <div class="popup-overlay" id="popupOverlay" aria-hidden="true" hidden>
@@ -11,6 +13,7 @@ const {
     <h2>{title}</h2>
     <p>{text}</p>
     <button id="popupButton">{buttonText}</button>
+    <a href={endScreenLink} class="nextScreen">{buttonText}</a>
   </div>
 </div>
 
@@ -54,7 +57,25 @@ const {
   margin: 0 0 20px;
 }
 
+.nextScreen {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.nextScreen:hover {
+  background: black;
+  color: white;
+}
+
 .popup button {
+  display: block;
   width: 100%;
   padding: 10px;
   border: 2px solid black;
@@ -66,6 +87,10 @@ const {
   background: black;
   color: white;
 }
+
+.nextScreen {
+  display: none;
+}
 </style>
 
 <script is:inline>
@@ -74,7 +99,7 @@ function getOverlay() {
   return document.getElementById("popupOverlay");
 }
 
-function showPopup({ title, text, buttonText }) {
+function showPopup({ title, text, buttonText, endScreenLink }) {
   const overlay = getOverlay();
 
   if (!overlay) {
