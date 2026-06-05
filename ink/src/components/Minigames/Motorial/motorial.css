@@ -25,7 +25,7 @@
 /* HOTSPOTS */
 .hotspot {
   position: absolute;
-  background: transparent;
+  background: transparent; /* Maak zichtbaar als je wil testen */
   border: none;
   cursor: pointer;
   transition:
