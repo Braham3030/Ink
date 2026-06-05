@@ -6,7 +6,7 @@ import { levels } from "../../../data/motorialData";
 
 <div class="content">
   <h2 transition:name="title-text">Ga het gebouw in</h2>
-  <p>Klik op de onderdelen die voor Anna een obstakel zouden kunnen zijn.</p>
+  <p transition:name="text-Anna">Klik op de onderdelen die voor Anna een obstakel zouden kunnen zijn.</p>
 
   <div class="image-wrapper">
     <img id="level-image" src={levels[0].image} />
@@ -15,7 +15,7 @@ import { levels } from "../../../data/motorialData";
   <h2>Gevonden obstakels</h2>
   <ul id="found-list"></ul>
 
-  <button id="done-button" class="link-button">Klaar!</button>
+  <button id="done-button" class="link-button" transition:name="button-Anna"> Klaar! </button>
 </div>
 
 <Popup

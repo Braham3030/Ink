@@ -1,11 +1,27 @@
 // @ts-nocheck
 
+// Help popup content
+window.helpContext = {
+  text: "Het is handig om de basis kennis van gebarentaal te hebben als je moet communiceren met iemand die doof is. Hierbij moet je gebruik maken van je handen, en minder uit gaan van wat je zegt.",
+}
+
+// Closing popup
+document.addEventListener("click", (e) => {
+  if (e.target?.id === "popupButton") {
+    e.target.blur();
+    window.popup.hide();
+  }
+})
+
 import { gsap } from "gsap"
 import { Draggable } from "gsap/Draggable"
 
 gsap.registerPlugin(Draggable)
 
+
+
 function initGame() {
+  let correctCount = 0
   const draggables = document.querySelectorAll(".draggable")
   const dropzones = document.querySelectorAll(".dropzone")
   const textColumn = document.querySelector(".text-column")
@@ -173,6 +189,10 @@ function initGame() {
 
       const isCorrect = placed.text === correctAnswer
 
+      if (isCorrect) {
+        correctCount++
+      }
+
       placed.element.classList.add(
         isCorrect ? "correct" : "incorrect"
       )
@@ -188,6 +208,14 @@ function initGame() {
         }
       }
     })
+
+    if (correctCount === dropzones.length) {
+      window.popup.show({
+        title: "Goed gedaan!",
+        text: "Je hebt nu een basis kennis van gebaren, hiermee kan je al een heel eind komen in het communiceren met iemand die doof is!",
+        buttonText: "Volgende",
+      })
+    }
   })
 }
 

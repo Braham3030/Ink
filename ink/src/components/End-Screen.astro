@@ -1,0 +1,46 @@
+---
+// @ts-nocheck
+const { name, quote, image, animation, disabilityName, animationNext, linkChoice, linkNext } = Astro.props;
+---
+
+<div class="end-screen-container">
+    <h2 transition:name="title-text">De training van {name} is voltooid</h2>
+    <h3>Quotes</h3>
+
+    <p>
+        {quote}
+    </p>
+
+    <div class="buttons-end-screen">
+        <a href={linkChoice} class="link-button" transition:name={animation}>Naar de keuze pagina</a>
+        <a href={linkNext} class="link-button" transition:name={animationNext}>Introductie {disabilityName}</a>
+    </div>
+</div>
+
+
+<style>
+    .end-screen-container {
+        
+        > h3 {
+            margin: 0 auto;
+            width: 40%;
+            padding: 1rem;
+        }
+
+        > p {
+            margin: 0 auto;
+            border: 2px solid black;
+            padding: 1rem;
+            width: 40%;
+        }
+    .buttons-end-screen {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        margin-top: 6em;
+        gap: 1rem;
+    }
+}
+
+</style>
