@@ -60,21 +60,29 @@ const { helpPopup } = Astro.props;
 </style>
 
 <script is:inline>
-//@ts-nocheck
-  const button = document.getElementById("help-button");
+  //@ts-nocheck
+  function initHelpButton() {
+    const button = document.getElementById("help-button");
+    if (!button) return;
 
-  button.addEventListener("click", () => {
-    console.log("Help button clicked");
-    const help = window.helpContext;
+    // voorkom dubbele listeners bij navigatie
+    button.replaceWith(button.cloneNode(true));
+    const freshButton = document.getElementById("help-button");
 
-    if (!help?.text) return;
+    freshButton.addEventListener("click", () => {
+      console.log("Help button clicked");
 
-    window.popup.show({
-      title: "Hier heb je een tip!",
-      text: help.text,
-      buttonText: "Sluiten",
+      const help = window.helpContext;
+      if (!help?.text) return;
+
+      window.popup.show({
+        title: "Hier heb je een tip!",
+        text: help.text,
+        buttonText: "Sluiten",
+      });
     });
-  });
+  }
 
-
+  document.addEventListener("astro:page-load", initHelpButton);
+  document.addEventListener("astro:after-swap", initHelpButton);
 </script>
