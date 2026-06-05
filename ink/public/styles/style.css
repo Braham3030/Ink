@@ -113,7 +113,6 @@ p {
       corner-shape: bevel;
       border-radius: 0.5rem 0.5rem 0 0;
       font-size: 1.5rem;
-      z-index: -1;
       border: 2px solid rgba(0, 0, 0, 0.6);
       background: var(--detail-bg-light);
     }
@@ -140,4 +139,3 @@ p {
   cursor: pointer;
   width: 100%;
 }
- 
