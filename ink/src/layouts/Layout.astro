@@ -7,10 +7,16 @@ import { getImage } from "astro:assets";
 
 import visualDisability from "../assets/images/disabilities/visual.jpg";
 import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+import motorialDisability from "../assets/images/disabilities/motor.jpg";
+import looksDisability from "../assets/images/disabilities/looks.jpg";
+import speechDisability from "../assets/images/disabilities/speech.jpg";
 
 // Preload image.
 const preloadVisual = await getImage({ src: visualDisability });
 const preloadAuditory = await getImage({ src: auditoryDisability });
+const preloadMotorial = await getImage({ src: motorialDisability });
+const preloadLooks = await getImage({ src: looksDisability });
+const preloadSpeech = await getImage({ src: speechDisability });
 
 ---
 
@@ -28,14 +34,30 @@ const preloadAuditory = await getImage({ src: auditoryDisability });
       rel="preload"
       as="image"
       href={preloadVisual.src}
-      type="image/webp"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
       href={preloadAuditory.src}
-      type="image/webp"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadMotorial.src}
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadLooks.src}
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadSpeech.src}
       fetchpriority="high"
     />
     <title>Ink</title>
