@@ -1,4 +1,5 @@
 export const levels = [
+  // LEVEL 1
   {
     image: "/images/motorial-obstacles/Entrance_Building.png",
 
@@ -83,21 +84,45 @@ export const levels = [
 
     obstacles: [
       {
-        id: "example-1",
-        label: "Voorbeeld obstakel",
+        id: "stairs",
+        label: "Trap",
+        top: "50%",
+        left: "60%",
+        width: "20%",
+        height: "15%",
+      },
+      {
+        id: "elevator-door",
+        label: "Smalle liftdeur",
         top: "40%",
-        left: "40%",
-        width: "10%",
-        height: "10%",
+        left: "85%",
+        width: "13%",
+        height: "35%",
+      },
+      {
+        id: "train-door",
+        label: "Treindeur + Ruimte tussen trein en perron",
+        top: "30%",
+        left: "10%",
+        width: "13%",
+        height: "65%",
       },
     ],
 
     obstacleCategories: {
-      "example-1": "space",
+      "stairs": "height",
+      "elevator-door": "space",
+      "train-door": "train",
     },
 
     categoryHints: {
-      space: "Tweede level hint voor ruimte.",
+      height: "Let op hoogteverschillen. Hoe kan iemand in een rolstoel hier overheen komen?",
+      space: "Houd er rekening mee dat een rolstoel meer ruimte nodig heeft dan een lopend persoon.",
+      train: "Denk na over hoe iemand in een rolstoel in en uit de trein stapt.",
     },
   },
+
+
+
 ];
+

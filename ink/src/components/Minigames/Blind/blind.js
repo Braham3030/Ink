@@ -341,3 +341,19 @@ function resetGame() {
   window.popup?.hide?.();
   render();
 }
+
+/* =========================
+   Hint Popup
+========================= */
+// Help popup content
+window.helpContext = {
+  text: "Alleen wanneer je een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden",
+}
+
+// Closing popup
+document.addEventListener("click", (e) => {
+  if (e.target?.id === "popupButton") {
+    e.target.blur();
+    window.popup.hide();
+  }
+})

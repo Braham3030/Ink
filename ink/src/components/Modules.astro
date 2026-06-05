@@ -7,13 +7,13 @@
   <div class="module-container">
     <div class="module-item">
       <h3>Module 1:</h3>
-      <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
-        Bewustwording en vooroordelen
-      </a>
+      <a href="" class="module-choice">Bewustwording en vooroordelen</a>
     </div>
     <div class="module-item">
       <h3>Module 2:</h3>
-      <a href="" class="module-choice">Leren door te ervaren</a>
+      <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
+        Leren door te ervaren
+      </a>
     </div>
     <div class="module-item">
       <h3>Module 3:</h3>
@@ -25,7 +25,9 @@
 <script>
   // @ts-nocheck
   document.addEventListener("astro:page-load", () => {
-    const btn1 = document.querySelector(".module-choice");
+    const btn1 = document.querySelector(
+      ".module-item:nth-child(2) .module-choice",
+    );
 
     if (btn1) {
       btn1.style.viewTransitionName = "none";
@@ -38,12 +40,6 @@
 </script>
 
 <style>
-
-/* h2 {
-  margin-top: 1rem;
-} */
-
-
   .module-container {
     display: flex;
     flex-direction: column;
@@ -74,9 +70,9 @@
     text-align: center;
   }
 
-.module-item:nth-child(2) .module-choice,
-.module-item:nth-child(3) .module-choice {
-  opacity: 0.5;
-  pointer-events: none;
-}
+  .module-item:nth-child(1) .module-choice,
+  .module-item:nth-child(3) .module-choice {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 </style>
