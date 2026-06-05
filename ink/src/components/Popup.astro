@@ -108,4 +108,12 @@ const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
     show: showPopup,
     hide: hidePopup,
   };
+
+  // Closing popup
+  document.addEventListener("click", (e) => {
+    if (e.target?.id === "popupButton") {
+      e.target.blur();
+      window.popup.hide();
+    }
+  })
 </script>
