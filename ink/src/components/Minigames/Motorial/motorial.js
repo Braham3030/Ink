@@ -1,84 +1,138 @@
 // @ts-nocheck
-import {
-  obstacles,
-  obstacleCategories,
-  categoryHints,
-} from "../../../data/motorialData.js";
+import { levels } from "../../../data/motorialData.js";
+
+let currentLevelIndex = 0;
+let currentLevel = levels[currentLevelIndex];
+
+let foundObstacles = new Set();
+let pendingAdvance = false;
 
 function initMotorial() {
-  const hotspots = document.querySelectorAll(".hotspot");
-  const foundList = document.getElementById("found-list");
+  loadLevel(0);
+
   const doneButton = document.getElementById("done-button");
+  doneButton?.addEventListener("click", handleDone);
+}
 
-  if (!foundList || !doneButton || hotspots.length === 0) {
-    return;
-  }
+function loadLevel(index) {
+  currentLevelIndex = index;
+  currentLevel = levels[currentLevelIndex];
 
-  const foundObstacles = new Set();
+  foundObstacles = new Set();
+  pendingAdvance = false;
 
-  hotspots.forEach((hotspot) => {
-    hotspot.addEventListener("click", () => {
-      const id = hotspot.dataset.id;
-      const label = hotspot.dataset.label;
+  renderLevel();
+  renderHotspots();
+}
 
-      if (foundObstacles.has(id)) return;
+function renderLevel() {
+  const img = document.getElementById("level-image");
+  const list = document.getElementById("found-list");
 
-      foundObstacles.add(id);
-      hotspot.classList.add("found");
+  if (img) img.src = currentLevel.image;
+  if (list) list.innerHTML = "";
+}
 
-      const li = document.createElement("li");
-      li.textContent = label;
-      foundList.appendChild(li);
-    });
-  });
+function renderHotspots() {
+  const wrapper = document.querySelector(".image-wrapper");
+  if (!wrapper) return;
 
-  doneButton.addEventListener("click", () => {
-    if (foundObstacles.size === hotspots.length) {
-      window.popup.show({
-        title: "Goed gedaan!",
-        text: "Je hebt alle obstakels gevonden.",
-        buttonText: "Volgende",
-      });
-      return;
-    }
+  wrapper.querySelectorAll(".hotspot").forEach((el) => el.remove());
 
-    const missedIds = obstacles
-      .filter((o) => !foundObstacles.has(o.id))
-      .map((o) => o.id);
+  currentLevel.obstacles.forEach((o) => {
+    const btn = document.createElement("button");
+    btn.className = "hotspot";
+    btn.dataset.id = o.id;
+    btn.dataset.label = o.label;
 
-    const priorityOrder = Object.keys(categoryHints);
+    btn.style.top = o.top;
+    btn.style.left = o.left;
+    btn.style.width = o.width;
+    btn.style.height = o.height;
+    btn.style.transform = `rotate(${o.rotate || 0}deg)`;
 
-    let chosenCategory = null;
+    btn.addEventListener("click", () => handleHotspotClick(o, btn));
 
-    for (const category of priorityOrder) {
-      const found = missedIds.find(
-        (id) => obstacleCategories[id] === category
-      );
-
-      if (found) {
-        chosenCategory = category;
-        break;
-      }
-    }
-
-    window.popup.show({
-      title: "Helaas!",
-      text:
-        "Je hebt nog niet alles gevonden. " +
-        categoryHints[chosenCategory],
-      buttonText: "Verder zoeken",
-    });
+    wrapper.appendChild(btn);
   });
 }
 
-document.addEventListener("DOMContentLoaded", initMotorial);
+function handleHotspotClick(obstacle, btn) {
+  if (foundObstacles.has(obstacle.id)) return;
 
-// Astro client-side navigatie
-document.addEventListener("astro:page-load", initMotorial);
+  foundObstacles.add(obstacle.id);
+  btn.classList.add("found");
 
+  const list = document.getElementById("found-list");
+
+  const li = document.createElement("li");
+  li.textContent = obstacle.label;
+  list.appendChild(li);
+}
+
+function handleDone() {
+  const total = currentLevel.obstacles.length;
+
+  // ✅ SUCCESS
+  if (foundObstacles.size === total) {
+    pendingAdvance = true;
+
+    window.popup?.show({
+      title: "Goed gedaan!",
+      text: "Je hebt alle obstakels gevonden.",
+      buttonText: "Volgende level",
+    });
+
+    return;
+  }
+
+  // ❌ FAIL
+  const missed = currentLevel.obstacles.filter(
+    (o) => !foundObstacles.has(o.id)
+  );
+
+  const priority = Object.keys(currentLevel.categoryHints);
+
+  let category = null;
+
+  for (const p of priority) {
+    if (missed.find((m) => currentLevel.obstacleCategories[m.id] === p)) {
+      category = p;
+      break;
+    }
+  }
+
+  pendingAdvance = false;
+
+  window.popup?.show({
+    title: "Helaas!",
+    text:
+      "Je hebt nog niet alles gevonden. " +
+      (currentLevel.categoryHints[category] ??
+        "Let goed op de omgeving."),
+    buttonText: "Verder zoeken",
+  });
+}
+
+// Popup + level flow
 document.addEventListener("click", (e) => {
-  if (e.target?.id === "popupButton") {
-    e.target.blur();
-    window.popup.hide();
+  if (e.target?.id !== "popupButton") return;
+
+  window.popup?.hide();
+
+  // ❌ niet doorgaan als level niet gehaald is
+  if (!pendingAdvance) return;
+
+  pendingAdvance = false;
+
+  const next = currentLevelIndex + 1;
+
+  if (next < levels.length) {
+    loadLevel(next);
+  } else {
+    console.log("Game finished!");
   }
 });
+
+// Astro navigation support
+document.addEventListener("astro:page-load", initMotorial);
