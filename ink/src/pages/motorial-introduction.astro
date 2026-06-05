@@ -1,16 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
+import MotorialDisability from "../assets/images/disabilities/motor.jpg"
 ---
 
 <Layout>
     <div transition:name="motorial-introduction-window">
         <DisabilityIntroduction 
         name="Anna"
-        image="/images/disabilities/motor.jpg"
+        image={MotorialDisability}
         description="Anna heeft een motorische beperking en gebruikt een rolstoel. Jij en Anna zitten samen in een café. Anna vraagt aan jou of je haar naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
         link="/motorial"
         animation="motorial-window"
         />
     </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-normal: #c8d6ff;
+    --detail-bg-dark: #7194ff;
+    --detail-bg-light: #ffffff;
+  }
+</style>

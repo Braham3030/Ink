@@ -1,16 +1,23 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import DisabilityIntroduction from "../components/Disability-Introduction.astro"
+import Layout from "../layouts/Layout.astro";
+import DisabilityIntroduction from "../components/Disability-Introduction.astro";
+import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
 ---
 
 <Layout>
-    <div transition:name="deaf-introduction-window">
-        <DisabilityIntroduction 
-        name="Nick"
-        image="/images/disabilities/auditory.jpg"
-        description="Nick is volledig doof en gebruikt een taal. Jij en Nick zitten samen in een café. Nick vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
-        link="/deaf"
-        animation="deaf-window"
-        />
-    </div>
+  <div transition:name="deaf-introduction-window">
+    <DisabilityIntroduction
+      name="Eva"
+      image={auditoryDisability}
+      description="Eva is volledig doof en gebruikt een taal. Jij en Eva zitten samen in een café. Eva vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+      link="/deaf"
+      animationNext="deaf-introduction-window"
+    />
+  </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-light: #ffffff;
+  }
+</style>

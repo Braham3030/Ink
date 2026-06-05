@@ -9,63 +9,88 @@
         description="Tim is blind en..."
     />
 */
-const { name, description, image, link } = Astro.props;
+import { Image } from "astro:assets";
+const { name, description, animation, image, link } = Astro.props;
 ---
 
+<h2 transition:name="title-text">Dit is {name}</h2>
 <div class="card">
-    <h2>Dit is {name}</h2>
+  
 
-    <div class="avatar">
-        <img src={image} alt={`afbeelding van ${name}`} />
-    </div>
+  <div class="avatar">
+    <Image
+      src={image}
+      alt={`afbeelding van ${name}`}
+      loading="eager"
+      transition:name={`avatar-${name}`}
+    />
+  </div>
 
-    <p>{description}</p>
+  <p class="introduction-text" transition:name={`text-${name}`}>{description}</p>
 
-    <a href={link}>Begin</a>
+  <a href={link} transition:name={`button-${name}`} class="link-button">Begin</a
+  >
 </div>
 
 <style>
-    .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        padding: 2rem 1.5rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0rem 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
 
-    h2 {
-        font-size: 2rem;
-        text-align: center;
-    }
-
-    p {
-        font-size: 1.2rem;
-        text-align: center;
-        line-height: 1.6;
-    }
-
-    a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        width: 80%;
-        max-width: 250px;
-        padding: 0.75rem;
-        border: 1px solid black;
-        border-radius: 3px;
-        box-shadow: 0 2px 0 0 #000;
-        background-color: white;
-        color: black;
-        cursor: pointer;
-    }
-
-    img {
-      display: block;
+    > .avatar {
+      border: 2px solid rgba(0, 0, 0, 0);
       width: 75%;
-      margin: 0 auto;
     }
-</style>
+  }
 
+  p {
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(-40px) scale(0.75);
+
+    animation: slideInText 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) 0.6s both;
+  }
+
+  @keyframes slideInText {
+    0% {
+      transform: translateY(-40px) scale(0.75);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0;
+    transform: scale(0.2);
+    border-radius: 18px;
+
+    animation: zoomIn 1.2s cubic-bezier(0.25, 1.5, 0.5, 1) both;
+  }
+
+  @keyframes zoomIn {
+    0% {
+      border-radius: 16px;
+      transform: scale(0.2);
+      opacity: 0;
+    }
+    100% {
+      border-radius: 5px;
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import MinigameBlind from '../components/Minigame-Blind.astro';
+import MinigameBlind from '../components/Minigames/Blind/Minigame-Blind.astro';
 ---
 
 <Layout>
@@ -8,3 +8,11 @@ import MinigameBlind from '../components/Minigame-Blind.astro';
         <MinigameBlind />
     </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-normal: #f9ffad;
+    --detail-bg-dark: #e7f079;
+    --detail-bg-light: #ffffff;
+  }
+</style>

@@ -1,0 +1,78 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+#dialogue.hidden {
+    display: none;
+}
+
+
+#interrupt-container, #start-container {
+    background: gray;
+    width: 10rem;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: auto;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:has(button.hidden) {
+        display: none;
+    }
+
+    #start-button, #interrupt-button {
+        width: 8rem;
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5rem;
+        margin-top: -3rem;
+        border: none;
+
+        &:active {
+            margin-bottom: -2rem;
+        }
+        
+        &:disabled {
+            background: darkgray;
+            box-shadow: 0 1rem 0 0rem #5f5f5f;
+            pointer-events: none;
+        }
+    }
+
+    #start-button {
+        background: blue;
+        box-shadow: 0 1rem 0 0rem darkblue;
+
+        &:active {
+            box-shadow: 0 0rem 0 0rem darkblue;
+        }
+    }
+
+    #interrupt-button {
+        background: red;
+        box-shadow: 0 1rem 0 0rem darkred;
+
+        &:active {
+            box-shadow: 0 0 0 0rem darkred;
+        }
+    }
+}
+
+#speaker-image {
+    &.grey-filter {
+        filter: grayscale(100%);
+    }
+}

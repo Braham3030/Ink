@@ -1,7 +1,7 @@
 ---
 import './deaf.css'
-
 import { blindItems } from '../../../data/deafData.js'
+import Popup from "../../Popup.astro";
 
 // Randomize the items
 function shuffleArray(array) {
@@ -26,9 +26,11 @@ const draggableTexts = shuffleArray([
   ...selectedItems.map((item) => item.answer),
   ...wrongAnswers,
 ])
+
+
 ---
-<div class="content">
-  <h2>Sleep de betekenis naar het juiste gebaar</h2>
+<div class="content" transition:name="avatar-Eva">
+  <h2 transition:name="title-text">Sleep de betekenis naar het juiste gebaar</h2>
 
   <div class="game-wrapper">
     
@@ -69,7 +71,9 @@ const draggableTexts = shuffleArray([
     </div>
 
   </div>
-  <button id="done-button" class="button-wide">Klaar!</button>
+  <button id="done-button" class="button-wide" transition:name="button-Eva">Klaar!</button>
 </div>
+
+<Popup />
 
 <script src="./deaf.js"></script>

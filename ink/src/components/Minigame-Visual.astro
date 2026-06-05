@@ -1,31 +1,36 @@
 ---
 import Popup from "./Popup.astro";
+import { Image } from "astro:assets";
+import looksDisability from "../assets/images/disabilities/looks.jpg";
 ---
 
 <div class="screen">
-  <h2>Praat met Eduard</h2>
+  <h2 transition:name="title-text">Praat met Eduard</h2>
 
-  <div class="chat-area">
-    <img
-      class="avatar"
-      src="/images/disabilities/looks.jpeg"
+  <div class="dialogue">
+    <Image
+      src={looksDisability}
       alt="afbeelding van Eduard"
+      class="speaker-image"
+      transition:name="avatar-Eduard"
     />
 
-    <div class="speech-bubble">
-      <p class="bubble-name">Eduard</p>
-      <p class="bubble-text">
+    <div class="dialogue-box">
+      <p class="speaker-name">Eduard</p>
+      <p class="dialogue-text">
         "Hey! Jij bent vast mijn nieuwe collega, leuk om je te ontmoeten!"
       </p>
     </div>
   </div>
 
-  <div class="choices">
+  <div class="choices" transition:name="button-Eduard">
     <button id="btn1">1: Hoi Eduard, leuk om je te ontmoeten.</button>
     <button id="btn2"
       >2: Hey Eduard, mag ik vragen wat er met je gezicht is gebeurd?</button
     >
-    <button id="btn3">3: *Wegkijken zodat je niet staart*</button>
+    <button id="btn3"
+      >3: Alleen in zijn ogen kijken om er geen aandacht op te vestigen</button
+    >
   </div>
 </div>
 
@@ -36,15 +41,13 @@ import Popup from "./Popup.astro";
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.3rem;
     max-width: 500px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
   }
 
   h2 {
-    font-size: 1.4rem;
-    text-align: center;
     margin-bottom: 1rem;
   }
 
@@ -53,7 +56,7 @@ import Popup from "./Popup.astro";
     position: relative;
   }
 
-  .avatar {
+  /* .avatar {
     position: absolute;
     top: -77px;
     right: -9px;
@@ -62,19 +65,23 @@ import Popup from "./Popup.astro";
     object-fit: cover;
     border-radius: 50%;
     z-index: 0;
-  }
+  } */
 
-  .speech-bubble {
-    position: relative;
-    z-index: 1;
-    margin-right: 3rem; /* ruimte voor avatar */
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-  }
+  /* .speech-bubble {
+  position: relative;
+  z-index: 1;
+  margin-right: 3rem;
 
-  .bubble-name {
+  background: linear-gradient(180deg, #ffffff 0%, #f6f7ff 100%);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+
+  padding: 0.9rem 1rem;
+
+  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.12);
+} */
+
+  /* .bubble-name {
     font-size: 1.2rem;
     color: black;
     margin: 0 0 4px;
@@ -83,23 +90,37 @@ import Popup from "./Popup.astro";
   .bubble-text {
     margin: 0;
     line-height: 1.5;
-  }
+  } */
 
   .choices {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.8rem;
     margin-top: 1rem;
   }
 
   button {
     text-align: left;
     padding: 0.75rem 1rem;
-    border: 1px solid #6f6f6f;
+    border: 2px solid #000000;
     border-radius: 6px;
-    background: rgb(246, 228, 228);
-    cursor: pointer;
-    line-height: 1.6;
+    background: hsl(200 80% 80%);
+
+    background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+    border: 2px solid rgba(70, 80, 180, 0.5);
+    border-radius: 14px;
+
+    padding: 0.9rem 1rem 0.9rem 1rem;
+    text-align: left;
+
+    color: #1a1a1a;
+
+    box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
+
+    transition:
+      transform 0.08s ease,
+      box-shadow 0.08s ease,
+      background 0.08s ease;
   }
 
   @media (min-width: 768px) {
@@ -123,16 +144,29 @@ import Popup from "./Popup.astro";
       font-size: 1.1rem;
     }
 
-    .avatar {
+    /* .avatar {
       width: 120px;
       height: 130px;
       top: -90px;
-    }
+    } */
   }
 </style>
 
 <script is:inline>
   // @ts-nocheck
+
+  // Help popup content
+  window.helpContext = {
+    text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
+  };
+
+  // Closing popup
+  document.addEventListener("click", (e) => {
+    if (e.target?.id === "popupButton") {
+      e.target.blur();
+      window.popup.hide();
+    }
+  });
   document.getElementById("btn1").addEventListener("click", () => {
     window.popup.show({
       title: "Goed gedaan!",
@@ -152,7 +186,7 @@ import Popup from "./Popup.astro";
   document.getElementById("btn3").addEventListener("click", () => {
     window.popup.show({
       title: "Helaas!",
-      text: "Wegkijken kan onbeleefd overkomen.",
+      text: "Hoewel je het goed bedoelt, kan het staren naar iemands ogen ongemakkelijk zijn.",
       buttonText: "Probeer opnieuw",
     });
   });

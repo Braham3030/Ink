@@ -1,45 +1,143 @@
 /* Global styling */
 
+@font-face {
+  font-family: "branding-font";
+  src: url("/font/PlusJakartaSans-VariableFont_wght") format("ttf");
+}
+
 :root {
-    --primary-color: #ff6f61;
-    --secondary-color: #4a90e2;
-    --background-color: #f5f5f5;
-    --text-color: #333;
-    --font-family: 'Arial', sans-serif;
+  --main-font: "branding-font", sans-serif;
 
-    --h1-font-size: 2.5rem;
-    --h2-font-size: 2rem;
-    --h3-font-size: 1.5rem;
-    --p-font-size: 1rem;
-    --button-font-size: 1.5rem;
+  --h1-font-size: 2.3rem;
+  /* https://utopia.fyi/clamp/calculator */
+  --h2-font-size: clamp(1.5rem, 1.3571rem + 0.7143vw, 2rem);
+  --h3-font-size: 1.3rem;
+  --p-font-size: clamp(1rem, 0.8571rem + 0.7143vw, 1.5rem);
+  --button-font-size: clamp(1rem, 0.9rem + 0.5vw, 1.35rem);
 
-    /* Dynamic background colors */
-    --detail-bg-normal: #93D7C0;
-    --detail-bg-dark: #2BB687;
-    --detail-bg-light: #d0d0d0;
+  /* Dynamic background colors */
+  --detail-bg-normal: #93d7c0;
+  --detail-bg-dark: #2bb687;
+  --detail-bg-light: #d0d0d0;
+}
+
+main {
+  padding-top: 3rem;
+}
+
+body {
+  font-family: var(--main-font);
 }
 
 h1 {
-    font-size: var(--h1-font-size);
+  font-size: var(--h1-font-size);
 }
 
 h2 {
-    font-size: var(--h2-font-size);
+  font-size: var(--h2-font-size);
+  text-align: center;
 }
 
 h3 {
-    font-size: var(--h3-font-size);
+  font-size: var(--h3-font-size);
 }
 
 p {
-    font-size: var(--p-font-size);
+  font-size: var(--p-font-size);
+}
+
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  width: fit-content;
+  width: clamp(150px, 121.4286px + 8.9286vw, 250px);
+  padding: 0.85rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  background: #111827;
+  color: white;
+  transition: 0.2s ease;
+  font-size: var(--button-font-size);
 }
 
 .button-wide {
-    font-size: var(--p-font-size);
-    padding: 1rem 4rem;
-    border: 2px solid black;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 0 black;
-    background: white;
+  font-size: var(--p-font-size);
+  padding: 1rem 4rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 0 black;
+  background: white;
+  margin-bottom: 1rem;
 }
+
+.dialogue {
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 90%;
+  width: 35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  .speaker-image {
+    width: 10rem;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: -2rem;
+    align-self: flex-end;
+  }
+
+  .dialogue-box {
+    position: relative;
+    padding: 0 1rem;
+    background: var(--detail-bg-light);
+    border-radius: 0.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    width: 30rem;
+    width: 100%;
+
+    .speaker-name {
+      position: absolute;
+      top: -4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: content;
+      padding: 0.5rem 1.5rem;
+      corner-shape: bevel;
+      border-radius: 0.5rem 0.5rem 0 0;
+      font-size: 1.5rem;
+      z-index: -1;
+      border: 2px solid rgba(0, 0, 0, 0.6);
+      background: var(--detail-bg-light);
+    }
+
+    .dialogue-text {
+      width: 100%;
+      line-height: 1.5;
+    }
+  }
+}
+
+.choice-button {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+  border: 2px solid rgba(70, 80, 180, 0.5);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  color: #1a1a1a;
+  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background 0.08s ease;
+  cursor: pointer;
+  width: 100%;
+}
+ 

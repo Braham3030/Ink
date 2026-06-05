@@ -1,16 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
+import speechDisability from "../assets/images/disabilities/speech.jpg"
 ---
 
 <Layout>
     <div transition:name="speech-introduction-window">
         <DisabilityIntroduction 
         name="Evelin"
-        image="/images/disabilities/speech.jpg"
+        image={speechDisability}
         description="Evelin heeft een spraakgebrek en gebruikt een taalapparaat. Jij en Evelin zitten samen in een café. Evelin vraagt aan jou of je haar naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
         link="/speech"
         animation="speech-window"
         />
     </div>
 </Layout>
+
+<style>
+  body {
+    --detail-bg-normal: #ffbda6;
+    --detail-bg-dark: #ff936e;
+    --detail-bg-light: #ffffff;
+  }
+</style>
