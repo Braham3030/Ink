@@ -22,7 +22,7 @@
 }
 
 main {
-  padding-top: 4rem;
+  padding-top: 3rem;
 }
 
 body {
@@ -36,7 +36,6 @@ h1 {
 h2 {
   font-size: var(--h2-font-size);
   text-align: center;
-  margin-top: -0.5rem;
 }
 
 h3 {
