@@ -95,57 +95,40 @@ const {
 
 <script is:inline>
   // @ts-nocheck
+function getOverlay() {
+  return document.getElementById("popupOverlay");
+}
 
 function showPopup({ title, text, buttonText, endScreenLink }) {
   const overlay = getOverlay();
-  window.isPopupOpen = false;
 
-  function getOverlay() {
-    return document.getElementById("popupOverlay");
+  if (!overlay) {
+    console.warn("Popup overlay not found");
+    return;
   }
 
-  function showPopup({ title, text, buttonText }) {
-    const overlay = getOverlay();
+  const h2 = overlay.querySelector("h2");
+  const p = overlay.querySelector("p");
+  const btn = overlay.querySelector("button");
 
-    if (!overlay) {
-      console.warn("Popup overlay not found");
-      return;
-    }
+  if (h2) h2.textContent = title;
+  if (p) p.textContent = text;
+  if (btn) btn.textContent = buttonText;
 
-    const h2 = overlay.querySelector("h2");
-    const p = overlay.querySelector("p");
-    const btn = overlay.querySelector("button");
-
-    if (h2) h2.textContent = title;
-    if (p) p.textContent = text;
-    if (btn) btn.textContent = buttonText;
-
-    overlay.classList.add("show");
-    overlay.setAttribute("aria-hidden", "false");
-
-    window.isPopupOpen = true;
-  }
-
-  function hidePopup() {
-    const overlay = getOverlay();
-    if (!overlay) return;
-
-    overlay.classList.remove("show");
-    overlay.setAttribute("aria-hidden", "true");
-    window.isPopupOpen = false;
-  }
-
-  window.popup = {
-    show: showPopup,
-    hide: hidePopup,
-  };
-
-  // Closing popup
-  document.addEventListener("click", (e) => {
-    if (e.target?.id === "popupButton") {
-      e.target.blur();
-      window.popup.hide();
-    }
-  })
+  overlay.classList.add("show");
+  overlay.setAttribute("aria-hidden", "false");
 }
+
+function hidePopup() {
+  const overlay = getOverlay();
+  if (!overlay) return;
+
+  overlay.classList.remove("show");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+window.popup = {
+  show: showPopup,
+  hide: hidePopup,
+};
 </script>
