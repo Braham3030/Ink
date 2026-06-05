@@ -21,6 +21,10 @@
   --detail-bg-light: #d0d0d0;
 }
 
+main {
+  padding-top: 4rem;
+}
+
 body {
   font-family: var(--main-font);
 }
@@ -32,6 +36,7 @@ h1 {
 h2 {
   font-size: var(--h2-font-size);
   text-align: center;
+  margin-top: -0.5rem;
 }
 
 h3 {
@@ -60,20 +65,14 @@ p {
   font-size: var(--button-font-size);
 }
 
-.choice-button {
-  background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
-  border: 2px solid rgba(70, 80, 180, 0.5);
-  border-radius: 14px;
-  padding: 0.9rem 1rem;
-  text-align: left;
-  color: #1a1a1a;
-  box-shadow: 0 3px 0 rgba(70, 80, 180, 0.15);
-  transition:
-    transform 0.08s ease,
-    box-shadow 0.08s ease,
-    background 0.08s ease;
-  cursor: pointer;
-  width: 100%;
+.button-wide {
+  font-size: var(--p-font-size);
+  padding: 1rem 4rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 0 black;
+  background: white;
+  margin-bottom: 1rem;
 }
 
 .dialogue {
@@ -97,10 +96,10 @@ p {
 
   .dialogue-box {
     position: relative;
-    padding:  0 1rem;
+    padding: 0 1rem;
     background: var(--detail-bg-light);
     border-radius: 0.5rem;
-    border: 2px solid  rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.6);
     width: 30rem;
     width: 100%;
 
@@ -116,7 +115,7 @@ p {
       border-radius: 0.5rem 0.5rem 0 0;
       font-size: 1.5rem;
       z-index: -1;
-      border: 2px solid  rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(0, 0, 0, 0.6);
       background: var(--detail-bg-light);
     }
 

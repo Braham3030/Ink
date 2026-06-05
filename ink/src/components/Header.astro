@@ -23,7 +23,6 @@ const isHome =  Astro.url.pathname === "/";
 <style>
     header {
         display: flex;
-        justify-content: flex-start;
         align-items: center;
         background-color: transparent;
 
@@ -32,8 +31,7 @@ const isHome =  Astro.url.pathname === "/";
         left: 0;
         transform: translateY(0);
         width: 100%;
-        height: 6rem;
-        z-index: 999;
+        z-index: 2;
         pointer-events: none;
 
         > #back-button {
@@ -41,16 +39,14 @@ const isHome =  Astro.url.pathname === "/";
             left: 16px;
             transform: translateX(0); */
             padding: 0;
-            margin-left: 1.5rem;
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.543);
             color: black;
             border-radius: 50%;
-            font-size: 3rem;
+            font-size: 2.8rem;
             pointer-events: auto;
             cursor: pointer;
             text-decoration: none;
-            width: 3.8rem;
-            height: 3.8rem;
+            margin: 0.5rem;
 
             display: inline-flex;
             align-items: center;
@@ -61,7 +57,6 @@ const isHome =  Astro.url.pathname === "/";
             box-shadow: 0 0 10px rgba(0, 0, 0, 0);
             filter: brightness(0);
             transform: scale(0.5);
-            opacity: 0;
             /* opacity: 1; */
 
             animation: popIn 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) forwards 0.2s;
@@ -78,10 +73,8 @@ const isHome =  Astro.url.pathname === "/";
         }
         100% {
             backdrop-filter: blur(12px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             filter: brightness(2.15);
             transform: scale(1);
-            opacity: 1;
         }
     }
 </style>
