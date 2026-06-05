@@ -5,6 +5,7 @@ const {
   buttonText = "Volgende",
   endScreenLink = ""
 } = Astro.props;
+// const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
 ---
 
 <div class="popup-overlay" id="popupOverlay" aria-hidden="true" hidden>
@@ -94,40 +95,56 @@ const {
 
 <script is:inline>
   // @ts-nocheck
-function getOverlay() {
-  return document.getElementById("popupOverlay");
-}
 
 function showPopup({ title, text, buttonText, endScreenLink }) {
   const overlay = getOverlay();
+  window.isPopupOpen = false;
 
-  if (!overlay) {
-    console.warn("Popup overlay not found");
-    return;
+  function getOverlay() {
+    return document.getElementById("popupOverlay");
   }
 
-  const h2 = overlay.querySelector("h2");
-  const p = overlay.querySelector("p");
-  const btn = overlay.querySelector("button");
+  function showPopup({ title, text, buttonText }) {
+    const overlay = getOverlay();
 
-  if (h2) h2.textContent = title;
-  if (p) p.textContent = text;
-  if (btn) btn.textContent = buttonText;
+    if (!overlay) {
+      console.warn("Popup overlay not found");
+      return;
+    }
 
-  overlay.classList.add("show");
-  overlay.setAttribute("aria-hidden", "false");
-}
+    const h2 = overlay.querySelector("h2");
+    const p = overlay.querySelector("p");
+    const btn = overlay.querySelector("button");
 
-function hidePopup() {
-  const overlay = getOverlay();
-  if (!overlay) return;
+    if (h2) h2.textContent = title;
+    if (p) p.textContent = text;
+    if (btn) btn.textContent = buttonText;
 
-  overlay.classList.remove("show");
-  overlay.setAttribute("aria-hidden", "true");
-}
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
 
-window.popup = {
-  show: showPopup,
-  hide: hidePopup,
-};
+    window.isPopupOpen = true;
+  }
+
+  function hidePopup() {
+    const overlay = getOverlay();
+    if (!overlay) return;
+
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    window.isPopupOpen = false;
+  }
+
+  window.popup = {
+    show: showPopup,
+    hide: hidePopup,
+  };
+
+  // Closing popup
+  document.addEventListener("click", (e) => {
+    if (e.target?.id === "popupButton") {
+      e.target.blur();
+      window.popup.hide();
+    }
+  })
 </script>

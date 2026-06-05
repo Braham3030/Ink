@@ -1,3 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+#dialogue.hidden {
+    display: none;
+}
+
+
 #interrupt-container, #start-container {
     background: gray;
     width: 10rem;
@@ -59,9 +72,6 @@
 }
 
 #speaker-image {
-    width: 12rem;
-    height: auto;
-
     &.grey-filter {
         filter: grayscale(100%);
     }

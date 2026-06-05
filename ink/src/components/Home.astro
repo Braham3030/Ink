@@ -4,7 +4,7 @@
 
 <div>
   <h1 transition:name="title-text">Start de module</h1>
-  <a href="/modules" class="start-button" transition:name="module-window">
+  <a href="/modules" class="link-button" transition:name="module-window">
     Start
   </a>
 </div>
@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 25vh;
     /* height: 100%; */
     > h1 {
       /* margin: 0 auto; */
@@ -23,27 +23,13 @@
       width: fit-content;
     }
 
-    > .start-button {
-      display: block;
-      margin: 2rem auto;
-      padding: 0.8em 2.3em;
-
-      background-color: green;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-
-      font-size: 2rem;
-      text-decoration: none;
-      cursor: pointer;
-
+    > .link-button {
       transition:
         background-color 0.2s ease,
         transform 0.2s ease;
     }
 
-    .start-button:hover {
-      background-color: darkgreen;
+    .link-button:hover {
       transform: scale(1.05);
     }
   }
