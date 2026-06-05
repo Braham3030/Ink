@@ -7,7 +7,9 @@ const isHome =  Astro.url.pathname === "/";
 <header transition:name="header">
     {!isHome &&
     <a id="back-button" href="javascript:history.back()">
-        ←
+<svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+<path d="M4 12H20M4 12L8 8M4 12L8 16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
     </a>
     }
 </header>
@@ -35,8 +37,6 @@ const isHome =  Astro.url.pathname === "/";
         pointer-events: none;
 
         > #back-button {
-            appearance: none;
-            border: none;
             /* position: absolute;
             left: 16px;
             transform: translateX(0); */
@@ -64,6 +64,16 @@ const isHome =  Astro.url.pathname === "/";
             animation: popIn 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) forwards 0.2s;
         }
     }
+
+    #back-button svg {
+  width: 2.7rem;
+  height: 2.7rem;
+
+  @media (min-width: 768px) {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+}
 
     @keyframes popIn {
         0% {
