@@ -7,11 +7,20 @@ import { getImage } from "astro:assets";
 
 import visualDisability from "../assets/images/disabilities/visual.jpg";
 import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+import motorialDisability from "../assets/images/disabilities/motor.jpg";
+import looksDisability from "../assets/images/disabilities/looks.jpg";
+import speechDisability from "../assets/images/disabilities/speech.jpg";
 
-const preloadVisual = await getImage({ src: visualDisability, format: "webp" });
+// Preload image.
+const preloadVisual = await getImage({ src: visualDisability });
+const preloadAuditory = await getImage({ src: auditoryDisability });
+const preloadMotorial = await getImage({ src: motorialDisability });
+const preloadLooks = await getImage({ src: looksDisability });
+const preloadSpeech = await getImage({ src: speechDisability });
+
+const preloadVisual = await getImage({ src: visualDisability });
 const preloadAuditory = await getImage({
-  src: auditoryDisability,
-  format: "webp",
+  src: auditoryDisability
 });
 
 import HelpButton from "../components/HelpButton.astro";
@@ -31,48 +40,42 @@ import HelpButton from "../components/HelpButton.astro";
       rel="preload"
       as="image"
       href={preloadVisual.src}
-      type="image/webp"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
       href={preloadAuditory.src}
-      type="image/webp"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadMotorial.src}
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadLooks.src}
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={preloadSpeech.src}
       fetchpriority="high"
     />
     <title>Ink</title>
   </head>
   <body>
     <Header />
-    <main></main>
-    <slot />
+    <main>
+      <slot />
+    </main>
     <HelpButton />
   </body>
 </html>
-
-<!-- <script>
-	// Javascript dynamically changes the components on the page.
-	const startButton = document.querySelector('.startButton');
-
-	const home = document.getElementById('home');
-	const disabilityChoice = document.getElementById('disability-choice');
-	const miniGameBlind = document.getElementById('minigame-blind');
-
-	if (startButton && home && miniGameBlind) {
-	startButton.addEventListener('click', () => {
-		home.style.opacity = '0';
-		home.style.width = '0%';
-
-		home.classList.add('hidden');
-		disabilityChoice.classList.remove('hidden');
-		// miniGameBlind.style.opacity = '1';
-		// miniGameBlind.style.width = '100%';
-
-		// miniGameBlind.classList.remove('hidden');
-	});
-}
-</script> -->
 
 <style>
   body {

@@ -1,5 +1,11 @@
 ---
-const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
+const {
+  title = "Popup",
+  text = "",
+  buttonText = "Volgende",
+  endScreenLink = ""
+} = Astro.props;
+// const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
 ---
 
 <div class="popup-overlay" id="popupOverlay" aria-hidden="true" hidden>
@@ -7,66 +13,91 @@ const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
     <h2>{title}</h2>
     <p>{text}</p>
     <button id="popupButton">{buttonText}</button>
+    <a href={endScreenLink} class="nextScreen">{buttonText}</a>
   </div>
 </div>
 
 <style>
-  .popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    z-index: 9999;
+  z-index: 9999;
 
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease;
-  }
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
 
-  .popup-overlay.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
+.popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-  .popup {
-    background: white;
-    padding: 24px;
-    border: 2px solid black;
-    width: 300px;
-    text-align: center;
+.popup {
+  background: white;
+  padding: 24px;
+  border: 2px solid black;
+  width: 300px;
+  text-align: center;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
 
-  .popup h2 {
-    margin: 0 0 10px;
-  }
+.popup h2 {
+  margin: 0 0 10px;
+}
 
-  .popup p {
-    margin: 0 0 20px;
-  }
+.popup p {
+  margin: 0 0 20px;
+}
 
-  .popup button {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid black;
-    background: white;
-    cursor: pointer;
-  }
+.nextScreen {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+}
 
-  .popup button:hover {
-    background: black;
-    color: white;
-  }
+.nextScreen:hover {
+  background: black;
+  color: white;
+}
+
+.popup button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background: black;
+  color: white;
+}
+
+.nextScreen {
+  display: none;
+}
 </style>
 
 <script is:inline>
   // @ts-nocheck
 
+function showPopup({ title, text, buttonText, endScreenLink }) {
+  const overlay = getOverlay();
   window.isPopupOpen = false;
 
   function getOverlay() {
