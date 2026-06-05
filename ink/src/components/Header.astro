@@ -67,6 +67,7 @@ const isHome = Astro.url.pathname === "/";
       box-shadow: 0 0 10px rgba(0, 0, 0, 0);
       filter: brightness(0);
       transform: scale(0.5);
+      opacity: 0;
       /* opacity: 1; */
 
       animation: popIn 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) forwards 0.2s;
@@ -95,6 +96,7 @@ const isHome = Astro.url.pathname === "/";
       backdrop-filter: blur(12px);
       filter: brightness(2.15);
       transform: scale(1);
+      opacity: 1;
     }
   }
 </style>
