@@ -8,11 +8,10 @@ import { getImage } from "astro:assets";
 import visualDisability from "../assets/images/disabilities/visual.jpg";
 import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
 
-const preloadVisual = await getImage({ src: visualDisability, format: "webp" });
-const preloadAuditory = await getImage({
-  src: auditoryDisability,
-  format: "webp",
-});
+// Preload image.
+const preloadVisual = await getImage({ src: visualDisability });
+const preloadAuditory = await getImage({ src: auditoryDisability });
+
 ---
 
 <!doctype html>
