@@ -18,7 +18,10 @@ import { Draggable } from "gsap/Draggable"
 
 gsap.registerPlugin(Draggable)
 
+
+
 function initGame() {
+  let correctCount = 0
   const draggables = document.querySelectorAll(".draggable")
   const dropzones = document.querySelectorAll(".dropzone")
   const textColumn = document.querySelector(".text-column")
@@ -186,6 +189,10 @@ function initGame() {
 
       const isCorrect = placed.text === correctAnswer
 
+      if (isCorrect) {
+        correctCount++
+      }
+
       placed.element.classList.add(
         isCorrect ? "correct" : "incorrect"
       )
@@ -201,6 +208,14 @@ function initGame() {
         }
       }
     })
+
+    if (correctCount === dropzones.length) {
+      window.popup.show({
+        title: "Goed gedaan!",
+        text: "Je hebt nu een basis kennis van gebaren, hiermee kan je al een heel eind komen in het communiceren met iemand die doof is!",
+        buttonText: "Volgende",
+      })
+    }
   })
 }
 
