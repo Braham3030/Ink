@@ -47,6 +47,10 @@ const { helpPopup } = Astro.props;
     background: none;
     border: none;
     z-index: 1;
+
+    &:hover {
+      cursor: pointer;
+    }
 };
 
   svg {
@@ -55,7 +59,7 @@ const { helpPopup } = Astro.props;
   }
 </style>
 
-<script>
+<script is:inline>
 //@ts-nocheck
   const button = document.getElementById("help-button");
 
@@ -68,7 +72,9 @@ const { helpPopup } = Astro.props;
     window.popup.show({
       title: "Hier heb je een tip!",
       text: help.text,
-      buttonText: "Volgende",
+      buttonText: "Sluiten",
     });
   });
+
+
 </script>

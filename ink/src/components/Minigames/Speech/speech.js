@@ -1,8 +1,17 @@
 // @ts-nocheck
 
+// Help popup content
 window.helpContext = {
-  text: "Dit is een testbericht.",
+  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
 }
+
+// Closing popup
+document.addEventListener("click", (e) => {
+  if (e.target?.id === "popupButton") {
+    e.target.blur();
+    window.popup.hide();
+  }
+})
 
 const CONFIG = {
   // Per-speaker typing behavior configuration
@@ -14,7 +23,7 @@ const CONFIG = {
       pauseMax: 900         // maximum pause duration
     },
     default: {
-      typingSpeed: 25,
+      typingSpeed: 35,
       pauseChance: 0,
       pauseMin: 0,
       pauseMax: 0
@@ -22,7 +31,7 @@ const CONFIG = {
   },
 
   // Delay between automated lines (used for player → Evelin transitions)
-  lineDelay: 1200
+  lineDelay: 1500
 }
 
 function init() {
@@ -44,9 +53,6 @@ function init() {
 
   // Prevent multiple interrupts within the same Evelin line
   let interruptUsedThisLine = false
-
-  // Pauses typing when interrupt popup is open
-  let isPaused = false
 
   // DOM elements
   const speakerName = document.getElementById("speaker-name")
@@ -77,14 +83,13 @@ function init() {
   }
 
   // Types text character-by-character with optional pauses
-  // Can be paused globally via `isPaused`
   async function typeText(element, text, speed, settings) {
     element.textContent = ""
 
     for (let i = 0; i < text.length; i++) {
 
       // Freeze typing while popup is active
-      while (isPaused) {
+      while (window.isPopupOpen) {
         await wait(50)
       }
 
@@ -191,7 +196,7 @@ function init() {
         window.popup.hide()
 
         // Resume typing after popup closes
-        isPaused = false
+        window.isPopupOpen = false
 
         document.removeEventListener("click", handler)
       }
@@ -226,7 +231,7 @@ function init() {
       setInterruptEnabled(false)
 
       // Pause typing while popup is shown
-      isPaused = true
+      window.isPopupOpen = true
 
       showInterruptPopup()
 
