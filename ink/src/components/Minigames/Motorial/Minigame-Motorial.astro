@@ -1,8 +1,7 @@
 ---
 import "./motorial.css";
 import Popup from "../../Popup.astro";
-
-import { obstacles } from "../../../data/motorialData";
+import { levels } from "../../../data/motorialData";
 ---
 
 <div class="content">
@@ -10,35 +9,13 @@ import { obstacles } from "../../../data/motorialData";
   <p>Klik op de onderdelen die voor Anna een obstakel zouden kunnen zijn.</p>
 
   <div class="image-wrapper">
-    <img
-      src="../../images/motorial-obstacles/Entrance_Building.png"
-      alt="Entrance Office Building"
-      transition:name="avatar-Anna"
-    />
-
-    {
-      obstacles.map((obstacle) => (
-        <button
-          class="hotspot"
-          data-id={obstacle.id}
-          data-label={obstacle.label}
-          style={`
-          top:${obstacle.top};
-          left:${obstacle.left};
-          width:${obstacle.width};
-          height:${obstacle.height};
-          transform: rotate(${obstacle.rotate}deg);
-          transform-origin: center;
-        `}
-        />
-      ))
-    }
+    <img id="level-image" src={levels[0].image} />
   </div>
 
   <h2>Gevonden obstakels</h2>
   <ul id="found-list"></ul>
 
-  <button id="done-button" class="link-button"> Klaar! </button>
+  <button id="done-button" class="link-button">Klaar!</button>
 </div>
 
 <Popup
