@@ -13,8 +13,9 @@ import { Image } from "astro:assets";
 const { name, description, animation, image, link } = Astro.props;
 ---
 
+<h2 transition:name="title-text">Dit is {name}</h2>
 <div class="card">
-  <h2 transition:name="title-text">Dit is {name}</h2>
+  
 
   <div class="avatar">
     <Image
