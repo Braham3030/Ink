@@ -136,3 +136,19 @@ document.addEventListener("click", (e) => {
 
 // Astro navigation support
 document.addEventListener("astro:page-load", initMotorial);
+
+/* =========================
+   Hint Popup
+========================= */
+// Help popup content
+window.helpContext = {
+  text: "Mensen in een rolstoel hebben meestal moeite met oppervlaktes die niet vlak zijn. Ook zijn ze in een rolstoel breder dan een lopende voetganger. Houd hier rekening mee.",
+}
+
+// Closing popup
+document.addEventListener("click", (e) => {
+  if (e.target?.id === "popupButton") {
+    e.target.blur();
+    window.popup.hide();
+  }
+})
