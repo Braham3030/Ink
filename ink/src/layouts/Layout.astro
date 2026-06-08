@@ -19,6 +19,8 @@ const preloadLooks = await getImage({ src: looksDisability });
 const preloadSpeech = await getImage({ src: speechDisability });
 
 import HelpButton from "../components/HelpButton.astro";
+
+const {backUrl = "/", hideBackButton = false} = Astro.props;
 ---
 
 <!doctype html>
@@ -64,7 +66,7 @@ import HelpButton from "../components/HelpButton.astro";
     <title>Ink</title>
   </head>
   <body>
-    <Header />
+    <Header backUrl={backUrl} hideBackButton={hideBackButton} />
     <main>
       <slot />
     </main>
