@@ -1,8 +1,9 @@
 ---
-import Popup from "./Popup.astro";
+import Popup from "../../Popup.astro";
 import { Image } from "astro:assets";
-import looksDisability from "../assets/images/disabilities/looks.jpg";
+import looksDisability from "../../../assets/images/disabilities/looks.jpg";
 ---
+
 
 <div class="screen">
   <h2 transition:name="title-text">Praat met Eduard</h2>
@@ -14,34 +15,23 @@ import looksDisability from "../assets/images/disabilities/looks.jpg";
       class="speaker-image"
       transition:name="avatar-Eduard"
     />
-
     <div class="dialogue-box">
       <p class="speaker-name">Eduard</p>
-      <p class="dialogue-text">
-        "Hey! Jij bent vast mijn nieuwe collega, leuk om je te ontmoeten!"
-      </p>
+      <p class="dialogue-text"></p>
     </div>
   </div>
 
-  <div class="choices" transition:name="button-Eduard">
-    <button id="btn1">1: Hoi Eduard, leuk om je te ontmoeten.</button>
-    <button id="btn2"
-      >2: Hey Eduard, mag ik vragen wat er met je gezicht is gebeurd?</button
-    >
-    <button id="btn3"
-      >3: Alleen in zijn ogen kijken om er geen aandacht op te vestigen</button
-    >
-  </div>
+  <div class="choices"></div>
 </div>
 
 <Popup />
+
 
 <style>
   .screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.3rem;
     max-width: 500px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
@@ -121,6 +111,8 @@ import looksDisability from "../assets/images/disabilities/looks.jpg";
       transform 0.08s ease,
       box-shadow 0.08s ease,
       background 0.08s ease;
+
+      cursor: pointer;
   }
 
   @media (min-width: 768px) {
@@ -152,46 +144,6 @@ import looksDisability from "../assets/images/disabilities/looks.jpg";
   }
 </style>
 
-<script is:inline>
-  // @ts-nocheck
-
-  // Help popup content
-  window.helpContext = {
-    text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
-  };
-
-  // Closing popup
-  document.addEventListener("click", (e) => {
-    if (e.target?.id === "popupButton") {
-      e.target.blur();
-      window.popup.hide();
-    }
-  });
-  document.getElementById("btn1").addEventListener("click", () => {
-    window.popup.show({
-      title: "Goed gedaan!",
-      text: "Dit is een respectvolle manier om iemand te begroeten.",
-      buttonText: "Volgende",
-    });
-  });
-
-  document.getElementById("btn2").addEventListener("click", () => {
-    window.popup.show({
-      title: "Niet handig!",
-      text: "Het is onbeleefd om direct naar iemands uiterlijk te vragen.",
-      buttonText: "Probeer opnieuw",
-    });
-  });
-
-  document.getElementById("btn3").addEventListener("click", () => {
-    window.popup.show({
-      title: "Helaas!",
-      text: "Hoewel je het goed bedoelt, kan het staren naar iemands ogen ongemakkelijk zijn.",
-      buttonText: "Probeer opnieuw",
-    });
-  });
-
-  document.getElementById("popupButton").addEventListener("click", () => {
-    window.popup.hide();
-  });
+<script>
+  import "../Visual/visual.js";
 </script>
