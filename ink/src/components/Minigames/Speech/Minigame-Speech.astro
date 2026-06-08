@@ -2,6 +2,8 @@
 import './speech.css'
 import { speechData } from '../../../data/speechData.js'
 import Popup from "../../Popup.astro";
+import { Image } from "astro:assets";
+import SpeakerImage from "../../../assets/images/disabilities/speech.jpg"
 ---
 
 <div class="content" transition:name="avatar-Evelin">
@@ -10,7 +12,7 @@ import Popup from "../../Popup.astro";
 
 
   <div id="dialogue" class="dialogue hidden">
-    <img id="speaker-image" class="speaker-image" src="../../../../src/assets/images/disabilities/speech.jpg" alt="Speaker Image">
+    <Image id="speaker-image" class="speaker-image" src={SpeakerImage} alt="Spekaer Image"/>
     <div id="dialogue-box" class="dialogue-box">
         <p id="speaker-name" class="speaker-name"></p>
         <p id="dialogue-text" class="dialogue-text"></p>
@@ -21,7 +23,7 @@ import Popup from "../../Popup.astro";
     <button id="start-button">Start</button>
   </div>
   <div id="interrupt-container">
-    <button id="interrupt-button" class="hidden">Start Praten</button>
+    <button id="interrupt-button" class="hidden">Help zin afmaken</button>
   </div>
 </div>
 

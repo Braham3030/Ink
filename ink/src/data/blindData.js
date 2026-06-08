@@ -3,7 +3,7 @@ export const levels = [
     {
         title: "1 - Verwijs Tim naar de WC",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 7, y: 0, w: 2, h: 2 },
+        goal: { x: 7, y: 0, w: 2, h: 2, name: "WC"},
         obstacles: [
             { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
             { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
@@ -93,7 +93,7 @@ export const levels = [
     {
         title: "2 - Verwijs Tim naar de bushalte",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 2, y: 0, w: 2, h: 1 },
+        goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte" },
         obstacles: [
             { x: 0, y: 0, w: 1, h: 1, name: "Boom" },
             { x: 5, y: 0, w: 1, h: 1, name: "Boom" },
@@ -152,7 +152,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Gebruik het zebprapad om aan de overkant van de weg te komen",
+                text: "Gebruik het zebrapad om aan de overkant van de weg te komen",
                 correct: false,
                 feedback: "Tim kwam veilig aan de overkant, maar wist daarna niet hoe hij de bushalte kon vinden.",
                 path: [
@@ -182,7 +182,7 @@ export const levels = [
     {
         title: "3 - Verwijs Tim naar de ingang van het gebouw",
         startPosition: { x: 1, y: 8 },
-        goal: { x: 3, y: 0, w: 3, h: 2},
+        goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang" },
         obstacles: [
             { x: 0, y: 0, w: 3, h: 2, name: "Muur" },
             { x: 6, y: 0, w: 3, h: 2, name: "Muur" },

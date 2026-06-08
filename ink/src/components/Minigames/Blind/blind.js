@@ -20,6 +20,38 @@ let player = { x: 0, y: 0 };
 let locked = false;
 let showQuestionMark = false;
 
+const POPUP_OWNER = "blind-game";
+
+let lastAnswerCorrect = false;
+let lastFeedback = "";
+
+/* =========================
+   GLOBAL POPUP CLOSE + LOGIC HANDLER
+========================= */
+
+document.addEventListener("click", (e) => {
+  const btn = e.target?.closest?.("#popupButton");
+  if (!btn) return;
+
+  const overlay = document.getElementById("popupOverlay");
+
+  btn.blur();
+  window.popup?.hide?.();
+
+  if (overlay) {
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+  }
+
+  if (!overlay || overlay.dataset.owner !== POPUP_OWNER) return;
+
+  if (lastAnswerCorrect) {
+    nextLevel();
+  } else {
+    resetGame();
+  }
+});
+
 /* =========================
    INIT
 ========================= */
@@ -45,6 +77,16 @@ if (document.readyState === "loading") {
 }
 
 /* =========================
+   SHUFFLE
+========================= */
+
+function shuffleOptions(options) {
+  return options
+    .map((option, index) => ({ option, index }))
+    .sort(() => Math.random() - 0.5);
+}
+
+/* =========================
    BUTTONS
 ========================= */
 
@@ -54,7 +96,9 @@ function renderButtons() {
 
   container.innerHTML = "";
 
-  currentLevel.options.forEach((option, index) => {
+  const shuffled = shuffleOptions(currentLevel.options);
+
+  shuffled.forEach(({ option, index }) => {
     const btn = document.createElement("button");
 
     btn.textContent = option.text;
@@ -88,6 +132,9 @@ function loadLevel(index) {
 
   showQuestionMark = false;
   locked = false;
+
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
 
   window.popup?.hide?.();
 
@@ -128,7 +175,7 @@ function drawObstacles() {
       o.x * tileSize,
       o.y * tileSize,
       o.w * tileSize,
-      o.h * tileSize,
+      o.h * tileSize
     );
 
     ctx.strokeStyle = "#000";
@@ -136,7 +183,7 @@ function drawObstacles() {
       o.x * tileSize,
       o.y * tileSize,
       o.w * tileSize,
-      o.h * tileSize,
+      o.h * tileSize
     );
 
     ctx.fillStyle = "white";
@@ -155,16 +202,15 @@ function drawMarkers() {
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize,
+      marker.h * tileSize
     );
 
     ctx.strokeStyle = "#000";
-
     ctx.strokeRect(
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize,
+      marker.h * tileSize
     );
 
     ctx.fillStyle = "#000";
@@ -173,10 +219,14 @@ function drawMarkers() {
     ctx.fillText(
       marker.name,
       marker.x * tileSize + 4,
-      marker.y * tileSize + 16,
+      marker.y * tileSize + 16
     );
   });
 }
+
+/* =========================
+   GOAL
+========================= */
 
 function drawGoal() {
   const goal = currentLevel.goal;
@@ -187,7 +237,7 @@ function drawGoal() {
     goal.x * tileSize,
     goal.y * tileSize,
     goal.w * tileSize,
-    goal.h * tileSize,
+    goal.h * tileSize
   );
 
   ctx.strokeStyle = "#000";
@@ -197,7 +247,16 @@ function drawGoal() {
     goal.x * tileSize,
     goal.y * tileSize,
     goal.w * tileSize,
-    goal.h * tileSize,
+    goal.h * tileSize
+  );
+
+  ctx.fillStyle = "white";
+  ctx.font = "12px sans-serif";
+
+  ctx.fillText(
+    goal.name,
+    goal.x * tileSize + 4,
+    goal.y * tileSize + 16
   );
 }
 
@@ -233,35 +292,26 @@ function render() {
 ========================= */
 
 function moveTo(path, showQ, correct, feedback, i = 0) {
-  if (i === 0) locked = true;
+  if (i === 0) {
+    locked = true;
+  }
 
   if (i >= path.length) {
     showQuestionMark = showQ;
     render();
 
     setTimeout(() => {
+      lastAnswerCorrect = correct;
+      lastFeedback = feedback;
+
       window.popup?.show?.({
         title: correct ? "Inderdaad!" : "Helaas",
         text: feedback,
         buttonText: correct ? "Volgende" : "Opnieuw",
       });
 
-      // 🔥 ROBUUST FIX: DOM fallback (ALTIJD WERKEND)
-      setTimeout(() => {
-        const btn = document.getElementById("popupButton");
-
-        if (btn) {
-          btn.onclick = () => {
-            window.popup?.hide?.();
-
-            if (correct) {
-              nextLevel();
-            } else {
-              resetGame();
-            }
-          };
-        }
-      }, 50);
+      const overlay = document.getElementById("popupOverlay");
+      if (overlay) overlay.dataset.owner = POPUP_OWNER;
 
       locked = false;
     }, 600);
@@ -287,6 +337,10 @@ function runPath(type) {
   if (locked) return;
 
   showQuestionMark = false;
+
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
+
   window.popup?.hide?.();
 
   const option = currentLevel.options[type - 1];
@@ -299,32 +353,13 @@ function runPath(type) {
 ========================= */
 
 function nextLevel() {
-  const nextLevelBtn = document.querySelector(".nextScreen");
-  const buttonResume = document.getElementById("popupButton");
   if (currentLevelIndex + 1 < levels.length) {
     loadLevel(currentLevelIndex + 1);
-  } else {
-    if (nextLevelBtn) nextLevelBtn.href = "/blind-end-screen";
-    nextLevelBtn.style.display = "block";
-    buttonResume.style.display = "none";
-    window.popup?.show?.({
-      title: "Klaar!",
-      text: "Je hebt alle levels voltooid.",
-      buttonText: "Volgende scherm",
-      endScreenLink: "/blind-end-screen",
-    });
-
-    setTimeout(() => {
-      const btn = document.querySelector(".nextScreen");
-
-      if (btn) {
-        btn.onclick = () => {
-          window.popup?.hide?.();
-          window.locate.href = "/blind-end-screen";
-        };
-      }
-    }, 50);
+    return;
   }
+
+  window.popup?.hide?.();
+  window.location.href = "/blind-end-screen";
 }
 
 /* =========================
@@ -338,22 +373,17 @@ function resetGame() {
   showQuestionMark = false;
   locked = false;
 
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
+
   window.popup?.hide?.();
   render();
 }
 
 /* =========================
-   Hint Popup
+   HINT
 ========================= */
-// Help popup content
+
 window.helpContext = {
   text: "Alleen wanneer je een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden",
 };
-
-// Closing popup
-document.addEventListener("click", (e) => {
-  if (e.target?.id === "popupButton") {
-    e.target.blur();
-    window.popup.hide();
-  }
-});
