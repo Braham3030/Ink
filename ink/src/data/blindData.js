@@ -152,7 +152,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Gebruik het zebprapad om aan de overkant van de weg te komen",
+                text: "Gebruik het zebrapad om aan de overkant van de weg te komen",
                 correct: false,
                 feedback: "Tim kwam veilig aan de overkant, maar wist daarna niet hoe hij de bushalte kon vinden.",
                 path: [
