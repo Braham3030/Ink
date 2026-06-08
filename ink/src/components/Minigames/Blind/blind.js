@@ -45,6 +45,16 @@ if (document.readyState === "loading") {
 }
 
 /* =========================
+   SHUFFLE
+========================= */
+
+function shuffleOptions(options) {
+  return options
+    .map((option, index) => ({ option, index }))
+    .sort(() => Math.random() - 0.5);
+}
+
+/* =========================
    BUTTONS
 ========================= */
 
@@ -54,7 +64,9 @@ function renderButtons() {
 
   container.innerHTML = "";
 
-  currentLevel.options.forEach((option, index) => {
+  const shuffled = shuffleOptions(currentLevel.options);
+
+  shuffled.forEach(({ option, index }) => {
     const btn = document.createElement("button");
 
     btn.textContent = option.text;
@@ -128,7 +140,7 @@ function drawObstacles() {
       o.x * tileSize,
       o.y * tileSize,
       o.w * tileSize,
-      o.h * tileSize,
+      o.h * tileSize
     );
 
     ctx.strokeStyle = "#000";
@@ -136,11 +148,11 @@ function drawObstacles() {
       o.x * tileSize,
       o.y * tileSize,
       o.w * tileSize,
-      o.h * tileSize,
+      o.h * tileSize
     );
 
     ctx.fillStyle = "white";
-    ctx.font = "12px sans-serif";
+    ctx.font = "16px sans-serif";
     ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
   });
 }
@@ -155,28 +167,31 @@ function drawMarkers() {
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize,
+      marker.h * tileSize
     );
 
     ctx.strokeStyle = "#000";
-
     ctx.strokeRect(
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize,
+      marker.h * tileSize
     );
 
     ctx.fillStyle = "#000";
-    ctx.font = "12px sans-serif";
+    ctx.font = "16px sans-serif";
 
     ctx.fillText(
       marker.name,
       marker.x * tileSize + 4,
-      marker.y * tileSize + 16,
+      marker.y * tileSize + 16
     );
   });
 }
+
+/* =========================
+   GOAL (UPDATED)
+========================= */
 
 function drawGoal() {
   const goal = currentLevel.goal;
@@ -187,7 +202,7 @@ function drawGoal() {
     goal.x * tileSize,
     goal.y * tileSize,
     goal.w * tileSize,
-    goal.h * tileSize,
+    goal.h * tileSize
   );
 
   ctx.strokeStyle = "#000";
@@ -197,7 +212,17 @@ function drawGoal() {
     goal.x * tileSize,
     goal.y * tileSize,
     goal.w * tileSize,
-    goal.h * tileSize,
+    goal.h * tileSize
+  );
+
+  // LABEL zoals obstacles
+  ctx.fillStyle = "#000";
+  ctx.font = "16px sans-serif";
+
+  ctx.fillText(
+    goal.name || "Goal",
+    goal.x * tileSize + 4,
+    goal.y * tileSize + 16
   );
 }
 
@@ -246,12 +271,13 @@ function moveTo(path, showQ, correct, feedback, i = 0) {
         buttonText: correct ? "Volgende" : "Opnieuw",
       });
 
-      // 🔥 ROBUUST FIX: DOM fallback (ALTIJD WERKEND)
       setTimeout(() => {
         const btn = document.getElementById("popupButton");
 
         if (btn) {
-          btn.onclick = () => {
+          btn.onclick = (e) => {
+            e?.stopPropagation?.();
+
             window.popup?.hide?.();
 
             if (correct) {
@@ -299,32 +325,13 @@ function runPath(type) {
 ========================= */
 
 function nextLevel() {
-    const nextLevelBtn = document.querySelector('.nextScreen');
-    const buttonResume = document.getElementById("popupButton");
-    if (currentLevelIndex + 1 < levels.length) {
-        loadLevel(currentLevelIndex + 1)
-    } else {
-        if (nextLevelBtn) nextLevelBtn.href = "/blind-end-screen";
-        nextLevelBtn.style.display = 'block';
-        buttonResume.style.display = 'none';
-        window.popup?.show?.({
-            title: "Klaar!",
-            text: "Je hebt alle levels voltooid.",
-            buttonText: "Volgende scherm",
-            endScreenLink: "/blind-end-screen"
-        })
+  if (currentLevelIndex + 1 < levels.length) {
+    loadLevel(currentLevelIndex + 1);
+    return;
+  }
 
-        setTimeout(() => {
-            const btn = document.querySelector(".nextScreen")
-
-            if (btn) {
-                btn.onclick = () => {
-                    window.popup?.hide?.()
-                    window.locate.href = "/blind-end-screen";
-                }
-            }
-        }, 50)
-    }
+  window.popup?.hide?.();
+  window.location.href = "/blind-end-screen";
 }
 
 /* =========================
@@ -343,17 +350,9 @@ function resetGame() {
 }
 
 /* =========================
-   Hint Popup
+   HINT
 ========================= */
-// Help popup content
+
 window.helpContext = {
   text: "Alleen wanneer je een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden",
-}
-
-// Closing popup
-document.addEventListener("click", (e) => {
-  if (e.target?.id === "popupButton") {
-    e.target.blur();
-    window.popup.hide();
-  }
-})
+};
