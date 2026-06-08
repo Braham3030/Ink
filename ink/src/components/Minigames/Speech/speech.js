@@ -123,6 +123,7 @@ function init() {
       interruptUsedThisLine = false
       setInterruptEnabled(true)
       setSpeakerActive(true)
+      interruptBtn.textContent = "Help zin afmaken"
     } else {
       setInterruptEnabled(false)
       setSpeakerActive(false)
@@ -170,6 +171,8 @@ function init() {
       waitingForPlayer = true
       setInterruptEnabled(true)
       setSpeakerActive(true)
+      interruptBtn.textContent = "Reageer"
+
       return
     }
 
