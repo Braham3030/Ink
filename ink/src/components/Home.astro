@@ -10,6 +10,9 @@
 </div>
 
 <style>
+  body {
+    
+  }
   div {
     display: flex;
     flex-direction: column;
@@ -21,6 +24,11 @@
       /* margin: 0 auto; */
       color: black;
       width: fit-content;
+
+      opacity: 0;
+      transform: translateY(10px);
+
+      animation: comeIntitle 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
     }
 
     > .link-button {
@@ -31,6 +39,17 @@
 
     .link-button:hover {
       transform: scale(1.05);
+    }
+  }
+
+  @keyframes comeIntitle {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 </style>
