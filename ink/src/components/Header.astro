@@ -1,16 +1,17 @@
 ---
 // With the following line, it is possible to obtain the url information of the page.
 // https://docs.astro.build/en/reference/api-reference/
-
-const { backUrl = "/", hideBackButton = false } = Astro.props;
-
 const isHome = Astro.url.pathname === "/";
 ---
 
 <header transition:name="header">
   {
-    !isHome && !hideBackButton && (
-      <a id="back-button" aria-label="Ga pagina terug" href={backUrl}>
+    !isHome && (
+      <a
+        id="back-button"
+        aria-label="Ga pagina terug"
+        href="javascript:history.back()"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
           <path
             d="M4 12H20M4 12L8 8M4 12L8 16"

@@ -56,16 +56,13 @@ p {
   width: fit-content;
   width: clamp(150px, 121.4286px + 8.9286vw, 250px);
   padding: 0.85rem;
-  border-radius: 12px;
+  border-radius: 7px;
   border: none;
   cursor: pointer;
   background: #111827;
   color: white;
   transition: 0.2s ease;
-  opacity: 0;
   font-size: var(--button-font-size);
-
-  animation: linkButtonAnimate 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) 0.1s forwards;
 }
 
 .dialogue {
@@ -138,15 +135,4 @@ p {
     background 0.08s ease;
   cursor: pointer;
   width: 100%;
-}
-
-@keyframes linkButtonAnimate {
-  0% {
-    border-radius: 12px;
-    opacity: 0;
-  }
-  100% {
-    border-radius: 7px;
-    opacity: 1;
-  }
 }

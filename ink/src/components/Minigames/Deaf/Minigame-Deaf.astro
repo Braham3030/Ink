@@ -27,6 +27,7 @@ const draggableTexts = shuffleArray([
   ...wrongAnswers,
 ]);
 ---
+
 <div class="content" transition:name="avatar-Eva">
   <h2 transition:name="title-text">
     Sleep de betekenis naar het juiste gebaar
@@ -34,7 +35,7 @@ const draggableTexts = shuffleArray([
 
   <div class="game-wrapper">
     <!-- LEFT SIDE -->
-    <div class="text-column" transition:name="text-Eva">
+    <div class="text-column">
       {
         draggableTexts.map((text) => (
           <div class="draggable" draggable="true" data-text={text}>
@@ -45,7 +46,7 @@ const draggableTexts = shuffleArray([
     </div>
 
     <!-- RIGHT SIDE -->
-    <div class="image-column" transition:name="avatar-Eva">
+    <div class="image-column">
       {
         selectedItems.map((item) => (
           <div class="card">
