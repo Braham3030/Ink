@@ -12,11 +12,15 @@ const {
     <h2>{title}</h2>
     <p>{text}</p>
 
-    {endScreenLink ? (
-      <a class="popup-button" href={endScreenLink}>{buttonText}</a>
-    ) : (
-      <button id="popupButton">{buttonText}</button>
-    )}
+    {
+      endScreenLink ? (
+        <a class="popup-button" href={endScreenLink}>
+          {buttonText}
+        </a>
+      ) : (
+        <button id="popupButton">{buttonText}</button>
+      )
+    }
   </div>
 </div>
 
@@ -77,7 +81,7 @@ const {
 
   .popup p {
     margin: 0 0 1.25rem;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     color: #475569;
   }
@@ -99,7 +103,9 @@ const {
     text-decoration: none;
     cursor: pointer;
 
-    transition: transform 0.28s ease, background 0.12s ease;
+    transition:
+      transform 0.28s ease,
+      background 0.12s ease;
   }
 
   .popup button:hover,
@@ -114,21 +120,21 @@ const {
   }
 
   @keyframes popupIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.92);
-  }
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.92);
+    }
 
-  50% {
-    opacity: 1;
-    transform: translateY(-6px) scale(1.03);
-  }
+    50% {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.03);
+    }
 
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
-}
 </style>
 
 <script is:inline>
