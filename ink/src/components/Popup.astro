@@ -5,15 +5,22 @@ const {
   buttonText = "Volgende",
   endScreenLink = "",
 } = Astro.props;
-// const { title = "Popup", text = "", buttonText = "Volgende" } = Astro.props;
 ---
 
 <div class="popup-overlay" id="popupOverlay" aria-hidden="true" hidden>
   <div class="popup">
     <h2>{title}</h2>
     <p>{text}</p>
-    <button id="popupButton">{buttonText}</button>
-    <a href={endScreenLink} class="nextScreen">{buttonText}</a>
+
+    {
+      endScreenLink ? (
+        <a class="popup-button" href={endScreenLink}>
+          {buttonText}
+        </a>
+      ) : (
+        <button id="popupButton">{buttonText}</button>
+      )
+    }
   </div>
 </div>
 
@@ -21,7 +28,9 @@ const {
   .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+
+    background: rgba(10, 14, 20, 0.65);
+    backdrop-filter: blur(4px);
 
     display: flex;
     align-items: center;
@@ -31,6 +40,7 @@ const {
 
     opacity: 0;
     pointer-events: none;
+
     transition: opacity 0.15s ease;
   }
 
@@ -40,73 +50,103 @@ const {
   }
 
   .popup {
-    background: white;
-    padding: 1.5rem;
+    width: min(90%, 360px);
     margin: 0.8rem;
-    border: 2px solid black;
-    width: 300px;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+
+    padding: 1.5rem;
     text-align: center;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.25),
+      0 8px 20px rgba(0, 0, 0, 0.15);
+
+    /* start state */
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  .popup-overlay.show .popup {
+    animation: popupIn 0.2s ease-out forwards;
   }
 
   .popup h2 {
-    margin: 0 0 10px;
+    margin: 0 0 0.75rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
   }
 
   .popup p {
-    margin: 0 0 20px;
+    margin: 0 0 1.25rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #475569;
   }
 
-  .nextScreen {
-    display: none;
+  .popup button,
+  .popup-button {
     width: 100%;
-    padding: 10px;
-    border: 2px solid black;
-    background: white;
-    color: black;
-    cursor: pointer;
+    display: inline-block;
+
+    padding: 0.9rem;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #0f172a;
+    color: white;
+
+    font-weight: 600;
     text-decoration: none;
-    box-sizing: border-box;
-  }
-
-  .nextScreen:hover {
-    background: black;
-    color: white;
-  }
-
-  .popup button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 2px solid black;
-    background: white;
     cursor: pointer;
+
+    transition:
+      transform 0.28s ease,
+      background 0.12s ease;
   }
 
-  .popup button:hover {
-    background: black;
-    color: white;
+  .popup button:hover,
+  .popup-button:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
   }
 
-  .nextScreen {
-    display: none;
+  .popup button:active,
+  .popup-button:active {
+    transform: translateY(1px);
+  }
+
+  @keyframes popupIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.92);
+    }
+
+    50% {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.03);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 </style>
 
 <script is:inline>
   // @ts-nocheck
+
   function getOverlay() {
     return document.getElementById("popupOverlay");
   }
 
-  function showPopup({ title, text, buttonText, endScreenLink }) {
+  function showPopup({ title, text, buttonText }) {
     const overlay = getOverlay();
-
-    if (!overlay) {
-      console.warn("Popup overlay not found");
-      return;
-    }
+    if (!overlay) return;
 
     const h2 = overlay.querySelector("h2");
     const p = overlay.querySelector("p");
@@ -116,6 +156,7 @@ const {
     if (p) p.textContent = text;
     if (btn) btn.textContent = buttonText;
 
+    overlay.hidden = false;
     overlay.classList.add("show");
     overlay.setAttribute("aria-hidden", "false");
   }
@@ -126,6 +167,10 @@ const {
 
     overlay.classList.remove("show");
     overlay.setAttribute("aria-hidden", "true");
+
+    setTimeout(() => {
+      overlay.hidden = true;
+    }, 150);
   }
 
   window.popup = {

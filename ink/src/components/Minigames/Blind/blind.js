@@ -20,6 +20,38 @@ let player = { x: 0, y: 0 };
 let locked = false;
 let showQuestionMark = false;
 
+const POPUP_OWNER = "blind-game";
+
+let lastAnswerCorrect = false;
+let lastFeedback = "";
+
+/* =========================
+   GLOBAL POPUP CLOSE + LOGIC HANDLER
+========================= */
+
+document.addEventListener("click", (e) => {
+  const btn = e.target?.closest?.("#popupButton");
+  if (!btn) return;
+
+  const overlay = document.getElementById("popupOverlay");
+
+  btn.blur();
+  window.popup?.hide?.();
+
+  if (overlay) {
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+  }
+
+  if (!overlay || overlay.dataset.owner !== POPUP_OWNER) return;
+
+  if (lastAnswerCorrect) {
+    nextLevel();
+  } else {
+    resetGame();
+  }
+});
+
 /* =========================
    INIT
 ========================= */
@@ -101,6 +133,9 @@ function loadLevel(index) {
   showQuestionMark = false;
   locked = false;
 
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
+
   window.popup?.hide?.();
 
   render();
@@ -152,7 +187,7 @@ function drawObstacles() {
     );
 
     ctx.fillStyle = "white";
-    ctx.font = "16px sans-serif";
+    ctx.font = "12px sans-serif";
     ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
   });
 }
@@ -179,7 +214,7 @@ function drawMarkers() {
     );
 
     ctx.fillStyle = "#000";
-    ctx.font = "16px sans-serif";
+    ctx.font = "12px sans-serif";
 
     ctx.fillText(
       marker.name,
@@ -190,7 +225,7 @@ function drawMarkers() {
 }
 
 /* =========================
-   GOAL (UPDATED)
+   GOAL
 ========================= */
 
 function drawGoal() {
@@ -215,12 +250,11 @@ function drawGoal() {
     goal.h * tileSize
   );
 
-  // LABEL zoals obstacles
-  ctx.fillStyle = "#000";
-  ctx.font = "16px sans-serif";
+  ctx.fillStyle = "white";
+  ctx.font = "12px sans-serif";
 
   ctx.fillText(
-    goal.name || "Goal",
+    goal.name,
     goal.x * tileSize + 4,
     goal.y * tileSize + 16
   );
@@ -258,36 +292,26 @@ function render() {
 ========================= */
 
 function moveTo(path, showQ, correct, feedback, i = 0) {
-  if (i === 0) locked = true;
+  if (i === 0) {
+    locked = true;
+  }
 
   if (i >= path.length) {
     showQuestionMark = showQ;
     render();
 
     setTimeout(() => {
+      lastAnswerCorrect = correct;
+      lastFeedback = feedback;
+
       window.popup?.show?.({
         title: correct ? "Inderdaad!" : "Helaas",
         text: feedback,
         buttonText: correct ? "Volgende" : "Opnieuw",
       });
 
-      setTimeout(() => {
-        const btn = document.getElementById("popupButton");
-
-        if (btn) {
-          btn.onclick = (e) => {
-            e?.stopPropagation?.();
-
-            window.popup?.hide?.();
-
-            if (correct) {
-              nextLevel();
-            } else {
-              resetGame();
-            }
-          };
-        }
-      }, 50);
+      const overlay = document.getElementById("popupOverlay");
+      if (overlay) overlay.dataset.owner = POPUP_OWNER;
 
       locked = false;
     }, 600);
@@ -313,6 +337,10 @@ function runPath(type) {
   if (locked) return;
 
   showQuestionMark = false;
+
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
+
   window.popup?.hide?.();
 
   const option = currentLevel.options[type - 1];
@@ -344,6 +372,9 @@ function resetGame() {
 
   showQuestionMark = false;
   locked = false;
+
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.dataset.owner = "";
 
   window.popup?.hide?.();
   render();

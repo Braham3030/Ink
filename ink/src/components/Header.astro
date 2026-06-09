@@ -10,7 +10,7 @@ const isHome = Astro.url.pathname === "/";
 <header transition:name="header">
   {
     !isHome && !hideBackButton && (
-      <a id="back-button" href={backUrl}>
+      <a id="back-button" aria-label="Ga pagina terug" href={backUrl}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
           <path
             d="M4 12H20M4 12L8 8M4 12L8 16"
@@ -78,13 +78,18 @@ const isHome = Astro.url.pathname === "/";
   }
 
   #back-button svg {
-    width: 2.7rem;
-    height: 2.7rem;
+    width: clamp(2.7rem, 6vw, 4.5rem);
+    height: clamp(2.7rem, 6vw, 4.5rem);
 
-    @media (min-width: 768px) {
+    /* @media (min-width: 768px) {
       width: 3.5rem;
       height: 3.5rem;
     }
+
+    @media (min-width: 1024px) {
+      width: 4.5rem;
+      height: 4.5rem;
+    } */
   }
 
   @keyframes popIn {
