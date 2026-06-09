@@ -1,48 +1,44 @@
 ---
-import './deaf.css'
-import { blindItems } from '../../../data/deafData.js'
+import "./deaf.css";
+import { blindItems } from "../../../data/deafData.js";
 import Popup from "../../Popup.astro";
 
 // Randomize the items
 function shuffleArray(array) {
-  return [...array].sort(() => Math.random() - 0.5)
+  return [...array].sort(() => Math.random() - 0.5);
 }
 
 // Select 4 random items for the game
-const selectedItems = shuffleArray(blindItems).slice(0, 4)
+const selectedItems = shuffleArray(blindItems).slice(0, 4);
 
 // Get the remaining items that were not selected
 const remainingItems = blindItems.filter(
-  (item) => !selectedItems.some((selected) => selected.id === item.id)
-)
+  (item) => !selectedItems.some((selected) => selected.id === item.id),
+);
 
 // Select 2 wrong answers from the remaining items
 const wrongAnswers = shuffleArray(remainingItems)
   .slice(0, 2)
-  .map((item) => item.answer)
+  .map((item) => item.answer);
 
-  // Combine the correct answers with the wrong answers and shuffle them for the draggable texts
+// Combine the correct answers with the wrong answers and shuffle them for the draggable texts
 const draggableTexts = shuffleArray([
   ...selectedItems.map((item) => item.answer),
   ...wrongAnswers,
-])
-
-
+]);
 ---
+
 <div class="content" transition:name="avatar-Eva">
-  <h2 transition:name="title-text">Sleep de betekenis naar het juiste gebaar</h2>
+  <h2 transition:name="title-text">
+    Sleep de betekenis naar het juiste gebaar
+  </h2>
 
   <div class="game-wrapper">
-    
     <!-- LEFT SIDE -->
     <div class="text-column">
       {
         draggableTexts.map((text) => (
-          <div
-            class="draggable"
-            draggable="true"
-            data-text={text}
-          >
+          <div class="draggable" draggable="true" data-text={text}>
             {text}
           </div>
         ))
@@ -54,24 +50,17 @@ const draggableTexts = shuffleArray([
       {
         selectedItems.map((item) => (
           <div class="card">
-            <img
-              // src={item.image}
-              src={item.image}
-              alt={item.answer}
-            />
+            <img src={item.image} src={item.image} alt={item.answer} />
 
-            <div
-              class="dropzone"
-              data-answer={item.answer}
-            >
-            </div>
+            <div class="dropzone" data-answer={item.answer}></div>
           </div>
         ))
       }
     </div>
-
   </div>
-  <button id="check-button" class="button-wide" transition:name="button-Eva">Checken!</button>
+  <button id="check-button" class="link-button" transition:name="button-Eva"
+    >Checken!</button
+  >
 </div>
 
 <Popup />

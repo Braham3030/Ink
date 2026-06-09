@@ -75,13 +75,18 @@ const isHome = Astro.url.pathname === "/";
   }
 
   #back-button svg {
-    width: 2.7rem;
-    height: 2.7rem;
+    width: clamp(2.7rem, 6vw, 4.5rem);
+    height: clamp(2.7rem, 6vw, 4.5rem);
 
-    @media (min-width: 768px) {
+    /* @media (min-width: 768px) {
       width: 3.5rem;
       height: 3.5rem;
     }
+
+    @media (min-width: 1024px) {
+      width: 4.5rem;
+      height: 4.5rem;
+    } */
   }
 
   @keyframes popIn {
