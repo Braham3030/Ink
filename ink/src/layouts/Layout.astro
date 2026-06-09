@@ -3,20 +3,6 @@ import Header from "../components/Header.astro";
 // View-transitions for animations between pages, and less load time.
 // https://docs.astro.build/en/guides/view-transitions/
 import { ClientRouter } from "astro:transitions";
-import { getImage } from "astro:assets";
-
-import visualDisability from "../assets/images/disabilities/visual.jpg";
-import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
-import motorialDisability from "../assets/images/disabilities/motor.jpg";
-import looksDisability from "../assets/images/disabilities/looks.jpg";
-import speechDisability from "../assets/images/disabilities/speech.jpg";
-
-// Preload image.
-const preloadVisual = await getImage({ src: visualDisability });
-const preloadAuditory = await getImage({ src: auditoryDisability });
-const preloadMotorial = await getImage({ src: motorialDisability });
-const preloadLooks = await getImage({ src: looksDisability });
-const preloadSpeech = await getImage({ src: speechDisability });
 
 import HelpButton from "../components/HelpButton.astro";
 
@@ -33,36 +19,6 @@ const {backUrl = "/", hideBackButton = false} = Astro.props;
     <link rel="stylesheet" href="/styles/style.css" />
     <meta name="generator" content={Astro.generator} />
     <ClientRouter />
-    <link
-      rel="preload"
-      as="image"
-      href={preloadVisual.src}
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href={preloadAuditory.src}
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href={preloadMotorial.src}
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href={preloadLooks.src}
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href={preloadSpeech.src}
-      fetchpriority="high"
-    />
     <title>Ink</title>
   </head>
   <body>
@@ -71,25 +27,24 @@ const {backUrl = "/", hideBackButton = false} = Astro.props;
       <slot />
     </main>
     <HelpButton />
-
     <!-- Service worker for PWA -->
     <!-- https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Offline_Service_workers -->
     <script>
-  // @ts-nocheck
-  // Script for offline usage, PWA
+    // @ts-nocheck
+    // Script for offline usage, PWA
 
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("/sw.js")
-        .then(function (registration) {
-          console.log("ServiceWorker registration successful with scope: ", registration.scope);
-        })
-        .catch(function (error) {
-          console.log("ServiceWorker registration failed: ", error);
-        })
-    })
-  }
-</script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js")
+          .then(function (registration) {
+            console.log("ServiceWorker registration successful with scope: ", registration.scope);
+          })
+          .catch(function (error) {
+            console.log("ServiceWorker registration failed: ", error);
+          })
+      })
+    }
+  </script>
   </body>
 </html>
 
