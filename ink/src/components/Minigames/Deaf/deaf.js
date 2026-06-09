@@ -24,7 +24,7 @@ function initGame() {
   const draggables = document.querySelectorAll(".draggable")
   const dropzones = document.querySelectorAll(".dropzone")
   const textColumn = document.querySelector(".text-column")
-  const doneButton = document.querySelector("#done-button")
+  const doneButton = document.getElementById("check-button")
 
   if (!draggables.length || !dropzones.length) return
 
@@ -174,7 +174,7 @@ function initGame() {
   })
 
   doneButton.addEventListener("click", () => {
-    let correctCount = 0; // <-- move it here
+    let correctCount = 0; 
 
     draggables.forEach((el) => {
       el.classList.remove("correct", "incorrect");
