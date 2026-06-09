@@ -25,15 +25,15 @@
 <script>
   // @ts-nocheck
   document.addEventListener("astro:page-load", () => {
-    const btn1 = document.querySelector(
+    const btn2 = document.querySelector(
       ".module-item:nth-child(2) .module-choice",
     );
 
-    if (btn1) {
-      btn1.style.viewTransitionName = "none";
+    if (btn2) {
+      btn2.style.viewTransitionName = "none";
 
-      btn1.addEventListener("click", () => {
-        btn1.style.viewTransitionName = "choice1-window";
+      btn2.addEventListener("click", () => {
+        btn2.style.viewTransitionName = "choice2-window";
       });
     }
   });
