@@ -50,7 +50,7 @@
   li {
     background: #f3f4f6;
     padding: 6px 10px;
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 0.8143rem + 0.4286vw, 1.2rem);
     border: 1px solid #000000;
     margin: 1rem 0;
   }
