@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import looksDisability from "../../../assets/images/disabilities/looks.jpg";
 ---
 
-
 <div class="screen">
   <h2 transition:name="title-text">Praat met Eduard</h2>
 
@@ -26,7 +25,6 @@ import looksDisability from "../../../assets/images/disabilities/looks.jpg";
 
 <Popup />
 
-
 <style>
   .screen {
     display: flex;
@@ -39,6 +37,7 @@ import looksDisability from "../../../assets/images/disabilities/looks.jpg";
 
   h2 {
     margin-bottom: 1rem;
+    margin-top: 0rem;
   }
 
   .chat-area {
@@ -112,7 +111,7 @@ import looksDisability from "../../../assets/images/disabilities/looks.jpg";
       box-shadow 0.08s ease,
       background 0.08s ease;
 
-      cursor: pointer;
+    cursor: pointer;
   }
 
   @media (min-width: 768px) {
