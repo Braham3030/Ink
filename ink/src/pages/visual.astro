@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import MinigameVisual from "../components/Minigames/Visual/Minigame-Visual.astro";
 ---
 
-<Layout>
+<Layout backUrl="/visual-introduction" hideBackButton={false}>
   <div id="minigame-visual" transition:name="visual-window">
     <MinigameVisual />
   </div>
@@ -15,5 +15,5 @@ import MinigameVisual from "../components/Minigames/Visual/Minigame-Visual.astro
     --detail-bg-normal: #ff93df;
     --detail-bg-dark: #ffd1f1;
     --detail-bg-light: #ffffff;
-  3}
+  }
 </style>

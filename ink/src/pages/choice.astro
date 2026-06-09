@@ -2,10 +2,10 @@
 import DisabilityChoice from "../components/Disability-Choice.astro"
 import Layout from "../layouts/Layout.astro"
 ---
-<Layout>
-    <div id="choice" transition:name="choice1-window">
+<Layout backUrl="/modules" hideBackButton={false}>
+    <div id="choice" transition:name="choice2-window">
         <DisabilityChoice 
-        animation="choice1-window"/>
+        animation="choice2-window"/>
     </div>
 </div>
     <!-- <DisabilityChoice transition:name="choice1-window"/> -->
