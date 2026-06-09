@@ -19,7 +19,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         // With globPatterns, the given file types will be cached by the service worker in the browser.
-        globPatterns: ['**/*.{js,css,html,jpg,svg,astro,webp}'],
+        globPatterns: ['**/*.{js,css,html,jpg,png,svg,astro,webp}'],
         maximumFileSizeToCacheInBytes: 20000000, // 10 MB
       },
       manifest: {
