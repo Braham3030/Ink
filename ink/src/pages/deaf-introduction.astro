@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import DisabilityIntroduction from "../components/Disability-Introduction.astro";
 import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
@@ -16,8 +17,18 @@ import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
   </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Hulpmiddelen",
+    text: "Pak er visuele hulpmiddelen bij als nodig. Zoals je telefoon, pen en papier, gebaren of een menukaart bijvoorbeeld."
+  }

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import speechDisability from "../assets/images/disabilities/speech.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
@@ -16,6 +17,8 @@ import speechDisability from "../assets/images/disabilities/speech.jpg"
     </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-normal: #ffbda6;
@@ -23,3 +26,11 @@ import speechDisability from "../assets/images/disabilities/speech.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Ongemakkelijk voelen",
+    text: "Als u zich ongemakkelijk voelt, probeer dit dan niet te laten blijken. Blijf neutraal en houd natuurlijk oogcontact."
+  }

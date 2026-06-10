@@ -2,6 +2,7 @@
 // @ts-nocheck
 import Layout from "../layouts/Layout.astro"
 import EndScreen from "../components/End-Screen.astro"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
@@ -16,3 +17,13 @@ import EndScreen from "../components/End-Screen.astro"
       disabilityName="Opvallend uiterlijk"
       />
 </Layout>
+
+<Popup />
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Gebruik gebruikelijke woorden",
+    text: "Je kunt gebruikelijke woorden wel gebruiken zoals lopen. Je hoeft niet 'rollen' te zeggen in plaats van 'lopen'."
+  }

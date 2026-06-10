@@ -1,5 +1,5 @@
 ---
-
+import Popup from "../components/Popup.astro";
 ---
 
 <div class="full-container">
@@ -22,8 +22,16 @@
   </div>
 </div>
 
+<Popup />
+
+
 <script>
   // @ts-nocheck
+  window.helpContext = {
+    title: "Doe geen aannames",
+    text: "Als je iets niet zeker weet, vraag het dan. 'Heb je hulp nodig bij het dragen van je drankjes?' of 'Zal ik je naar je tafel begeleiden, of loop je er liever zelf naartoe?'",
+  };
+
   document.addEventListener("astro:page-load", () => {
     const btn2 = document.querySelector(
       ".module-item:nth-child(2) .module-choice",

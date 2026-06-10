@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import MotorialDisability from "../assets/images/disabilities/motor.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
@@ -16,6 +17,8 @@ import MotorialDisability from "../assets/images/disabilities/motor.jpg"
     </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-normal: #c8d6ff;
@@ -23,3 +26,11 @@ import MotorialDisability from "../assets/images/disabilities/motor.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Benaming",
+    text: "De benaming invalide kan kwetsend zijn. Zeg in plaats daarvan: 'persoon met een rolstoel, persoon met een motorische beperking'."
+  }

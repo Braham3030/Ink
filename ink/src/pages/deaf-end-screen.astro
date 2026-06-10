@@ -2,6 +2,7 @@
 // @ts-nocheck
 import Layout from "../layouts/Layout.astro"
 import EndScreen from "../components/End-Screen.astro"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
@@ -16,3 +17,13 @@ import EndScreen from "../components/End-Screen.astro"
       disabilityName="Motorial beperkt"
       />
 </Layout>
+
+<Popup />
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Blijf praten",
+    text: "Je kunt gewoon blijven praten. Zorg dat je goed articuleert, rustig praat en de persoon aankijkt. Dat helpt hen jou te verstaan."
+  }
