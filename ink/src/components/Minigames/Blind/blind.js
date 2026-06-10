@@ -359,7 +359,9 @@ function nextLevel() {
   }
 
   window.popup?.hide?.();
-  window.location.href = "/blind-end-screen";
+  setTimeout(() => {
+    window.location.href = "/blind-end-screen";
+  }, 400);
 }
 
 /* =========================

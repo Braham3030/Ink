@@ -66,7 +66,9 @@ function nextLevel() {
   if (currentLevelIndex + 1 < levels.length) {
     loadLevel(currentLevelIndex + 1);
   } else {
-    window.location.href = "";
+    setTimeout(() => {
+      window.location.href = "/visual-end-screen";
+    }, 400);
   }
 }
 

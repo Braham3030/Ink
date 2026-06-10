@@ -161,6 +161,10 @@ function init() {
     if (index >= conversation.length) {
       setInterruptEnabled(false)
       setSpeakerActive(false)
+
+      setTimeout(() => {
+        window.location.href = "/speech-end-screen";
+      }, 400);
       console.log("Dialogue finished")
       return
     }
