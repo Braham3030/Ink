@@ -1,6 +1,6 @@
 ---
 // @ts-nocheck
-const { name, quote, quoteBy, image, animation, disabilityName, animationNext, linkChoice, linkNext } = Astro.props;
+const { name, quote, quoteBy, image, animation, disabilityName, animationNext, linkChoice, linkNext, buttonHide = false } = Astro.props;
 ---
 
 <div class="end-screen-container">
@@ -15,7 +15,11 @@ const { name, quote, quoteBy, image, animation, disabilityName, animationNext, l
 
     <div class="buttons-end-screen">
         <a href={linkChoice} class="link-button" transition:name={animation}>Naar de keuze pagina</a>
+        {
+        !buttonHide && (
         <a href={linkNext} class="link-button" transition:name={animationNext}>Intro {disabilityName}</a>
+        )
+        }
     </div>
 </div>
 
