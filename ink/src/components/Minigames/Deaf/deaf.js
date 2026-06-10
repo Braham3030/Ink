@@ -213,6 +213,15 @@ function initGame() {
         text: "Je hebt nu een basis kennis van gebaren, hiermee kan je al een heel eind komen in het communiceren met iemand die doof is!",
         buttonText: "Volgende",
       });
+
+      setTimeout(() => {
+        const popupBtn = document.getElementById("popupButton");
+        if (popupBtn) {
+          popupBtn.onclick = () => {
+            window.location.href = "/deaf-end-screen";
+          };
+        }
+      }, 50)
     }
   })
 }

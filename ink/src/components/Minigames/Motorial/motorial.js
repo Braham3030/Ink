@@ -131,6 +131,10 @@ document.addEventListener("click", (e) => {
     loadLevel(next);
   } else {
     console.log("Game finished!");
+
+    setTimeout(() => {
+      window.location.href = "/motorial-end-screen";
+    }, 50)
   }
 });
 
