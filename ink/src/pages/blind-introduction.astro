@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import visualDisability from "../assets/images/disabilities/visual.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
@@ -16,6 +17,8 @@ import visualDisability from "../assets/images/disabilities/visual.jpg"
     </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-normal: #f9ffad;
@@ -23,3 +26,12 @@ import visualDisability from "../assets/images/disabilities/visual.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Stel jezelf voor",
+    text: "Mensen met een visuele beperking kunnen niet zien wanneer je voor ze staat. Stel jezelf daarom altijd voor door middel van je naam en je functie. Want een uniform is ook niet zichtbaar.",
+  };
+</script>

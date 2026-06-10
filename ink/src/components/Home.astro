@@ -1,13 +1,15 @@
 ---
-
+import Popup from "../components/Popup.astro";
 ---
 
 <div>
-  <h1 transition:name="title-text">Start de module</h1>
+  <h1 transition:name="title-text">Start de training</h1>
   <a href="/modules" class="link-button" transition:name="module-window">
     Start
   </a>
 </div>
+
+<Popup />
 
 <style>
   div {
@@ -54,3 +56,11 @@
     }
   }
 </style>
+
+<script>
+  //@ts-nocheck
+  window.helpContext = {
+    title: "Dit kan je altijd vragen!",
+    text: "Je kan aan iemand met een beperking altijd vragen: 'Heb je hulp nodig?' of 'Hoe kan je het beste helpen?'",
+  };
+</script>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import looksDisability from "../assets/images/disabilities/looks.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
@@ -16,6 +17,8 @@ import looksDisability from "../assets/images/disabilities/looks.jpg"
     </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-normal: #ff93df;
@@ -23,3 +26,11 @@ import looksDisability from "../assets/images/disabilities/looks.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Niet verboden te vragen",
+    text: "Het is niet verboden om iets te vragen over iemands uiterlijk. Maar zorg ervoor dat de persoon centraal staat en niet het uiterlijk."
+  }

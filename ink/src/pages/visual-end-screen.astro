@@ -2,6 +2,7 @@
 // @ts-nocheck
 import Layout from "../layouts/Layout.astro"
 import EndScreen from "../components/End-Screen.astro"
+import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
@@ -16,3 +17,13 @@ import EndScreen from "../components/End-Screen.astro"
       disabilityName=""
       />
 </Layout>
+
+<Popup />
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Staren",
+    text: "Probeer niet uitbundig te staren naar de plek die wordt gezien als 'opvallend'."
+  }
