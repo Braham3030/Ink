@@ -221,7 +221,7 @@ function initGame() {
             window.location.href = "/deaf-end-screen";
           };
         }
-      }, 50)
+      }, 400)
     }
   })
 }

@@ -134,7 +134,7 @@ document.addEventListener("click", (e) => {
 
     setTimeout(() => {
       window.location.href = "/motorial-end-screen";
-    }, 50)
+    }, 400)
   }
 });
 
