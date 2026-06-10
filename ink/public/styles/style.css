@@ -82,35 +82,35 @@ p {
     margin-right: 1rem;
     margin-bottom: -2rem;
     align-self: flex-end;
-
-    @media (max-width: 370px) {
-      z-index: -1;
-    }
   }
 
   .dialogue-box {
     position: relative;
     padding: 0 1rem;
-    background: var(--detail-bg-light);
-    border-radius: 0.5rem;
-    border: 2px solid rgba(0, 0, 0, 0.6);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+
+    border: 2px solid rgba(205, 45, 58, 0.571);
+    box-shadow: 0 3px 0 rgba(180, 70, 80, 0.15);
+
+    border-radius: 14px;
     width: 30rem;
     width: 100%;
+    z-index: 1;
 
     .speaker-name {
       position: absolute;
-      top: -4rem;
+      top: -71px;
+      /* top: -4rem; */
       display: flex;
       align-items: center;
       justify-content: center;
-      width: content;
       padding: 0.5rem 1.5rem;
-      corner-shape: bevel;
-      border-radius: 0.5rem 0.5rem 0 0;
+      border-radius: 0.3rem 0.3rem 0 0;
       font-size: 1.5rem;
-      border: 2px solid rgba(0, 0, 0, 0.6);
+
       background: var(--detail-bg-light);
-      z-index: -1;
+      border: 2px solid rgba(205, 45, 58, 0.571);
+      border-bottom: none;
     }
 
     .dialogue-text {
