@@ -1,7 +1,7 @@
 export const levels = [
     // Level 1
     {
-        title: "Verwijs Tim naar het toilet",
+        title: "Begeleid Tim naar het toilet",
         startPosition: { x: 4, y: 8 },
         goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet"},
         obstacles: [
@@ -91,7 +91,7 @@ export const levels = [
 
     // Level 2
     {
-        title: "Verwijs Tim naar de bushalte",
+        title: "Begeleid Tim naar de bushalte",
         startPosition: { x: 4, y: 8 },
         goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte" },
         obstacles: [
