@@ -2,7 +2,7 @@
 
 // Help popup content
 window.helpContext = {
-  text: "Het is handig om de basis kennis van gebarentaal te hebben als je moet communiceren met iemand die doof is. Hierbij moet je gebruik maken van je handen, en minder uit gaan van wat je zegt.",
+  text: "Het is handig om de basis kennis van gebarentaal te hebben als u moet communiceren met iemand die doof is. Hierbij moet u gebruik maken van uw handen, en minder uit gaan van wat u zegt.",
 }
 
 
@@ -67,7 +67,7 @@ function initGame() {
         // move it back to the start
         const existing = matchedZone.querySelector(".draggable")
 
-        // ❌ BLOCK replacing locked (correct) items
+        // BLOCK replacing locked (correct) items
         if (existing && existing.classList.contains("correct")) {
           gsap.to(draggedEl, {
             x: 0,
@@ -204,7 +204,7 @@ function initGame() {
     if (correctCount === dropzones.length) {
       window.popup.show({
         title: "Goed gedaan!",
-        text: "Je hebt nu een basis kennis van gebaren, hiermee kan je al een heel eind komen in het communiceren met iemand die doof is!",
+        text: "U hebt nu een basis kennis van gebaren, hiermee kan u al een heel eind komen in het communiceren met iemand die doof is!",
         buttonText: "Volgende",
       });
 

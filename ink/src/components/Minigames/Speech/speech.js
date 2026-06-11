@@ -2,7 +2,7 @@
 
 // Help popup content
 window.helpContext = {
-  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
+  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze u ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
 }
 
 // Closing popup
