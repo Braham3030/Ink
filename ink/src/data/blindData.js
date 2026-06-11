@@ -3,25 +3,31 @@ export const levels = [
     {
         title: "Begeleid Tim naar het toilet",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet"},
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
+        goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet", img:'/images/minigames/blind/toilets.png' },
         obstacles: [
-            { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
-            { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
-            { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
+            { x: 1, y: 0, w: 2, h: 1, name: "Bank", img:'/images/minigames/blind/couch-front.png' },
+            { x: 0, y: 1, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/couch-side.png' },
+            { x: 2, y: 2, w: 1, h: 1, name: "Tafel", img:'/images/minigames/blind/table.png'},
 
-            { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
-            { x: 2, y: 6, w: 1, h: 1, name: "Stoel" },
-            { x: 1, y: 7, w: 1, h: 1, name: "Stoel" },
+            { x: 2, y: 5, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair.png' },
+            { x: 2, y: 6, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair.png' },
+            { x: 1, y: 7, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair-top.png' },
 
-            { x: 0, y: 5, w: 1, h: 2, name: "TV" },
+            { x: 0, y: 5, w: 1, h: 2, name: "TV", img:'/images/minigames/blind/tv.png' },
 
-            { x: 5, y: 5, w: 1, h: 1, name: "Kruk" },
-            { x: 5, y: 6, w: 1, h: 1, name: "Kruk" },
-            { x: 5, y: 7, w: 1, h: 1, name: "Kruk" },
+            { x: 5, y: 5, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
+            { x: 5, y: 6, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
+            { x: 5, y: 7, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
 
-            { x: 6, y: 0, w: 1, h: 2, name: "Muur" },
-            { x: 6, y: 4, w: 3, h: 1, name: "Muur" },
-            { x: 6, y: 5, w: 1, h: 3, name: "Bar" },
+            { x: 6, y: 0, w: 1, h: 2, name: "Muur", img:'/images/minigames/blind/wall-long.png' },
+            { x: 6, y: 4, w: 3, h: 1, name: "Muur", img:'/images/minigames/blind/wall-wide.png' },
+            { x: 6, y: 5, w: 1, h: 3, name: "Bar", img:'/images/minigames/blind/bar.png' },
         ],
         markers: [],
         options: [
@@ -93,22 +99,27 @@ export const levels = [
     {
         title: "Begeleid Tim naar de bushalte",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte" },
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
+        goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte", img:'/images/minigames/blind/busstop.png' },
         obstacles: [
-            { x: 0, y: 0, w: 1, h: 1, name: "Boom" },
-            { x: 5, y: 0, w: 1, h: 1, name: "Boom" },
-            { x: 7, y: 0, w: 1, h: 1, name: "Boom" },
+            { x: 0, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
+            { x: 5, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
+            { x: 7, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
 
-            { x: 5, y: 3, w: 1, h: 1, name: "Stoplicht" },
-            { x: 8, y: 8, w: 1, h: 1, name: "Stoplicht" },
+            { x: 5, y: 3, w: 1, h: 1, name: "Stoplicht", img:'/images/minigames/blind/trafficlight.png' },
+            { x: 8, y: 7, w: 1, h: 1, name: "Stoplicht", img:'/images/minigames/blind/trafficlight-rotated.png' },
 
-            { x: 0, y: 7, w: 2, h: 1, name: "Auto" },
-            { x: 3, y: 7, w: 2, h: 1, name: "Auto" },
-        ],
-        markers: [
-            { x: 0, y: 1, w: 9, h: 2, name: "Stoep met ribbels" },
-            { x: 0, y: 8, w: 9, h: 1, name: "Stoep met ribbels" },
-            { x: 6, y: 3, w: 2, h: 5, name: "Zebrapad" },
+            { x: 0, y: 7, w: 2, h: 1, name: "Auto", img:'/images/minigames/blind/car.png' },
+            { x: 3, y: 7, w: 2, h: 1, name: "Auto", img:'/images/minigames/blind/car.png' },
+
+            { x: 0, y: 1, w: 9, h: 2, name: "Stoep met ribbels" , img:'/images/minigames/blind/sidewalk-wide.png'},
+            { x: 0, y: 8, w: 9, h: 1, name: "Stoep met ribbels" , img:'/images/minigames/blind/sidewalk-thin.png'},
+            { x: 6, y: 3, w: 2, h: 5, name: "Zebrapad" , img:'/images/minigames/blind/crosswalk.png'},
         ],
         options: [
             {
@@ -182,21 +193,24 @@ export const levels = [
     {
         title: "Verwijs Tim naar de ingang van het gebouw",
         startPosition: { x: 1, y: 8 },
-        goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang" },
+        goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang", img:'/images/minigames/blind/entrance.png'},
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
         obstacles: [
-            { x: 0, y: 0, w: 3, h: 2, name: "Muur" },
-            { x: 6, y: 0, w: 3, h: 2, name: "Muur" },
+            { x: 0, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
+            { x: 6, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
             
-            { x: 1, y: 3, w: 1, h: 2, name: "Bank" },
-            { x: 3, y: 6, w: 1, h: 2, name: "Bank" },
-            { x: 7, y: 4, w: 1, h: 2, name: "Bank" },
-            { x: 8, y: 7, w: 1, h: 2, name: "Bank" },
-        ],
-        markers: [
-            { x: 0, y: 8, w: 8, h: 2, name: "Stoep met ribbels" },
-            { x: 3, y: 2, w: 3, h: 3, name: "Pad" },
-            { x: 4, y: 5, w: 3, h: 3, name: "Pad" },
-            { x: 7, y: 7, w: 1, h: 1, name: "Pad" },
+            { x: 1, y: 3, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
+            { x: 3, y: 6, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
+            { x: 7, y: 4, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench-mirror.png' },
+            { x: 8, y: 7, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench-mirror.png' },
+            { x: 0, y: 8, w: 8, h: 1, name: "Stoep met ribbels", img:'/images/minigames/blind/sidewalk-custom.png' },
+            { x: 3, y: 2, w: 3, h: 6, name: "Pad", img:'/images/minigames/blind/path.png' },
+
 
         ],
         options: [
