@@ -2,16 +2,28 @@
 // @ts-nocheck
 import Layout from "../layouts/Layout.astro"
 import EndScreen from "../components/End-Screen.astro"
+import Popup from "../components/Popup.astro";
 ---
 
-<Layout>
+<Layout hideBackButton={true}>
     <EndScreen 
     name="Eduard"
       quote="Ik kan niet iedereen overtuigen dat het mooi is, dus ik heb geaccepteerd dat sommige mensen me nog steeds eng vinden, hoe positief ik me ook positioneer."
+      quoteBy="Iemand met opvallend uiterlijk"
       linkChoice="/choice"
-      linkNext=""
+      linkNext="/speech-introduction"
       animation="speech-introduction-window"
       animationNext="choice1-window"
-      disabilityName=""
+      disabilityName="Spraakgebrek"
       />
 </Layout>
+
+<Popup />
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Staren",
+    text: "Probeer niet uitbundig te staren naar de plek die wordt gezien als 'opvallend'."
+  }

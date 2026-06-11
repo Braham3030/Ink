@@ -5,13 +5,7 @@ window.helpContext = {
   text: "Het is handig om de basis kennis van gebarentaal te hebben als je moet communiceren met iemand die doof is. Hierbij moet je gebruik maken van je handen, en minder uit gaan van wat je zegt.",
 }
 
-// Closing popup
-document.addEventListener("click", (e) => {
-  if (e.target?.id === "popupButton") {
-    e.target.blur();
-    window.popup.hide();
-  }
-})
+
 
 import { gsap } from "gsap"
 import { Draggable } from "gsap/Draggable"
@@ -21,11 +15,10 @@ gsap.registerPlugin(Draggable)
 
 
 function initGame() {
-  let correctCount = 0
   const draggables = document.querySelectorAll(".draggable")
   const dropzones = document.querySelectorAll(".dropzone")
   const textColumn = document.querySelector(".text-column")
-  const doneButton = document.querySelector("#done-button")
+  const doneButton = document.getElementById("check-button")
 
   if (!draggables.length || !dropzones.length) return
 
@@ -175,46 +168,54 @@ function initGame() {
   })
 
   doneButton.addEventListener("click", () => {
+    let correctCount = 0; 
 
-    // Reset visual states first
     draggables.forEach((el) => {
-      el.classList.remove("correct", "incorrect")
-    })
+      el.classList.remove("correct", "incorrect");
+    });
 
     dropzones.forEach((zone) => {
-      const correctAnswer = zone.dataset.answer
-      const placed = placements[correctAnswer]
+      const correctAnswer = zone.dataset.answer;
+      const placed = placements[correctAnswer];
 
-      if (!placed) return
+      if (!placed) return;
 
-      const isCorrect = placed.text === correctAnswer
+      const isCorrect = placed.text === correctAnswer;
 
       if (isCorrect) {
-        correctCount++
+        correctCount++;
       }
 
       placed.element.classList.add(
         isCorrect ? "correct" : "incorrect"
-      )
+      );
 
-      // LOCK correct items
       if (isCorrect) {
         const draggableInstance = draggablesArray.find(
           d => d.target === placed.element
-        )
+        );
 
         if (draggableInstance) {
-          draggableInstance.disable()
+          draggableInstance.disable();
         }
       }
-    })
+    });
 
     if (correctCount === dropzones.length) {
       window.popup.show({
         title: "Goed gedaan!",
         text: "Je hebt nu een basis kennis van gebaren, hiermee kan je al een heel eind komen in het communiceren met iemand die doof is!",
         buttonText: "Volgende",
-      })
+      });
+
+      setTimeout(() => {
+        const popupBtn = document.getElementById("popupButton");
+        if (popupBtn) {
+          popupBtn.onclick = () => {
+            window.location.href = "/deaf-end-screen";
+          };
+        }
+      }, 400)
     }
   })
 }

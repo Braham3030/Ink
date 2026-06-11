@@ -12,8 +12,9 @@
   /* https://utopia.fyi/clamp/calculator */
   --h2-font-size: clamp(1.5rem, 1.3571rem + 0.7143vw, 2rem);
   --h3-font-size: 1.3rem;
-  --p-font-size: clamp(1rem, 0.8571rem + 0.7143vw, 1.5rem);
+  --p-font-size: clamp(1rem, 0.8571rem + 0.7143vw, 1.35rem);
   --button-font-size: clamp(1rem, 0.9rem + 0.5vw, 1.35rem);
+  --choice-font-size: clamp(0.8rem, 0.6429rem + 0.7857vw, 1.35rem);
 
   /* Dynamic background colors */
   --detail-bg-normal: #93d7c0;
@@ -22,7 +23,7 @@
 }
 
 main {
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 
 body {
@@ -60,18 +61,8 @@ p {
   cursor: pointer;
   background: #111827;
   color: white;
-  transition: 0.2s ease;
+  transition: all 0.2s ease;
   font-size: var(--button-font-size);
-}
-
-.button-wide {
-  font-size: var(--p-font-size);
-  padding: 1rem 4rem;
-  border: 2px solid black;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 0 black;
-  background: white;
-  margin-bottom: 1rem;
 }
 
 .dialogue {
@@ -96,25 +87,30 @@ p {
   .dialogue-box {
     position: relative;
     padding: 0 1rem;
-    background: var(--detail-bg-light);
-    border-radius: 0.5rem;
-    border: 2px solid rgba(0, 0, 0, 0.6);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
+
+    border: 2px solid rgba(205, 45, 58, 0.571);
+    box-shadow: 0 3px 0 rgba(180, 70, 80, 0.15);
+
+    border-radius: 14px;
     width: 30rem;
     width: 100%;
+    z-index: 1;
 
     .speaker-name {
       position: absolute;
-      top: -4rem;
+      top: -71px;
+      /* top: -4rem; */
       display: flex;
       align-items: center;
       justify-content: center;
-      width: content;
       padding: 0.5rem 1.5rem;
-      corner-shape: bevel;
-      border-radius: 0.5rem 0.5rem 0 0;
+      border-radius: 0.3rem 0.3rem 0 0;
       font-size: 1.5rem;
-      border: 2px solid rgba(0, 0, 0, 0.6);
+
       background: var(--detail-bg-light);
+      border: 2px solid rgba(205, 45, 58, 0.571);
+      border-bottom: none;
     }
 
     .dialogue-text {
@@ -125,6 +121,7 @@ p {
 }
 
 .choice-button {
+  font-size: var(--choice-font-size);
   background: linear-gradient(180deg, #ffffff 0%, #f4f5ff 100%);
   border: 2px solid rgba(70, 80, 180, 0.5);
   border-radius: 14px;

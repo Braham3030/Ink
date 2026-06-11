@@ -2,19 +2,22 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import visualDisability from "../assets/images/disabilities/visual.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
-<Layout>
+<Layout backUrl="/choice" hideBackButton={false}>
     <div transition:name="blind-introduction-window">
         <DisabilityIntroduction 
         name="Tim"
         image={visualDisability}
-        description="Tim is volledig blind en loopt met een stok. Jij en Tim zitten samen in een café. Tim vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+        description="Tim is volledig blind en loopt met een blindegeleidestok. U en Tim bevinden zich in een openbare ruimte. Tim vraagt u om hulp bij het vinden van de weg. Geef duidelijke, betrouwbare stap-voor-stap aanwijzingen zodat hij zich veilig naar zijn bestemming kan verplaatsen."
         link="/blind"
         animation="blind-window"
         />
     </div>
 </Layout>
+
+<Popup />
 
 <style>
   body {
@@ -23,3 +26,12 @@ import visualDisability from "../assets/images/disabilities/visual.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Stel jezelf voor",
+    text: "Mensen met een visuele beperking kunnen niet zien wanneer je voor ze staat. Stel jezelf daarom altijd voor door middel van je naam en je functie. Want een uniform is ook niet zichtbaar.",
+  };
+</script>

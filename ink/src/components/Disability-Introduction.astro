@@ -15,8 +15,6 @@ const { name, description, animation, image, link } = Astro.props;
 
 <h2 transition:name="title-text">Dit is {name}</h2>
 <div class="card">
-  
-
   <div class="avatar">
     <Image
       src={image}
@@ -26,7 +24,9 @@ const { name, description, animation, image, link } = Astro.props;
     />
   </div>
 
-  <p class="introduction-text" transition:name={`text-${name}`}>{description}</p>
+  <p class="introduction-text" transition:name={`text-${name}`}>
+    {description}
+  </p>
 
   <a href={link} transition:name={`button-${name}`} class="link-button">Begin</a
   >
@@ -37,7 +37,6 @@ const { name, description, animation, image, link } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     padding: 0rem 1.5rem;
     max-width: 600px;
     margin: 0 auto;
@@ -50,7 +49,7 @@ const { name, description, animation, image, link } = Astro.props;
 
   p {
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.5;
     opacity: 0;
     transform: translateY(-40px) scale(0.75);
 
@@ -70,8 +69,8 @@ const { name, description, animation, image, link } = Astro.props;
 
   img {
     display: block;
-    width: 100%;
-    max-width: 320px;
+    width: 70%;
+    max-width: 230px;
     height: auto;
     margin: 0 auto;
     opacity: 0;

@@ -1,0 +1,82 @@
+---
+import Popup from "../../Popup.astro";
+import { Image } from "astro:assets";
+import looksDisability from "../../../assets/images/disabilities/looks.jpg";
+---
+
+<div class="screen">
+  <h2 transition:name="title-text">Praat met Eduard</h2>
+
+  <div class="dialogue">
+    <Image
+      src={looksDisability}
+      alt="afbeelding van Eduard"
+      class="speaker-image"
+      transition:name="avatar-Eduard"
+    />
+    <div class="dialogue-box" transition:name="text-Eduard">
+      <p class="speaker-name">Eduard</p>
+      <p class="dialogue-text"></p>
+    </div>
+  </div>
+
+  <div class="choices" transition:name="button-Eduard"></div>
+</div>
+
+<Popup />
+
+<style>
+  .screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+  }
+
+  .chat-area {
+    margin-top: 4rem;
+    position: relative;
+  }
+
+
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+
+  @media (min-width: 768px) {
+    .screen {
+      max-width: 480px;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .bubble-name {
+      font-size: 1.4rem;
+    }
+
+    .bubble-text {
+      font-size: 1.1rem;
+    }
+
+    button {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<script>
+  import "../Visual/visual.js";
+</script>

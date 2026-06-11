@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import MinigameVisual from "../components/Minigame-Visual.astro";
+import MinigameVisual from "../components/Minigames/Visual/Minigame-Visual.astro";
 ---
 
-<Layout>
+<Layout backUrl="/visual-introduction" hideBackButton={false}>
   <div id="minigame-visual" transition:name="visual-window">
     <MinigameVisual />
   </div>

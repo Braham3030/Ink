@@ -1,5 +1,5 @@
 ---
-
+import Popup from "../components/Popup.astro";
 ---
 
 <div class="full-container">
@@ -22,24 +22,36 @@
   </div>
 </div>
 
+<Popup />
+
+
 <script>
   // @ts-nocheck
+  window.helpContext = {
+    title: "Doe geen aannames",
+    text: "Als je iets niet zeker weet, vraag het dan. 'Heb je hulp nodig bij het dragen van je drankjes?' of 'Zal ik je naar je tafel begeleiden, of loop je er liever zelf naartoe?'",
+  };
+
   document.addEventListener("astro:page-load", () => {
-    const btn1 = document.querySelector(
+    const btn2 = document.querySelector(
       ".module-item:nth-child(2) .module-choice",
     );
 
-    if (btn1) {
-      btn1.style.viewTransitionName = "none";
+    if (btn2) {
+      btn2.style.viewTransitionName = "none";
 
-      btn1.addEventListener("click", () => {
-        btn1.style.viewTransitionName = "choice1-window";
+      btn2.addEventListener("click", () => {
+        btn2.style.viewTransitionName = "choice2-window";
       });
     }
   });
 </script>
 
 <style>
+  :global(main) {
+    padding-top: 3rem;
+  }
+
   .module-container {
     display: flex;
     flex-direction: column;

@@ -1,13 +1,15 @@
 ---
-
+import Popup from "../components/Popup.astro";
 ---
 
 <div>
-  <h1 transition:name="title-text">Start de module</h1>
+  <h1 transition:name="title-text">Start de training</h1>
   <a href="/modules" class="link-button" transition:name="module-window">
     Start
   </a>
 </div>
+
+<Popup />
 
 <style>
   div {
@@ -21,6 +23,11 @@
       /* margin: 0 auto; */
       color: black;
       width: fit-content;
+
+      opacity: 0;
+      transform: translateY(10px);
+
+      animation: comeIntitle 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
     }
 
     > .link-button {
@@ -32,5 +39,28 @@
     .link-button:hover {
       transform: scale(1.05);
     }
+
+    #help-button {
+      aria-hidden: true;
+    }
+  }
+
+  @keyframes comeIntitle {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
+
+<script>
+  //@ts-nocheck
+  window.helpContext = {
+    title: "Dit kan je altijd vragen!",
+    text: "Je kan aan iemand met een beperking altijd vragen: 'Heb je hulp nodig?' of 'Hoe kan je het beste helpen?'",
+  };
+</script>

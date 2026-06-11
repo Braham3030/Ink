@@ -22,7 +22,6 @@ let showQuestionMark = false;
 
 const POPUP_OWNER = "blind-game";
 
-// 🔥 BELANGRIJK: laatste resultaat opslaan
 let lastAnswerCorrect = false;
 let lastFeedback = "";
 
@@ -37,8 +36,6 @@ document.addEventListener("click", (e) => {
   const overlay = document.getElementById("popupOverlay");
 
   btn.blur();
-
-  // 🔥 ALWAYS CLOSE UI
   window.popup?.hide?.();
 
   if (overlay) {
@@ -46,7 +43,6 @@ document.addEventListener("click", (e) => {
     overlay.setAttribute("aria-hidden", "true");
   }
 
-  // 🔥 SAFETY CHECK: alleen jouw game mag logic uitvoeren
   if (!overlay || overlay.dataset.owner !== POPUP_OWNER) return;
 
   if (lastAnswerCorrect) {
@@ -305,7 +301,6 @@ function moveTo(path, showQ, correct, feedback, i = 0) {
     render();
 
     setTimeout(() => {
-      // 🔥 STORE RESULT FOR GLOBAL HANDLER
       lastAnswerCorrect = correct;
       lastFeedback = feedback;
 
@@ -364,7 +359,9 @@ function nextLevel() {
   }
 
   window.popup?.hide?.();
-  window.location.href = "/blind-end-screen";
+  setTimeout(() => {
+    window.location.href = "/blind-end-screen";
+  }, 400);
 }
 
 /* =========================

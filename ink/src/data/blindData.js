@@ -1,9 +1,9 @@
 export const levels = [
     // Level 1
     {
-        title: "1 - Verwijs Tim naar de WC",
+        title: "Begeleid Tim naar het toilet",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 7, y: 0, w: 2, h: 2, name: "WC"},
+        goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet"},
         obstacles: [
             { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
             { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
@@ -63,10 +63,10 @@ export const levels = [
             },
 
             {
-                text: "De wc's bevinden zich rechtsachter in de kamer.",
+                text: "Het toilet bevindt zich rechtsachter in de kamer.",
                 correct: false,
                 feedback:
-                    "Tim is voorbij de WC's helemaal naar het einde van de kamer gelopen.",
+                    "Tim is voorbij het toilet helemaal naar het einde van de kamer gelopen.",
                 path: [
                     { x: 4, y: 7 },
                     { x: 4, y: 6 },
@@ -81,7 +81,7 @@ export const levels = [
             },
 
             {
-                text: "De wc's zijn daar.",
+                text: "De toiletten zijn daar.",
                 correct: false,
                 feedback: "Tim weet niet welke kant hij op moet lopen.",
                 path: [{ x: 4, y: 8 }],
@@ -91,7 +91,7 @@ export const levels = [
 
     // Level 2
     {
-        title: "2 - Verwijs Tim naar de bushalte",
+        title: "Begeleid Tim naar de bushalte",
         startPosition: { x: 4, y: 8 },
         goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte" },
         obstacles: [
@@ -180,7 +180,7 @@ export const levels = [
 
     // Level 3
     {
-        title: "3 - Verwijs Tim naar de ingang van het gebouw",
+        title: "Verwijs Tim naar de ingang van het gebouw",
         startPosition: { x: 1, y: 8 },
         goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang" },
         obstacles: [

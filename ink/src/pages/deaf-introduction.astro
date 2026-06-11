@@ -2,22 +2,33 @@
 import Layout from "../layouts/Layout.astro";
 import DisabilityIntroduction from "../components/Disability-Introduction.astro";
 import auditoryDisability from "../assets/images/disabilities/auditory.jpg";
+import Popup from "../components/Popup.astro";
 ---
 
-<Layout>
+<Layout backUrl="/choice" hideBackButton={false}>
   <div transition:name="deaf-introduction-window">
     <DisabilityIntroduction
       name="Eva"
       image={auditoryDisability}
-      description="Eva is volledig doof en gebruikt een taal. Jij en Eva zitten samen in een café. Eva vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+      description="Eva is volledig doof en communiceert via gebarentaal. Eva vindt het fijn wanneer mensen zich verstaanbaar kunnen maken met duidelijke handgebaren en visuele aanwijzingen, zodat ze u gemakkelijk kunt begrijpen en zich goed kunt oriënteren."
       link="/deaf"
       animationNext="deaf-introduction-window"
     />
   </div>
 </Layout>
 
+<Popup />
+
 <style>
   body {
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Hulpmiddelen",
+    text: "Pak er visuele hulpmiddelen bij als nodig. Zoals je telefoon, pen en papier, gebaren of een menukaart bijvoorbeeld."
+  }

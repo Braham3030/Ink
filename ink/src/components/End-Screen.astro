@@ -1,25 +1,35 @@
 ---
 // @ts-nocheck
-const { name, quote, image, animation, disabilityName, animationNext, linkChoice, linkNext } = Astro.props;
+const { name, quote, quoteBy, image, animation, disabilityName, animationNext, linkChoice, linkNext, buttonHide = false } = Astro.props;
 ---
 
 <div class="end-screen-container">
     <h2 transition:name="title-text">De training van {name} is voltooid</h2>
-    <h3>Quotes</h3>
+    <!-- <h3>Quotes</h3> -->
 
-    <p>
-        {quote}
-    </p>
+    <div class="quote-container">    
+        <p class="quote">"{quote}"</p>
+        <p class="quote-by">— {quoteBy}</p>
+    </div>
+
 
     <div class="buttons-end-screen">
         <a href={linkChoice} class="link-button" transition:name={animation}>Naar de keuze pagina</a>
-        <a href={linkNext} class="link-button" transition:name={animationNext}>Introductie {disabilityName}</a>
+        {
+        !buttonHide && (
+        <a href={linkNext} class="link-button" transition:name={animationNext}>Intro {disabilityName}</a>
+        )
+        }
     </div>
 </div>
 
 
 <style>
     .end-screen-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
         
         > h3 {
             margin: 0 auto;
@@ -27,18 +37,51 @@ const { name, quote, image, animation, disabilityName, animationNext, linkChoice
             padding: 1rem;
         }
 
-        > p {
+        .quote-container {
             margin: 0 auto;
-            border: 2px solid black;
-            padding: 1rem;
-            width: 40%;
+            corner-shape: squircle;
+            border-radius: 30%;
+            padding: 2rem;
+            width: 75%;
+            max-width: 40rem;
+            background: white;
+            position: relative;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+
+            .quote {
+                font-size: 1.5rem;            }
+
+            .quote-by {
+                color: gray;
+                font-size: 1.25rem;
+                font-style: italic;
+                align-self: flex-end;
+                margin: 0;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                width: 5rem;
+                aspect-ratio: 1;
+                background: white;
+                z-index: -1;
+                border-radius: 0 1rem 100% 1rem;
+                rotate: 10deg;
+            }
+            
         }
+
+
     .buttons-end-screen {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
-        margin-top: 6em;
+        flex-wrap: wrap;
         gap: 1rem;
     }
 }

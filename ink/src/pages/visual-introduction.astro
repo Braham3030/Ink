@@ -2,19 +2,22 @@
 import Layout from "../layouts/Layout.astro"
 import DisabilityIntroduction from "../components/Disability-Introduction.astro"
 import looksDisability from "../assets/images/disabilities/looks.jpg"
+import Popup from "../components/Popup.astro";
 ---
 
-<Layout>
+<Layout backUrl="/choice" hideBackButton={false}>
     <div transition:name="visual-introduction-window">
         <DisabilityIntroduction 
         name="Eduard"
         image={looksDisability}
-        description="Eduard is volledig blind en loopt met een stok. Jij en Eduard zitten samen in een café. Eduard vraagt aan jou of je hem naar de WC zou kunnen wijzen. Aan jou de opdracht: hoe zou je dit aanpakken?"
+        description="Eduard is uw nieuwe collega met zichtbare huidkenmerken in zijn gezicht. Hij wil graag op dezelfde manier behandeld worden als ieder ander. Samen werken jullie in een omgeving waar samenwerking en gelijkwaardigheid centraal staan."
         link="/visual"
         animation="speech-window"
         />
     </div>
 </Layout>
+
+<Popup />
 
 <style>
   body {
@@ -23,3 +26,11 @@ import looksDisability from "../assets/images/disabilities/looks.jpg"
     --detail-bg-light: #ffffff;
   }
 </style>
+
+<script>
+  // @ts-nocheck
+
+  window.helpContext = {
+    title: "Niet verboden te vragen",
+    text: "Het is niet verboden om iets te vragen over iemands uiterlijk. Maar zorg ervoor dat de persoon centraal staat en niet het uiterlijk."
+  }
