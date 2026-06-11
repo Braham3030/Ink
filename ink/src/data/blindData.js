@@ -46,7 +46,7 @@ export const levels = [
             {
                 text: "Voorbij de bar naar rechts en dan aan uw linkerhand.",
                 correct: true,
-                feedback: "Je hebt duidelijke en nauwkeurige instructies gegeven. Tim heeft het toilet gevonden.",
+                feedback: "U heeft duidelijke en nauwkeurige instructies gegeven. Tim heeft het toilet gevonden.",
                 path: [
                     { x: 4, y: 7 },
                     { x: 4, y: 6 },
@@ -133,7 +133,7 @@ export const levels = [
             {
                 text: "Volg rechts het zebrapad, aan de overkant links af en dan aan uw rechterhand.",
                 correct: true,
-                feedback: "Je hebt duidelijke oriëntatiepunten gebruikt en stap voor stap uitgelegd waar Tim heen moest. Hij heeft de bushalte weten te vinden.",
+                feedback: "U heeft duidelijke oriëntatiepunten gebruikt en stap voor stap uitgelegd waar Tim heen moest. Hij heeft de bushalte weten te vinden.",
                 path: [
                     { x: 4, y: 8 },
                     { x: 5, y: 8 },
@@ -172,7 +172,7 @@ export const levels = [
             {
                 text: "De bushalte staat daar.",
                 correct: false,
-                feedback: "Tim kan niet zien waar je naartoe wijst en weet daarom niet welke kant hij op moet.",
+                feedback: "Tim kan niet zien waar u naartoe wijst en weet daarom niet welke kant hij op moet.",
                 path: [{ x: 4, y: 8 }],
             },
         ],
@@ -218,7 +218,7 @@ export const levels = [
             {
                 text: "Loop naar rechts op de stoep, over 2 meter staat een bank aan je linkerhand, vanaf daar direct naar links.",
                 correct: true,
-                feedback: "Je gebruikte duidelijke afstanden en herkenningspunten. Daardoor kon Tim de juiste route naar de ingang volgen.",
+                feedback: "U gebruikte duidelijke afstanden en herkenningspunten. Daardoor kon Tim de juiste route naar de ingang volgen.",
                 path: [
                     { x: 1, y: 8 },
                     { x: 2, y: 8 },

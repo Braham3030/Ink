@@ -387,5 +387,5 @@ function resetGame() {
 ========================= */
 
 window.helpContext = {
-  text: "Alleen wanneer je een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden",
+  text: "Alleen wanneer u een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden.",
 };
