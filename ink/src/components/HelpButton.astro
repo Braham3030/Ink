@@ -2,9 +2,7 @@
 const { helpPopup } = Astro.props;
 ---
 
-<button id="help-button">
-  
-</button>
+<button id="help-button"> </button>
 
 <style>
   #help-button {
@@ -37,8 +35,6 @@ const { helpPopup } = Astro.props;
     }
   }
 
-  
-
   @keyframes helpPulse {
     0% {
       opacity: 1;
@@ -62,7 +58,7 @@ const { helpPopup } = Astro.props;
       e.target.blur();
       window.popup.hide();
     }
-  })
+  });
 
   function initHelpButton() {
     const button = document.getElementById("help-button");
@@ -100,7 +96,7 @@ const { helpPopup } = Astro.props;
       freshButton.classList.remove("pulse");
 
       window.popup.show({
-        title: help.title ||"Hier heb je een tip!",
+        title: help.title || "Hier heb je een tip!",
         text: help.text,
         buttonText: "Sluiten",
       });
