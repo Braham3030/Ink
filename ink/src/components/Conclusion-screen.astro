@@ -1,25 +1,20 @@
 ---
 // @ts-nocheck
-const { name, quote, quoteBy, image, animation, disabilityName, animationNext, linkChoice, linkNext, pageType, buttonHide = false } = Astro.props;
+const { moduleName, conclusion, moduleType, animationButton, animationText, linkModule } = Astro.props;
 ---
 
 <div class="end-screen-container">
-    <h2 transition:name="title-text">De training van {name} is voltooid</h2>
+    <h2 transition:name="title-text">De training van module {moduleName} is voltooid</h2>
     <!-- <h3>Quotes</h3> -->
 
-    <div class="quote-container">    
-        <p class="quote">"{quote}"</p>
-        <p class="quote-by">— {quoteBy}</p>
+    <div class="conclusion-container" transition:name={animationText}>    
+        <p class="conclusion">{conclusion}</p>
+        <p class="module-type">— {moduleType}</p>
     </div>
 
 
     <div class="buttons-end-screen">
-        <a href={linkChoice} class="link-button" transition:name={animation}>Naar {pageType}</a>
-        {
-        !buttonHide && (
-        <a href={linkNext} class="link-button" transition:name={animationNext}>Intro {disabilityName}</a>
-        )
-        }
+        <a href={linkModule} class="link-button" transition:name={animationButton}>Naar de module pagina</a>
     </div>
 </div>
 
@@ -37,7 +32,7 @@ const { name, quote, quoteBy, image, animation, disabilityName, animationNext, l
             padding: 1rem;
         }
 
-        .quote-container {
+        .conclusion-container {
             margin: 0 auto;
             corner-shape: squircle;
             border-radius: 30%;
@@ -50,11 +45,11 @@ const { name, quote, quoteBy, image, animation, disabilityName, animationNext, l
             display: flex;
             flex-direction: column;
 
-            .quote {
+            .conclusion {
                 font-size: 1.5rem;            
             }
 
-            .quote-by {
+            .module-type {
                 color: gray;
                 font-size: 1.25rem;
                 font-style: italic;
