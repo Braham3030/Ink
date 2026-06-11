@@ -1,21 +1,21 @@
 ---
 // @ts-nocheck
-import Layout from "../layouts/Layout.astro"
-import EndScreen from "../components/End-Screen.astro"
+import Layout from "../layouts/Layout.astro";
+import EndScreen from "../components/End-Screen.astro";
 import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
-    <EndScreen 
+  <EndScreen
     name="Evelin"
-      quote="Ik heb je vraag daar niet echt beantwoord, ik probeerde constant frambozen en croissants te vermijden te zeggen."
-      quoteBy="John Hendrickson"
-      linkChoice="/conclusion-screen-module_2"
-      animation="module-title-2"
-      disabilityName="Opvallend uiterlijk"
-      pageType="de conclusie pagina"
-      buttonHide={true}
-      />
+    quote="Ik heb je vraag daar niet echt beantwoord, ik probeerde constant frambozen en croissants te vermijden te zeggen."
+    quoteBy="John Hendrickson"
+    linkChoice="/conclusion-screen-module_2"
+    animation="module-title-2"
+    disabilityName="Opvallend uiterlijk"
+    pageType="afronding module"
+    buttonHide={true}
+  />
 </Layout>
 
 <Popup />
@@ -25,5 +25,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Maak geen suggesties",
-    text: "Maak geen suggesties om te 'ontspannen' of te 'vertragen'. Dit laat alleen maar zien dat je gefocust bent op hoe ze praten in plaats van wat ze zeggen."
-  }
+    text: "Maak geen suggesties om te 'ontspannen' of te 'vertragen'. Dit laat alleen maar zien dat je gefocust bent op hoe ze praten in plaats van wat ze zeggen.",
+  };
+</script>
