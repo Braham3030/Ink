@@ -2,7 +2,7 @@
 // Help popup content
 window.helpContext = {
   text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
-}
+};
 
 import { levels } from "../../../data/visualData.js";
 
@@ -82,3 +82,8 @@ function nextLevel() {
 ========================= */
 
 document.addEventListener("astro:page-load", () => loadLevel(0));
+if (document.readyState !== "loading") {
+  loadLevel(0);
+} else {
+  document.addEventListener("DOMContentLoaded", () => loadLevel(0));
+}
