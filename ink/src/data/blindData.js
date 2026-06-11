@@ -26,7 +26,7 @@ export const levels = [
         markers: [],
         options: [
             {
-                text: "Voorbij de bar naar rechts.",
+                text: "Loop rechtdoor tot voorbij de bar en ga daarna naar rechts.",
                 correct: false,
                 feedback:
                     "Nadat Tim voorbij de bar naar rechts is gegaan, wist hij verder niet waar hij naar toe moest...",
@@ -46,7 +46,7 @@ export const levels = [
             {
                 text: "Voorbij de bar naar rechts en dan aan uw linkerhand.",
                 correct: true,
-                feedback: "Je hebt duidelijke en nauwkeurige instructies gegeven. Tim heeft de WC gevonden.",
+                feedback: "Je hebt duidelijke en nauwkeurige instructies gegeven. Tim heeft het toilet gevonden.",
                 path: [
                     { x: 4, y: 7 },
                     { x: 4, y: 6 },
@@ -63,7 +63,7 @@ export const levels = [
             },
 
             {
-                text: "Het toilet bevindt zich rechtsachter in de kamer.",
+                text: "De toiletten bevinden zich rechtsachter in de kamer.",
                 correct: false,
                 feedback:
                     "Tim is voorbij het toilet helemaal naar het einde van de kamer gelopen.",
@@ -112,7 +112,7 @@ export const levels = [
         ],
         options: [
             {
-                text: "De bushalte is aan de overkant van de straat",
+                text: "De bushalte bevindt zich aan de overkant van de straat, aan de andere kant van de weg.",
                 correct: false,
                 feedback: "Tim wist wel dat hij moest oversteken, maar niet waar hij daarna heen moest lopen. Daarnaast had hij in een gevaarlijke situatie kunnen belanden.",
                 path: [
@@ -152,7 +152,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Gebruik het zebrapad om aan de overkant van de weg te komen",
+                text: "Gebruik het zebrapad om veilig aan de overkant van de weg te komen.",
                 correct: false,
                 feedback: "Tim kwam veilig aan de overkant, maar wist daarna niet hoe hij de bushalte kon vinden.",
                 path: [
@@ -170,7 +170,7 @@ export const levels = [
                 ],
             },
             {
-                text: "De bushalte is daar.",
+                text: "De bushalte staat daar.",
                 correct: false,
                 feedback: "Tim kan niet zien waar je naartoe wijst en weet daarom niet welke kant hij op moet.",
                 path: [{ x: 4, y: 8 }],
@@ -201,7 +201,7 @@ export const levels = [
         ],
         options: [
             {
-                text: "Loop rechtdoor, daar staat een bank. Als je langs die bank loopt, ben je bij de ingang.",
+                text: "Loop rechtdoor totdat je bij een bank komt. Ga langs die bank en dan kom je vanzelf bij de ingang uit.",
                 correct: false,
                 feedback: "Tim kwam wel een bank tegen, en wist dat hij daar langs moest, maar wanneer hij bij de muur was aangekomen kon hij de ingang niet vinden.",
                 path: [
@@ -235,7 +235,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Loop naar rechts, totdat je bij een bank komt, loop dan naar links.",
+                text: "Loop naar rechts totdat je een bank tegenkomt en sla vanaf daar linksaf.",
                 correct: false,
                 feedback: "Tim had de eerste bank gemist aangezien hij recht liep. Hierdoor was hij te laat naar links gegaan en kwam hij bij de muur uit.",
                 path: [
