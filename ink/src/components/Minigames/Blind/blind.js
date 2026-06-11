@@ -3,6 +3,7 @@ import { levels } from "../../../data/blindData.js";
 
 let canvas;
 let ctx;
+let initialized = false;
 
 const tileSize = 50;
 const gridSize = 9;
@@ -45,6 +46,11 @@ function preloadImages(levels) {
 
   allSources.forEach((src) => {
     const img = new Image();
+
+    img.onload = () => {
+      if (currentLevel) render();
+    };
+
     img.src = src;
     imageCache[src] = img;
   });
@@ -100,6 +106,9 @@ document.addEventListener("click", (e) => {
 ========================= */
 
 function init() {
+  if (initialized) return;
+  initialized = true;
+
   canvas = document.getElementById("game");
   if (!canvas) return;
 
