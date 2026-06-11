@@ -46,7 +46,7 @@ const {
 
   .popup-overlay.show {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto;-
   }
 
   .popup {
@@ -55,10 +55,12 @@ const {
     background: #ffffff;
     border: 2px solid #e5e7eb;
     border-radius: 12px;
-
     padding: 1.5rem;
-    text-align: center;
 
+    h2 {
+      text-align: center;
+    }
+ 
     box-shadow:
       0 20px 60px rgba(0, 0, 0, 0.25),
       0 8px 20px rgba(0, 0, 0, 0.15);
@@ -152,6 +154,8 @@ const {
     const p = overlay.querySelector("p");
     const btn = overlay.querySelector("button");
 
+    window.isPopupOpen = true;
+
     if (h2) h2.textContent = title;
     if (p) p.textContent = text;
     if (btn) btn.textContent = buttonText;
@@ -168,10 +172,14 @@ const {
     overlay.classList.remove("show");
     overlay.setAttribute("aria-hidden", "true");
 
+    window.isPopupOpen = false;
+
     setTimeout(() => {
       overlay.hidden = true;
     }, 150);
   }
+
+  window.isPopupOpen = false;
 
   window.popup = {
     show: showPopup,

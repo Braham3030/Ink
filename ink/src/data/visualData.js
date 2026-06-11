@@ -43,7 +43,7 @@ export const levels = [
         correct: true,
         feedback: {
           title: "Goed gedaan!",
-          text: "Je behandelt Eduard zoals je elke andere collega zou behandelen. Dat is precies de bedoeling.",
+          text: "U behandelt Eduard zoals u elke andere collega zou behandelen. Dat is precies de bedoeling.",
           buttonText: "Volgende",
         },
       },
@@ -61,7 +61,7 @@ export const levels = [
         correct: false,
         feedback: {
           title: "Helaas!",
-          text: "Ook als je de weg niet perfect weet, kun je Eduard begeleiden. Het gaat om de bereidheid om te helpen.",
+          text: "Ook als u de weg niet perfect weet, kunt u Eduard begeleiden. Het gaat om de bereidheid om te helpen.",
           buttonText: "Probeer opnieuw",
         },
       },
@@ -95,7 +95,7 @@ export const levels = [
         correct: true,
         feedback: {
           title: "Goed gedaan!",
-          text: "Je reageert empathisch en normaal. Precies de juiste toon.",
+          text: "U reageert empathisch en normaal. Precies de juiste toon.",
           buttonText: "Volgende",
         },
       },

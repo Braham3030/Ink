@@ -9,6 +9,48 @@ const gridSize = 9;
 const canvasSize = tileSize * gridSize;
 
 /* =========================
+   IMAGE SYSTEM
+========================= */
+
+const imageCache = {};
+
+function getImage(src) {
+  if (!src) return null;
+
+  if (!imageCache[src]) {
+    const img = new Image();
+    img.src = src;
+    imageCache[src] = img;
+  }
+
+  return imageCache[src];
+}
+
+function isImageReady(img) {
+  return img && img.complete && img.naturalWidth > 0;
+}
+
+function preloadImages(levels) {
+  const allSources = new Set();
+
+  levels.forEach((level) => {
+    level.obstacles?.forEach((o) => o.img && allSources.add(o.img));
+    if (level.goal?.img) allSources.add(level.goal.img);
+
+    const sprites = level.playerSprites;
+    if (sprites) {
+      Object.values(sprites).forEach((s) => s && allSources.add(s));
+    }
+  });
+
+  allSources.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+    imageCache[src] = img;
+  });
+}
+
+/* =========================
    STATE
 ========================= */
 
@@ -16,6 +58,7 @@ let currentLevelIndex = 0;
 let currentLevel;
 
 let player = { x: 0, y: 0 };
+let playerDirection = "front";
 
 let locked = false;
 let showQuestionMark = false;
@@ -26,7 +69,7 @@ let lastAnswerCorrect = false;
 let lastFeedback = "";
 
 /* =========================
-   GLOBAL POPUP CLOSE + LOGIC HANDLER
+   POPUP HANDLER
 ========================= */
 
 document.addEventListener("click", (e) => {
@@ -64,6 +107,9 @@ function init() {
   canvas.height = canvasSize;
 
   ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+
+  preloadImages(levels);
 
   loadLevel(0);
 }
@@ -113,7 +159,7 @@ function renderButtons() {
 }
 
 /* =========================
-   LEVEL LOADING
+   LEVEL LOAD
 ========================= */
 
 function loadLevel(index) {
@@ -124,6 +170,8 @@ function loadLevel(index) {
     x: currentLevel.startPosition.x,
     y: currentLevel.startPosition.y,
   };
+
+  playerDirection = "front";
 
   const titleElement = document.getElementById("levelTitle");
   if (titleElement) {
@@ -143,7 +191,7 @@ function loadLevel(index) {
 }
 
 /* =========================
-   DRAW
+   GRID
 ========================= */
 
 function drawGrid() {
@@ -167,30 +215,38 @@ function drawGrid() {
   }
 }
 
+/* =========================
+   OBSTACLES
+========================= */
+
 function drawObstacles() {
   currentLevel.obstacles.forEach((o) => {
-    ctx.fillStyle = currentLevel.theme?.obstacleColor || "#444";
+    const img = getImage(o.img);
 
-    ctx.fillRect(
-      o.x * tileSize,
-      o.y * tileSize,
-      o.w * tileSize,
-      o.h * tileSize
-    );
+    const x = o.x * tileSize;
+    const y = o.y * tileSize;
+    const w = o.w * tileSize;
+    const h = o.h * tileSize;
 
-    ctx.strokeStyle = "#000";
-    ctx.strokeRect(
-      o.x * tileSize,
-      o.y * tileSize,
-      o.w * tileSize,
-      o.h * tileSize
-    );
+    if (o.img && isImageReady(img)) {
+      ctx.drawImage(img, x, y, w, h);
+    } else {
+      ctx.fillStyle = currentLevel.theme?.obstacleColor || "#444";
+      ctx.fillRect(x, y, w, h);
 
-    ctx.fillStyle = "white";
-    ctx.font = "12px sans-serif";
-    ctx.fillText(o.name, o.x * tileSize + 4, o.y * tileSize + 16);
+      ctx.strokeStyle = "#000";
+      ctx.strokeRect(x, y, w, h);
+
+      ctx.fillStyle = "white";
+      ctx.font = "12px sans-serif";
+      ctx.fillText(o.name, x + 4, y + 16);
+    }
   });
 }
+
+/* =========================
+   MARKERS
+========================= */
 
 function drawMarkers() {
   if (!currentLevel.markers) return;
@@ -230,47 +286,51 @@ function drawMarkers() {
 
 function drawGoal() {
   const goal = currentLevel.goal;
+  const img = getImage(goal.img);
 
-  ctx.fillStyle = currentLevel.theme?.goalColor || "#2ecc71";
+  const x = goal.x * tileSize;
+  const y = goal.y * tileSize;
+  const w = goal.w * tileSize;
+  const h = goal.h * tileSize;
 
-  ctx.fillRect(
-    goal.x * tileSize,
-    goal.y * tileSize,
-    goal.w * tileSize,
-    goal.h * tileSize
-  );
+  if (goal.img && isImageReady(img)) {
+    ctx.drawImage(img, x, y, w, h);
+  } else {
+    ctx.fillStyle = currentLevel.theme?.goalColor || "#2ecc71";
 
-  ctx.strokeStyle = "#000";
-  ctx.lineWidth = 3;
+    ctx.fillRect(x, y, w, h);
 
-  ctx.strokeRect(
-    goal.x * tileSize,
-    goal.y * tileSize,
-    goal.w * tileSize,
-    goal.h * tileSize
-  );
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, w, h);
 
-  ctx.fillStyle = "white";
-  ctx.font = "12px sans-serif";
-
-  ctx.fillText(
-    goal.name,
-    goal.x * tileSize + 4,
-    goal.y * tileSize + 16
-  );
+    ctx.fillStyle = "white";
+    ctx.font = "12px sans-serif";
+    ctx.fillText(goal.name, x + 4, y + 16);
+  }
 }
+
+/* =========================
+   PLAYER (DIRECTION SPRITES)
+========================= */
 
 function drawPlayer() {
   const px = player.x * tileSize;
   const py = player.y * tileSize;
 
-  ctx.fillStyle = "blue";
+  const sprite = currentLevel.playerSprites?.[playerDirection];
+  const img = getImage(sprite);
 
-  ctx.fillRect(px, py, tileSize, tileSize);
+  if (sprite && isImageReady(img)) {
+    ctx.drawImage(img, px, py, tileSize, tileSize);
+  } else {
+    ctx.fillStyle = "blue";
+    ctx.fillRect(px, py, tileSize, tileSize);
 
-  ctx.strokeStyle = "#000";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(px, py, tileSize, tileSize);
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(px, py, tileSize, tileSize);
+  }
 
   if (showQuestionMark) {
     ctx.fillStyle = "red";
@@ -278,6 +338,10 @@ function drawPlayer() {
     ctx.fillText("?", px + 15, py + 32);
   }
 }
+
+/* =========================
+   RENDER
+========================= */
 
 function render() {
   drawGrid();
@@ -292,9 +356,7 @@ function render() {
 ========================= */
 
 function moveTo(path, showQ, correct, feedback, i = 0) {
-  if (i === 0) {
-    locked = true;
-  }
+  if (i === 0) locked = true;
 
   if (i >= path.length) {
     showQuestionMark = showQ;
@@ -319,8 +381,19 @@ function moveTo(path, showQ, correct, feedback, i = 0) {
     return;
   }
 
-  player.x = path[i].x;
-  player.y = path[i].y;
+  const next = path[i];
+
+  const dx = next.x - player.x;
+  const dy = next.y - player.y;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    playerDirection = dx > 0 ? "right" : "left";
+  } else {
+    playerDirection = dy > 0 ? "back" : "front";
+  }
+
+  player.x = next.x;
+  player.y = next.y;
 
   render();
 
@@ -383,7 +456,7 @@ function resetGame() {
 }
 
 /* =========================
-   HINT
+   HELP
 ========================= */
 
 window.helpContext = {

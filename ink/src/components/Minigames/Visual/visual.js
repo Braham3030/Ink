@@ -1,8 +1,8 @@
 // @ts-nocheck
 // Help popup content
 window.helpContext = {
-  text: "Het is handig om de basis kennis van gebarentaal te hebben als je moet communiceren met iemand die doof is. Hierbij moet je gebruik maken van je handen, en minder uit gaan van wat je zegt.Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
-}
+  text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
+};
 
 import { levels } from "../../../data/visualData.js";
 
@@ -82,3 +82,8 @@ function nextLevel() {
 ========================= */
 
 document.addEventListener("astro:page-load", () => loadLevel(0));
+if (document.readyState !== "loading") {
+  loadLevel(0);
+} else {
+  document.addEventListener("DOMContentLoaded", () => loadLevel(0));
+}

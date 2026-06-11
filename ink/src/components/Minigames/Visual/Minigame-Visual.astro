@@ -2,6 +2,9 @@
 import Popup from "../../Popup.astro";
 import { Image } from "astro:assets";
 import looksDisability from "../../../assets/images/disabilities/looks.jpg";
+import { levels } from "../../../data/visualData.js";
+
+const firstLevel = levels[0];
 ---
 
 <div class="screen">
@@ -16,11 +19,17 @@ import looksDisability from "../../../assets/images/disabilities/looks.jpg";
     />
     <div class="dialogue-box" transition:name="text-Eduard">
       <p class="speaker-name">Eduard</p>
-      <p class="dialogue-text"></p>
+      <p class="dialogue-text">{firstLevel.dialogue}</p>
     </div>
   </div>
 
-  <div class="choices" transition:name="button-Eduard"></div>
+  <div class="choices" transition:name="button-Eduard">
+    {
+      firstLevel.options.map((option) => (
+        <button class="choice-button">{option.text}</button>
+      ))
+    }
+  </div>
 </div>
 
 <Popup />
@@ -45,14 +54,12 @@ import looksDisability from "../../../assets/images/disabilities/looks.jpg";
     position: relative;
   }
 
-
   .choices {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     margin-top: 1rem;
   }
-
 
   @media (min-width: 768px) {
     .screen {

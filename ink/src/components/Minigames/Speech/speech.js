@@ -2,7 +2,7 @@
 
 // Help popup content
 window.helpContext = {
-  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
+  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze u ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
 }
 
 // Closing popup
@@ -202,9 +202,6 @@ function init() {
       if (e.target.id === "popupButton") {
         window.popup.hide()
 
-        // Resume typing after popup closes
-        window.isPopupOpen = false
-
         document.removeEventListener("click", handler)
       }
     })
@@ -236,9 +233,6 @@ function init() {
       interruptUsedThisLine = true
 
       setInterruptEnabled(false)
-
-      // Pause typing while popup is shown
-      window.isPopupOpen = true
 
       showInterruptPopup()
 

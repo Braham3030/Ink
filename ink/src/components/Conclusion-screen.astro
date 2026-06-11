@@ -1,0 +1,85 @@
+---
+// @ts-nocheck
+const { moduleName, conclusion, moduleType, animationButton, animationText, linkModule } = Astro.props;
+---
+
+<div class="end-screen-container">
+    <h2 transition:name="title-text">De training van {moduleName} is voltooid</h2>
+    <!-- <h3>Quotes</h3> -->
+
+    <div class="conclusion-container" transition:name={animationText}>    
+        <p class="conclusion">{conclusion}</p>
+        <p class="module-type">— {moduleType}</p>
+    </div>
+
+
+    <div class="buttons-end-screen">
+        <a href={linkModule} class="link-button" transition:name={animationButton}>Naar de module pagina</a>
+    </div>
+</div>
+
+
+<style>
+    .end-screen-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        
+        > h3 {
+            margin: 0 auto;
+            width: 40%;
+            padding: 1rem;
+        }
+
+        .conclusion-container {
+            margin: 0 auto;
+            corner-shape: squircle;
+            border-radius: 30%;
+            padding: 2rem;
+            width: 75%;
+            max-width: 40rem;
+            background: white;
+            position: relative;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+
+            .conclusion {
+                font-size: 1.5rem;            
+            }
+
+            .module-type {
+                color: gray;
+                font-size: 1.25rem;
+                font-style: italic;
+                align-self: flex-end;
+                margin: 0;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                width: 5rem;
+                aspect-ratio: 1;
+                background: white;
+                z-index: -1;
+                border-radius: 0 1rem 100% 1rem;
+                rotate: 10deg;
+            }
+            
+        }
+
+
+    .buttons-end-screen {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+</style>

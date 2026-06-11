@@ -3,30 +3,36 @@ export const levels = [
     {
         title: "Begeleid Tim naar het toilet",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet"},
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
+        goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet", img:'/images/minigames/blind/toilets.png' },
         obstacles: [
-            { x: 1, y: 0, w: 2, h: 1, name: "Bank" },
-            { x: 0, y: 1, w: 1, h: 2, name: "Bank" },
-            { x: 2, y: 2, w: 1, h: 1, name: "Tafel" },
+            { x: 1, y: 0, w: 2, h: 1, name: "Bank", img:'/images/minigames/blind/couch-front.png' },
+            { x: 0, y: 1, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/couch-side.png' },
+            { x: 2, y: 2, w: 1, h: 1, name: "Tafel", img:'/images/minigames/blind/table.png'},
 
-            { x: 2, y: 5, w: 1, h: 1, name: "Stoel" },
-            { x: 2, y: 6, w: 1, h: 1, name: "Stoel" },
-            { x: 1, y: 7, w: 1, h: 1, name: "Stoel" },
+            { x: 2, y: 5, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair.png' },
+            { x: 2, y: 6, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair.png' },
+            { x: 1, y: 7, w: 1, h: 1, name: "Stoel", img:'/images/minigames/blind/chair-top.png' },
 
-            { x: 0, y: 5, w: 1, h: 2, name: "TV" },
+            { x: 0, y: 5, w: 1, h: 2, name: "TV", img:'/images/minigames/blind/tv.png' },
 
-            { x: 5, y: 5, w: 1, h: 1, name: "Kruk" },
-            { x: 5, y: 6, w: 1, h: 1, name: "Kruk" },
-            { x: 5, y: 7, w: 1, h: 1, name: "Kruk" },
+            { x: 5, y: 5, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
+            { x: 5, y: 6, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
+            { x: 5, y: 7, w: 1, h: 1, name: "Kruk", img:'/images/minigames/blind/stool.png' },
 
-            { x: 6, y: 0, w: 1, h: 2, name: "Muur" },
-            { x: 6, y: 4, w: 3, h: 1, name: "Muur" },
-            { x: 6, y: 5, w: 1, h: 3, name: "Bar" },
+            { x: 6, y: 0, w: 1, h: 2, name: "Muur", img:'/images/minigames/blind/wall-long.png' },
+            { x: 6, y: 4, w: 3, h: 1, name: "Muur", img:'/images/minigames/blind/wall-wide.png' },
+            { x: 6, y: 5, w: 1, h: 3, name: "Bar", img:'/images/minigames/blind/bar.png' },
         ],
         markers: [],
         options: [
             {
-                text: "Voorbij de bar naar rechts.",
+                text: "Loop rechtdoor tot voorbij de bar en ga daarna naar rechts.",
                 correct: false,
                 feedback:
                     "Nadat Tim voorbij de bar naar rechts is gegaan, wist hij verder niet waar hij naar toe moest...",
@@ -46,7 +52,7 @@ export const levels = [
             {
                 text: "Voorbij de bar naar rechts en dan aan uw linkerhand.",
                 correct: true,
-                feedback: "Je hebt duidelijke en nauwkeurige instructies gegeven. Tim heeft de WC gevonden.",
+                feedback: "U heeft duidelijke en nauwkeurige instructies gegeven. Tim heeft het toilet gevonden.",
                 path: [
                     { x: 4, y: 7 },
                     { x: 4, y: 6 },
@@ -63,7 +69,7 @@ export const levels = [
             },
 
             {
-                text: "Het toilet bevindt zich rechtsachter in de kamer.",
+                text: "De toiletten bevinden zich rechtsachter in de kamer.",
                 correct: false,
                 feedback:
                     "Tim is voorbij het toilet helemaal naar het einde van de kamer gelopen.",
@@ -93,26 +99,31 @@ export const levels = [
     {
         title: "Begeleid Tim naar de bushalte",
         startPosition: { x: 4, y: 8 },
-        goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte" },
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
+        goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte", img:'/images/minigames/blind/busstop.png' },
         obstacles: [
-            { x: 0, y: 0, w: 1, h: 1, name: "Boom" },
-            { x: 5, y: 0, w: 1, h: 1, name: "Boom" },
-            { x: 7, y: 0, w: 1, h: 1, name: "Boom" },
+            { x: 0, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
+            { x: 5, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
+            { x: 7, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
 
-            { x: 5, y: 3, w: 1, h: 1, name: "Stoplicht" },
-            { x: 8, y: 8, w: 1, h: 1, name: "Stoplicht" },
+            { x: 5, y: 3, w: 1, h: 1, name: "Stoplicht", img:'/images/minigames/blind/trafficlight.png' },
+            { x: 8, y: 7, w: 1, h: 1, name: "Stoplicht", img:'/images/minigames/blind/trafficlight-rotated.png' },
 
-            { x: 0, y: 7, w: 2, h: 1, name: "Auto" },
-            { x: 3, y: 7, w: 2, h: 1, name: "Auto" },
-        ],
-        markers: [
-            { x: 0, y: 1, w: 9, h: 2, name: "Stoep met ribbels" },
-            { x: 0, y: 8, w: 9, h: 1, name: "Stoep met ribbels" },
-            { x: 6, y: 3, w: 2, h: 5, name: "Zebrapad" },
+            { x: 0, y: 7, w: 2, h: 1, name: "Auto", img:'/images/minigames/blind/car.png' },
+            { x: 3, y: 7, w: 2, h: 1, name: "Auto", img:'/images/minigames/blind/car.png' },
+
+            { x: 0, y: 1, w: 9, h: 2, name: "Stoep met ribbels" , img:'/images/minigames/blind/sidewalk-wide.png'},
+            { x: 0, y: 8, w: 9, h: 1, name: "Stoep met ribbels" , img:'/images/minigames/blind/sidewalk-thin.png'},
+            { x: 6, y: 3, w: 2, h: 5, name: "Zebrapad" , img:'/images/minigames/blind/crosswalk.png'},
         ],
         options: [
             {
-                text: "De bushalte is aan de overkant van de straat",
+                text: "De bushalte bevindt zich aan de overkant van de straat, aan de andere kant van de weg.",
                 correct: false,
                 feedback: "Tim wist wel dat hij moest oversteken, maar niet waar hij daarna heen moest lopen. Daarnaast had hij in een gevaarlijke situatie kunnen belanden.",
                 path: [
@@ -133,7 +144,7 @@ export const levels = [
             {
                 text: "Volg rechts het zebrapad, aan de overkant links af en dan aan uw rechterhand.",
                 correct: true,
-                feedback: "Je hebt duidelijke oriëntatiepunten gebruikt en stap voor stap uitgelegd waar Tim heen moest. Hij heeft de bushalte weten te vinden.",
+                feedback: "U heeft duidelijke oriëntatiepunten gebruikt en stap voor stap uitgelegd waar Tim heen moest. Hij heeft de bushalte weten te vinden.",
                 path: [
                     { x: 4, y: 8 },
                     { x: 5, y: 8 },
@@ -152,7 +163,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Gebruik het zebrapad om aan de overkant van de weg te komen",
+                text: "Gebruik het zebrapad om veilig aan de overkant van de weg te komen.",
                 correct: false,
                 feedback: "Tim kwam veilig aan de overkant, maar wist daarna niet hoe hij de bushalte kon vinden.",
                 path: [
@@ -170,9 +181,9 @@ export const levels = [
                 ],
             },
             {
-                text: "De bushalte is daar.",
+                text: "De bushalte staat daar.",
                 correct: false,
-                feedback: "Tim kan niet zien waar je naartoe wijst en weet daarom niet welke kant hij op moet.",
+                feedback: "Tim kan niet zien waar u naartoe wijst en weet daarom niet welke kant hij op moet.",
                 path: [{ x: 4, y: 8 }],
             },
         ],
@@ -182,26 +193,29 @@ export const levels = [
     {
         title: "Verwijs Tim naar de ingang van het gebouw",
         startPosition: { x: 1, y: 8 },
-        goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang" },
+        goal: { x: 3, y: 0, w: 3, h: 2, name: "Ingang", img:'/images/minigames/blind/entrance.png'},
+        playerSprites: {
+            front: "/images/minigames/blind/player-front.png",
+            back: "/images/minigames/blind/player-back.png",
+            left: "/images/minigames/blind/player-left.png",
+            right: "/images/minigames/blind/player-right.png",
+        },
         obstacles: [
-            { x: 0, y: 0, w: 3, h: 2, name: "Muur" },
-            { x: 6, y: 0, w: 3, h: 2, name: "Muur" },
+            { x: 0, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
+            { x: 6, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
             
-            { x: 1, y: 3, w: 1, h: 2, name: "Bank" },
-            { x: 3, y: 6, w: 1, h: 2, name: "Bank" },
-            { x: 7, y: 4, w: 1, h: 2, name: "Bank" },
-            { x: 8, y: 7, w: 1, h: 2, name: "Bank" },
-        ],
-        markers: [
-            { x: 0, y: 8, w: 8, h: 2, name: "Stoep met ribbels" },
-            { x: 3, y: 2, w: 3, h: 3, name: "Pad" },
-            { x: 4, y: 5, w: 3, h: 3, name: "Pad" },
-            { x: 7, y: 7, w: 1, h: 1, name: "Pad" },
+            { x: 1, y: 3, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
+            { x: 3, y: 6, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
+            { x: 7, y: 4, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench-mirror.png' },
+            { x: 8, y: 7, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench-mirror.png' },
+            { x: 0, y: 8, w: 8, h: 1, name: "Stoep met ribbels", img:'/images/minigames/blind/sidewalk-custom.png' },
+            { x: 3, y: 2, w: 3, h: 6, name: "Pad", img:'/images/minigames/blind/path.png' },
+
 
         ],
         options: [
             {
-                text: "Loop rechtdoor, daar staat een bank. Als je langs die bank loopt, ben je bij de ingang.",
+                text: "Loop rechtdoor totdat je bij een bank komt. Ga langs die bank en dan kom je vanzelf bij de ingang uit.",
                 correct: false,
                 feedback: "Tim kwam wel een bank tegen, en wist dat hij daar langs moest, maar wanneer hij bij de muur was aangekomen kon hij de ingang niet vinden.",
                 path: [
@@ -218,7 +232,7 @@ export const levels = [
             {
                 text: "Loop naar rechts op de stoep, over 2 meter staat een bank aan je linkerhand, vanaf daar direct naar links.",
                 correct: true,
-                feedback: "Je gebruikte duidelijke afstanden en herkenningspunten. Daardoor kon Tim de juiste route naar de ingang volgen.",
+                feedback: "U gebruikte duidelijke afstanden en herkenningspunten. Daardoor kon Tim de juiste route naar de ingang volgen.",
                 path: [
                     { x: 1, y: 8 },
                     { x: 2, y: 8 },
@@ -235,7 +249,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Loop naar rechts, totdat je bij een bank komt, loop dan naar links.",
+                text: "Loop naar rechts totdat je een bank tegenkomt en sla vanaf daar linksaf.",
                 correct: false,
                 feedback: "Tim had de eerste bank gemist aangezien hij recht liep. Hierdoor was hij te laat naar links gegaan en kwam hij bij de muur uit.",
                 path: [

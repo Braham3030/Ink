@@ -1,21 +1,22 @@
 ---
 // @ts-nocheck
-import Layout from "../layouts/Layout.astro"
-import EndScreen from "../components/End-Screen.astro"
+import Layout from "../layouts/Layout.astro";
+import EndScreen from "../components/End-Screen.astro";
 import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
-    <EndScreen 
+  <EndScreen
     name="Eva"
-      quote="Als mensen een paar zinnetjes of paar woorden gebarentaal kennen, doet dat zo veel, want je wordt aangesproken in je eigen taal. Al kan het personeel alleen maar goedendag zeggen, voel je je er enorm door welkom geheten."
-      quoteBy="Severine, auditief beperkt"
-      linkChoice="/choice"
-      linkNext="/motorial-introduction"
-      animation="motorial-introduction-window"
-      animationNext="choice1-window"
-      disabilityName="Motorial beperkt"
-      />
+    quote="Als mensen een paar zinnetjes of paar woorden gebarentaal kennen, doet dat zo veel, want je wordt aangesproken in je eigen taal. Al kan het personeel alleen maar goedendag zeggen, voel je je er enorm door welkom geheten."
+    quoteBy="Severine, auditief beperkt"
+    linkChoice="/choice"
+    linkNext="/motorial-introduction"
+    animation="motorial-introduction-window"
+    animationNext="choice1-window"
+    disabilityName="Motorisch beperkt"
+    pageType="de keuze pagina"
+  />
 </Layout>
 
 <Popup />
@@ -25,5 +26,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Blijf praten",
-    text: "Je kunt gewoon blijven praten. Zorg dat je goed articuleert, rustig praat en de persoon aankijkt. Dat helpt hen jou te verstaan."
-  }
+    text: "U kunt gewoon blijven praten. Zorg dat u goed articuleert, rustig praat en de persoon aankijkt. Dat helpt hen u te verstaan.",
+  };
+</script>

@@ -2,9 +2,7 @@
 const { helpPopup } = Astro.props;
 ---
 
-<button id="help-button">
-  
-</button>
+<button id="help-button"></button>
 
 <style>
   #help-button {
@@ -37,8 +35,6 @@ const { helpPopup } = Astro.props;
     }
   }
 
-  
-
   @keyframes helpPulse {
     0% {
       opacity: 1;
@@ -62,28 +58,24 @@ const { helpPopup } = Astro.props;
       e.target.blur();
       window.popup.hide();
     }
-  })
+  });
 
   function initHelpButton() {
     const button = document.getElementById("help-button");
     if (!button) return;
-
-    // prevent duplicate listeners after Astro navigation
-    button.replaceWith(button.cloneNode(true));
-    const freshButton = document.getElementById("help-button");
 
     let inactivityTimer;
 
     function startInactivityTimer() {
       clearTimeout(inactivityTimer);
 
-      freshButton.classList.remove("pulse");
+      button.classList.remove("pulse");
 
       // only pulse if this page actually has help content
       if (!window.helpContext?.text) return;
 
       inactivityTimer = setTimeout(() => {
-        freshButton.classList.add("pulse");
+        button.classList.add("pulse");
       }, 25000); // 25 seconds
     }
 
@@ -91,16 +83,16 @@ const { helpPopup } = Astro.props;
       startInactivityTimer();
     }
 
-    freshButton.addEventListener("click", () => {
-      console.log("Help button clicked");
+    button.addEventListener("click", () => {
+      window.isPopupOpen = true;
 
       const help = window.helpContext;
       if (!help?.text) return;
 
-      freshButton.classList.remove("pulse");
+      button.classList.remove("pulse");
 
       window.popup.show({
-        title: help.title ||"Hier heb je een tip!",
+        title: help.title || "Hier heb je een tip!",
         text: help.text,
         buttonText: "Sluiten",
       });
@@ -108,7 +100,7 @@ const { helpPopup } = Astro.props;
       startInactivityTimer();
     });
 
-    ["mousemove", "mousedown", "keydown", "scroll", "touchstart"].forEach(
+    ["mousedown", "keydown", "touchstart"].forEach(
       (event) => {
         document.addEventListener(event, resetActivity, { passive: true });
       },
