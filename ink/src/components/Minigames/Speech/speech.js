@@ -202,9 +202,6 @@ function init() {
       if (e.target.id === "popupButton") {
         window.popup.hide()
 
-        // Resume typing after popup closes
-        window.isPopupOpen = false
-
         document.removeEventListener("click", handler)
       }
     })
@@ -236,9 +233,6 @@ function init() {
       interruptUsedThisLine = true
 
       setInterruptEnabled(false)
-
-      // Pause typing while popup is shown
-      window.isPopupOpen = true
 
       showInterruptPopup()
 
