@@ -11,6 +11,8 @@ export const levels = [
         },
         goal: { x: 7, y: 0, w: 2, h: 2, name: "Toilet", img:'/images/minigames/blind/toilets.png' },
         obstacles: [
+            { x: 0, y: 0, w: 9, h: 9, name: "Floor", img:'/images/minigames/blind/floor-bar.png' },
+
             { x: 1, y: 0, w: 2, h: 1, name: "Bank", img:'/images/minigames/blind/couch-front.png' },
             { x: 0, y: 1, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/couch-side.png' },
             { x: 2, y: 2, w: 1, h: 1, name: "Tafel", img:'/images/minigames/blind/table.png'},
@@ -107,6 +109,8 @@ export const levels = [
         },
         goal: { x: 2, y: 0, w: 2, h: 1, name: "Bushalte", img:'/images/minigames/blind/busstop.png' },
         obstacles: [
+            { x: 0, y: 0, w: 9, h: 9, name: "Floor", img:'/images/minigames/blind/floor-busstop.png' },
+
             { x: 0, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
             { x: 5, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
             { x: 7, y: 0, w: 1, h: 1, name: "Boom", img:'/images/minigames/blind/tree.png' },
@@ -155,9 +159,9 @@ export const levels = [
                     { x: 6, y: 4 },
                     { x: 6, y: 3 },
                     { x: 6, y: 2 },
-                    { x: 6, y: 1 },
-                    { x: 5, y: 1 },
-                    { x: 4, y: 1 },
+                    { x: 5, y: 2 },
+                    { x: 4, y: 2 },
+                    { x: 3, y: 2 },
                     { x: 3, y: 1 },
                     { x: 3, y: 0 },
                 ],
@@ -201,9 +205,11 @@ export const levels = [
             right: "/images/minigames/blind/player-right.png",
         },
         obstacles: [
+            { x: 0, y: 0, w: 9, h: 9, name: "Floor", img:'/images/minigames/blind/floor-entrance.png' },
             { x: 0, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
             { x: 6, y: 0, w: 3, h: 2, name: "Muur", img:'/images/minigames/blind/wall-building.png' },
             
+
             { x: 1, y: 3, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
             { x: 3, y: 6, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench.png' },
             { x: 7, y: 4, w: 1, h: 2, name: "Bank", img:'/images/minigames/blind/bench-mirror.png' },
