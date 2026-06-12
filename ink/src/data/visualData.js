@@ -27,7 +27,7 @@ export const levels = [
         correct: false,
         feedback: {
           title: "Helaas!",
-          text: "Hoewel je het goed bedoelt, kan dit ongemakkelijk zijn.",
+          text: "Hoewel u het goed bedoelt, kan dit ongemakkelijk zijn.",
           buttonText: "Probeer opnieuw",
         },
       },
@@ -86,7 +86,7 @@ export const levels = [
         correct: false,
         feedback: {
           title: "Helaas!",
-          text: "Dit zet Eduard in een lastige positie om zijn situatie te verklaren. Beter om het gewoon te accepteren.",
+          text: "Dit zet Eduard in een lastige positie om zijn situatie te verklaren. Het is beter om het gewoon te accepteren.",
           buttonText: "Probeer opnieuw",
         },
       },
@@ -95,7 +95,7 @@ export const levels = [
         correct: true,
         feedback: {
           title: "Goed gedaan!",
-          text: "Je behandelt Eduard zoals je iedereen zou behandelen. Zoals het hoort.",
+          text: "U behandelt Eduard zoals U iedereen zou behandelen. Zoals het hoort.",
           buttonText: "Volgende",
         },
       },
