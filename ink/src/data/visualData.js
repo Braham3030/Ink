@@ -91,11 +91,11 @@ export const levels = [
         },
       },
       {
-        text: "3: Dat is fijn om te horen! Iedereen verdient gewoon respect.",
+        text: "3: Dat is fijn om te horen!",
         correct: true,
         feedback: {
           title: "Goed gedaan!",
-          text: "U reageert empathisch en normaal. Precies de juiste toon.",
+          text: "Je behandelt Eduard zoals je iedereen zou behandelen. Zoals het hoort.",
           buttonText: "Volgende",
         },
       },
