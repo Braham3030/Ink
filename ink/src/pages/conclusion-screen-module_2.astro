@@ -1,23 +1,20 @@
 ---
 // @ts-nocheck
-import Layout from "../layouts/Layout.astro"
-import Conclusion from "../components/Conclusion-screen.astro"
+import Layout from "../layouts/Layout.astro";
+import Conclusion from "../components/Conclusion-screen.astro";
 import Popup from "../components/Popup.astro";
-
 ---
 
 <!-- const { moduleName, conclusion, moduleType, animation, linkModule } = Astro.props; -->
-
-
 <Layout hideBackButton={true}>
-    <Conclusion transition:name="deaf-introduction-window"
-    moduleName="module 2"
-      conclusion="De maatschappij is er niet echt op ingericht. Dus laat ik bijvoorbeeld over straat lopen. Ja, er zijn nergens geleidlijnen, veel stoplichten tikken niet. Als het rood of groen is, weet je ook niet wanneer je can oversteken."
-      moduleType="Module 2"
-      linkModule="/modules"
-      animationButton="button-modules"
-      animationText="module-title-2"
-      />
+  <Conclusion
+    transition:name="deaf-introduction-window"
+    moduleName="leren door te ervaren"
+    conclusion="Door de training en de bijbehorende contextuele informatie is er een dieper begrip ontstaan van de obstakels die mensen met verschillende beperkingen tegenkomen in het dagelijks leven. Het doel van de training is niet enkel het vergroten van bewustwording, maar ook het oefenen van een empathische en respectvolle houding in de omgang met anderen."
+    linkModule="/modules"
+    animationButton="button-modules"
+    animationText="module-title-2"
+  />
 </Layout>
 
 <Popup />
@@ -27,6 +24,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Spreek direct aan",
-    text: "Spreek direct tegen de persoon aan wie u service verleend en niet over hen tegen hun gezelschap. Het zijn autonome mensen zoals ieder ander. U kunt ze direct aanspreken als elke andere klant."
-  }
+    text: "Spreek direct tegen de persoon aan wie u service verleent en niet over hen tegen hun gezelschap. Het zijn autonome mensen zoals ieder ander. U kunt hen direct aanspreken, net als elke andere klant.",
+  };
 </script>

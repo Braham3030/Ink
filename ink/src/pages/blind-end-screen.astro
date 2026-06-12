@@ -1,23 +1,23 @@
 ---
 // @ts-nocheck
-import Layout from "../layouts/Layout.astro"
-import EndScreen from "../components/End-Screen.astro"
+import Layout from "../layouts/Layout.astro";
+import EndScreen from "../components/End-Screen.astro";
 import Popup from "../components/Popup.astro";
-
 ---
 
 <Layout hideBackButton={true}>
-    <EndScreen transition:name="deaf-introduction-window"
-    name="Tim"
-      quote="De maatschappij is er niet echt op ingericht. Dus laat ik bijvoorbeeld over straat lopen. Ja, er zijn nergens geleidlijnen, veel stoplichten tikken niet. Als het rood of groen is, weet je ook niet wanneer je kan oversteken."
-      quoteBy="Iemand die visueel beperkt is"
-      linkChoice="/choice"
-      linkNext="/deaf-introduction"
-      animation="choice1-window"
-      animationNext="deaf-introduction-window"
-      disabilityName="Auditief beperkt"
-      pageType="de keuze pagina"
-      />
+  <EndScreen
+    transition:name="deaf-introduction-window"
+    name="blindheid"
+    quote="De maatschappij is er niet echt op ingericht. Dus laat ik bijvoorbeeld over straat lopen. Ja, er zijn nergens geleidlijnen, veel stoplichten tikken niet. Als het rood of groen is, weet je ook niet wanneer je kan oversteken."
+    quoteBy="Iemand met een visuele beperking"
+    linkChoice="/choice"
+    linkNext="/deaf-introduction"
+    animation="choice1-window"
+    animationNext="deaf-introduction-window"
+    disabilityName="Auditief beperkt"
+    pageType="de keuze pagina"
+  />
 </Layout>
 
 <Popup />
@@ -27,6 +27,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Blindegeleidehonden",
-    text: "Blindegeleidehonden en hulphonden zijn heel lief, maar mogen helaas niet geaaid worden als ze aan het werk zijn."
-  }
+    text: "Blindegeleidehonden en hulphonden zijn heel lief, maar mogen helaas niet geaaid worden als ze aan het werk zijn.",
+  };
 </script>

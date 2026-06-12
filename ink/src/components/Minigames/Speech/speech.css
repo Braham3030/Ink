@@ -21,7 +21,7 @@
   border-radius: 50%;
   margin: auto;
   position: absolute;
-  bottom: 3rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
 
@@ -72,8 +72,47 @@
   }
 }
 
+.dialogue-box {
+  min-height: 7rem;
+}
+
 #speaker-image {
   &.grey-filter {
     filter: grayscale(100%);
   }
 }
+
+.checklist {
+  background: white;
+  border: 2px solid #a8a8a8;
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 90%;
+  width: 20rem;
+  margin: 0.5rem auto;
+
+  &.hidden {
+    display: none;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0.5rem 0;
+      
+      &.completed {
+        color: #888;
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+

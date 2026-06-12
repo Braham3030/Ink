@@ -4,32 +4,88 @@ import Popup from "../components/Popup.astro";
 
 <div class="full-container">
   <h2 transition:name="title-text">Kies een module om te starten</h2>
+
   <div class="module-container">
     <div class="module-item">
       <h3>Module 1:</h3>
-      <a href="" class="module-choice">Bewustwording en vooroordelen</a>
-    </div>
-    <div class="module-item" transition:name="button-modules">
-      <h3 transition:name="module-title-2">Module 2:</h3>
-      <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
-        Leren door te ervaren
+      <a href="" class="module-choice">
+        <span>Bewustwording en vooroordelen</span>
+
+        <span class="module-duration">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          10m
+        </span>
       </a>
     </div>
+
+    <div class="module-item" transition:name="button-modules">
+      <h3 transition:name="module-title-2">Module 2:</h3>
+
+      <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
+        <span>Leren door te ervaren</span>
+
+        <span class="module-duration">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          10m
+        </span>
+      </a>
+    </div>
+
     <div class="module-item">
       <h3>Module 3:</h3>
-      <a href="" class="module-choice">Vertaling naar werkplek</a>
+
+      <a href="" class="module-choice">
+        <span>Vertaling naar werkplek</span>
+
+        <span class="module-duration">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          10m
+        </span>
+      </a>
     </div>
   </div>
 </div>
 
 <Popup />
 
-
 <script>
   // @ts-nocheck
   window.helpContext = {
     title: "Doe geen aannames",
-    text: "Als u iets niet zeker weet, vraag het dan. 'Heeft u hulp nodig bij het dragen van uw drankjes?' of 'Zal ik u naar uw tafel begeleiden, of loopt u er liever zelf naartoe?'",
+    text: "Als u iets niet zeker weet, vraag het dan. 'Heeft u hulp nodig met iets?' of 'Zal ik u daarheen begeleiden, of loopt u er liever zelf naartoe?'",
   };
 
   document.addEventListener("astro:page-load", () => {
@@ -72,14 +128,30 @@ import Popup from "../components/Popup.astro";
   }
 
   .module-choice {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     text-decoration: none;
     color: white;
     background: #111827;
     padding: 1.3rem 1rem;
     border-radius: 5px;
     font-size: var(--button-font-size);
-    text-align: center;
+    text-align: left;
+  }
+
+  .module-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  .module-duration svg {
+    flex-shrink: 0;
   }
 
   .module-item:nth-child(1) .module-choice,

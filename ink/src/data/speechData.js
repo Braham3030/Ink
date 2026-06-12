@@ -2,6 +2,15 @@ export const speechData = [
     {
         id: "passport_extension",
         title: "Paspoort verlengen",
+
+        checklist: [
+            "Huidig paspoort controleren",
+            "Persoonlijke gegevens controleren",
+            "Pasfoto controleren",
+            "Afhaaldatum vermelden",
+            "Aanvraag afronden"
+        ],
+
         dialogue: [
             {
                 speaker: "Evelin",
@@ -17,7 +26,8 @@ export const speechData = [
             },
             {
                 speaker: "U",
-                text: "Dat is verstandig. Ik ga uw gegevens even controleren. Zijn er sinds uw vorige aanvraag nog persoonlijke gegevens gewijzigd?"
+                text: "Dat is verstandig. Ik ga uw gegevens even controleren. Zijn er sinds uw vorige aanvraag nog persoonlijke gegevens gewijzigd?",
+                checklistItem: "Huidig paspoort controleren"
             },
             {
                 speaker: "Evelin",
@@ -25,7 +35,8 @@ export const speechData = [
             },
             {
                 speaker: "U",
-                text: "Prima. Heeft u ook een recente pasfoto meegenomen?"
+                text: "Prima. Heeft u ook een recente pasfoto meegenomen?",
+                checklistItem: "Persoonlijke gegevens controleren"
             },
             {
                 speaker: "Evelin",
@@ -33,7 +44,8 @@ export const speechData = [
             },
             {
                 speaker: "U",
-                text: "Deze ziet er goed uit. Dan hoeven we alleen nog uw vingerafdrukken af te nemen."
+                text: "Deze ziet er goed uit. Dan hoeven we alleen nog uw vingerafdrukken af te nemen.",
+                checklistItem: "Pasfoto controleren"
             },
             {
                 speaker: "Evelin",
@@ -41,7 +53,8 @@ export const speechData = [
             },
             {
                 speaker: "U",
-                text: "Meestal duurt dat ongeveer vijf werkdagen. U krijgt bericht zodra het document kan worden opgehaald."
+                text: "Meestal duurt dat ongeveer vijf werkdagen. U krijgt bericht zodra het document kan worden opgehaald.",
+                checklistItem: "Afhaaldatum vermelden"
             },
             {
                 speaker: "Evelin",
@@ -49,7 +62,8 @@ export const speechData = [
             },
             {
                 speaker: "U",
-                text: "Graag gedaan. Fijne dag verder."
+                text: "Graag gedaan. Fijne dag verder.",
+                checklistItem: "Aanvraag afronden"
             }
         ]
     }
