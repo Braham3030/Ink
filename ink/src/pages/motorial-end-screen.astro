@@ -1,22 +1,22 @@
 ---
 // @ts-nocheck
-import Layout from "../layouts/Layout.astro"
-import EndScreen from "../components/End-Screen.astro"
+import Layout from "../layouts/Layout.astro";
+import EndScreen from "../components/End-Screen.astro";
 import Popup from "../components/Popup.astro";
 ---
 
 <Layout hideBackButton={true}>
-    <EndScreen 
+  <EndScreen
     name="motorisch beperkt"
-      quote="Je gaat sneller naar plekken waarvan je weet dat het goed zit in plaats van een nieuwe plek en als je een nieuwe plek uitprobeert liever met vriendinnen en niet alleen."
-      quoteBy="Iemand met een motorische beperking"
-      linkChoice="/choice"
-      linkNext="/visual-introduction"
-      animation="visual-introduction-window"
-      animationNext="choice1-window"
-      disabilityName="Opvallend uiterlijk"
-      pageType="de keuze pagina"
-      />
+    quote="Je gaat liever naar plekken waarvan je weet dat het goed toegankelijk is. Een nieuwe plek probeer je liever uit met vriendinnen, niet alleen."
+    quoteBy="Iemand met een motorische beperking"
+    linkChoice="/choice"
+    linkNext="/visual-introduction"
+    animation="visual-introduction-window"
+    animationNext="choice1-window"
+    disabilityName="Opvallend uiterlijk"
+    pageType="de keuze pagina"
+  />
 </Layout>
 
 <Popup />
@@ -26,5 +26,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Gebruik gebruikelijke woorden",
-    text: "U kunt gebruikelijke woorden wel gebruiken zoals 'lopen'. Je hoeft niet 'rollen' te zeggen in plaats van 'lopen'."
-  }
+    text: "U kunt gebruikelijke woorden wel gebruiken zoals 'lopen'. Je hoeft niet 'rollen' te zeggen in plaats van 'lopen'.",
+  };
+</script>

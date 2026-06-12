@@ -32,11 +32,7 @@ import Popup from "../components/Popup.astro";
     <div class="module-item" transition:name="button-modules">
       <h3 transition:name="module-title-2">Module 2:</h3>
 
-      <a
-        href="/choice"
-        class="module-choice"
-        data-astro-prefetch="viewport"
-      >
+      <a href="/choice" class="module-choice" data-astro-prefetch="viewport">
         <span>Leren door te ervaren</span>
 
         <span class="module-duration">
@@ -89,7 +85,7 @@ import Popup from "../components/Popup.astro";
   // @ts-nocheck
   window.helpContext = {
     title: "Doe geen aannames",
-    text: "Als u iets niet zeker weet, vraag het dan. 'Heeft u hulp nodig bij het dragen van uw drankjes?' of 'Zal ik u naar uw tafel begeleiden, of loopt u er liever zelf naartoe?'",
+    text: "Als u iets niet zeker weet, vraag het dan. 'Heeft u hulp nodig met iets?' of 'Zal ik u daarheen begeleiden, of loopt u er liever zelf naartoe?'",
   };
 
   document.addEventListener("astro:page-load", () => {
