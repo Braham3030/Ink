@@ -23,7 +23,7 @@ export const levels = [
         },
       },
       {
-        text: "3: Alleen in zijn ogen kijken om geen aandacht te vestigen",
+        text: "3: Alleen in zijn ogen kijken om geen aandacht te vestigen.",
         correct: false,
         feedback: {
           title: "Helaas!",
@@ -95,7 +95,7 @@ export const levels = [
         correct: true,
         feedback: {
           title: "Goed gedaan!",
-          text: "U behandelt Eduard zoals U iedereen zou behandelen. Zoals het hoort.",
+          text: "U behandelt Eduard zoals u iedereen zou behandelen. Zoals het hoort.",
           buttonText: "Volgende",
         },
       },

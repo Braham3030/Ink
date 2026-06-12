@@ -276,7 +276,7 @@ export const levels = [
                 ],
             },
             {
-                text: "Volg het pad naar de ingang",
+                text: "Volg het pad naar de ingang.",
                 correct: false,
                 feedback: "Tim weet niet waar het pad is en kan daarom niet de juiste route volgen.",
                 path: [

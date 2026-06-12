@@ -1,20 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import DisabilityIntroduction from "../components/Disability-Introduction.astro"
-import MotorialDisability from "../assets/images/disabilities/motor.jpg"
+import Layout from "../layouts/Layout.astro";
+import DisabilityIntroduction from "../components/Disability-Introduction.astro";
+import MotorialDisability from "../assets/images/disabilities/motor.jpg";
 import Popup from "../components/Popup.astro";
 ---
 
 <Layout backUrl="/choice" hideBackButton={false}>
-    <div transition:name="motorial-introduction-window">
-        <DisabilityIntroduction 
-        name="Anna"
-        image={MotorialDisability}
-        description="Anna heeft een motorische beperking en gebruikt een rolstoel. U en Anna bevinden zich samen in een openbare ruimte. Anna vraagt u om haar te helpen haar weg te vervolgen. Het is aan u om mogelijke obstakels te herkennen en aan te geven, zodat ze veilig en zelfstandig verder kan."
-        link="/motorial"
-        animation="motorial-window"
-        />
-    </div>
+  <div transition:name="motorial-introduction-window">
+    <DisabilityIntroduction
+      name="Anna"
+      image={MotorialDisability}
+      description="Anna heeft een motorische beperking en gebruikt een rolstoel. U bevindt zich samen met Anna in een openbare ruimte. Anna vraagt u om haar te helpen haar weg te vervolgen. Het is aan u om mogelijke obstakels te herkennen en te benoemen, zodat zij veilig en zelfstandig verder kan."
+      link="/motorial"
+      animation="motorial-window"
+    />
+  </div>
 </Layout>
 
 <Popup />
@@ -32,5 +32,6 @@ import Popup from "../components/Popup.astro";
 
   window.helpContext = {
     title: "Benaming",
-    text: "De benaming invalide kan kwetsend zijn. Zeg in plaats daarvan: 'persoon met een rolstoel, persoon met een motorische beperking'."
-  }
+    text: "De benaming invalide kan kwetsend zijn. Zeg in plaats daarvan: 'persoon met een rolstoel, persoon met een motorische beperking'.",
+  };
+</script>
