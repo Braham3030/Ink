@@ -105,10 +105,9 @@ document.addEventListener("click", (e) => {
    INIT
 ========================= */
 
-function init() {
-  if (initialized) return;
-  initialized = true;
+let imagesPreloaded = false;
 
+function init() {
   canvas = document.getElementById("game");
   if (!canvas) return;
 
@@ -118,18 +117,17 @@ function init() {
   ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
 
-  preloadImages(levels);
+  if (!imagesPreloaded) {
+    preloadImages(levels);
+    imagesPreloaded = true;
+  }
 
-  loadLevel(0);
+  loadLevel(currentLevelIndex);
 }
 
-document.addEventListener("astro:page-load", init);
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
+document.addEventListener("astro:page-load", () => {
   init();
-}
+});
 
 /* =========================
    SHUFFLE
