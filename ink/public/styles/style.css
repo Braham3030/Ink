@@ -76,12 +76,16 @@ p {
   margin: 0 auto;
 
   .speaker-image {
-    width: 10rem;
+    width: 7rem;
     height: auto;
     border-radius: 0.5rem;
     margin-right: 1rem;
     margin-bottom: -2rem;
     align-self: flex-end;
+
+    @media (min-width: 768px) {
+      width: 8rem;
+    }
   }
 
   .dialogue-box {
@@ -111,6 +115,10 @@ p {
       background: var(--detail-bg-light);
       border: 2px solid rgba(205, 45, 58, 0.571);
       border-bottom: none;
+
+      @media (min-width: 425px) {
+        top: -71px;
+      }
     }
 
     .dialogue-text {

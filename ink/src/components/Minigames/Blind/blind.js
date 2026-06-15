@@ -3,7 +3,6 @@ import { levels } from "../../../data/blindData.js";
 
 let canvas;
 let ctx;
-let initialized = false;
 
 const tileSize = 50;
 const gridSize = 9;
@@ -105,10 +104,9 @@ document.addEventListener("click", (e) => {
    INIT
 ========================= */
 
-function init() {
-  if (initialized) return;
-  initialized = true;
+let imagesPreloaded = false;
 
+function init() {
   canvas = document.getElementById("game");
   if (!canvas) return;
 
@@ -118,18 +116,17 @@ function init() {
   ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
 
-  preloadImages(levels);
+  if (!imagesPreloaded) {
+    preloadImages(levels);
+    imagesPreloaded = true;
+  }
 
-  loadLevel(0);
+  loadLevel(currentLevelIndex);
 }
 
-document.addEventListener("astro:page-load", init);
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
+document.addEventListener("astro:page-load", () => {
   init();
-}
+});
 
 /* =========================
    SHUFFLE
@@ -342,9 +339,21 @@ function drawPlayer() {
   }
 
   if (showQuestionMark) {
-    ctx.fillStyle = "red";
+    const qx = px + tileSize / 2;
+    const qy = py + 20;
+
     ctx.font = "28px sans-serif";
-    ctx.fillText("?", px + 15, py + 32);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Black stroke
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "black";
+    ctx.strokeText("?", qx, qy);
+
+    // White fill
+    ctx.fillStyle = "white";
+    ctx.fillText("?", qx, qy);
   }
 }
 
