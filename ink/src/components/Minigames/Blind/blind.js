@@ -3,7 +3,6 @@ import { levels } from "../../../data/blindData.js";
 
 let canvas;
 let ctx;
-let initialized = false;
 
 const tileSize = 50;
 const gridSize = 9;
@@ -340,9 +339,21 @@ function drawPlayer() {
   }
 
   if (showQuestionMark) {
-    ctx.fillStyle = "red";
+    const qx = px + tileSize / 2;
+    const qy = py + 20;
+
     ctx.font = "28px sans-serif";
-    ctx.fillText("?", px + 15, py + 32);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Black stroke
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "black";
+    ctx.strokeText("?", qx, qy);
+
+    // White fill
+    ctx.fillStyle = "white";
+    ctx.fillText("?", qx, qy);
   }
 }
 
