@@ -287,5 +287,11 @@ function init() {
 }
 
 
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+
 // Re-initialize on Astro page navigation
 document.addEventListener("astro:page-load", init)
