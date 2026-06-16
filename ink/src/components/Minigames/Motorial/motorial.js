@@ -138,6 +138,12 @@ document.addEventListener("click", (e) => {
   }
 });
 
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initMotorial);
+} else {
+  initMotorial();
+}
+
 // Astro navigation support
 document.addEventListener("astro:page-load", initMotorial);
 
