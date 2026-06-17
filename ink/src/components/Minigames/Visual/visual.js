@@ -4,6 +4,8 @@ window.helpContext = {
   text: "Zorg ervoor dat je zo weinig mogelijk aandacht brengt aan het uiterlijk. Mensen willen zich ondanks hun uiterlijk niet voelen alsof ze anders zijn dan de rest.",
 };
 
+// Claude voor gebruik optional chaining (?.) bij popup, voorkomt script error als hij niet inlaad.
+
 import { levels } from "../../../data/visualData.js";
 
 /* =========================
