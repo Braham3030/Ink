@@ -86,7 +86,6 @@ function handleDone() {
     return;
   }
 
-  // ❌ FAIL
   const missed = currentLevel.obstacles.filter(
     (o) => !foundObstacles.has(o.id)
   );
@@ -120,7 +119,6 @@ document.addEventListener("click", (e) => {
 
   window.popup?.hide();
 
-  // ❌ niet doorgaan als level niet gehaald is
   if (!pendingAdvance) return;
 
   pendingAdvance = false;
@@ -137,6 +135,12 @@ document.addEventListener("click", (e) => {
     }, 400)
   }
 });
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initMotorial);
+} else {
+  initMotorial();
+}
 
 // Astro navigation support
 document.addEventListener("astro:page-load", initMotorial);

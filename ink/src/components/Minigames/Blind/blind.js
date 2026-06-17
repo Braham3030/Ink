@@ -264,7 +264,7 @@ function drawMarkers() {
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize
+      marker.h * tileSize,
     );
 
     ctx.strokeStyle = "#000";
@@ -272,7 +272,7 @@ function drawMarkers() {
       marker.x * tileSize,
       marker.y * tileSize,
       marker.w * tileSize,
-      marker.h * tileSize
+      marker.h * tileSize,
     );
 
     ctx.fillStyle = "#000";
@@ -281,7 +281,7 @@ function drawMarkers() {
     ctx.fillText(
       marker.name,
       marker.x * tileSize + 4,
-      marker.y * tileSize + 16
+      marker.y * tileSize + 16,
     );
   });
 }
@@ -478,5 +478,5 @@ function resetGame() {
 ========================= */
 
 window.helpContext = {
-  text: "Alleen wanneer je een persoon specifieke aanwijzingen geeft, kan hij/zij goed een locatie vinden",
+  text: "Om een locatie goed te kunnen vinden, heeft een persoon duidelijke en specifieke aanwijzingen nodig.",
 };
