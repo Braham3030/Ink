@@ -1,6 +1,9 @@
 export const levels = [
   // LEVEL 1
   {
+    // Bron: ChatGPT 
+    // Er waren meerdere prompts gebruikt voor dit resultaat, maar dit was de startprompt (met context over de minigame):
+    // Maak een foto van een kantoor ingang waar je dingen als trap, draaiende deur en andere soorten obstakels zitten
     image: "/images/motorial-obstacles/Entrance_Building.png",
 
     obstacles: [
@@ -80,6 +83,12 @@ export const levels = [
 
   // LEVEL 2 
   {
+    // Bron: https://gemini.google.com/
+    // Er waren meerdere prompts gebruikt voor dit resultaat, maar dit was de startprompt:
+    // Realistic wide-angle photograph of a modern European train station (Netherlands style). The viewpoint is from the upper concourse looking down towards the platform, showing a staircase that descends from the station entrance area down to the train platform. At the bottom of the stairs is a train stopped at the platform with open doors visible.
+    // The composition clearly shows the vertical transition from upper level to platform level via the staircase, including railings, steps, and landing. The platform is busy but realistic, with typical station elements such as signage, benches, tactile paving, and platform edge markings. Natural daylight, documentary photography style, realistic colors, no stylization, no diagrams or labels.
+    // The focus is on the spatial relationship between the descending stairs and the train boarding area below, showing both in one coherent frame. 
+
     image: "/images/motorial-obstacles/Train_Station.jpg",
 
     obstacles: [
