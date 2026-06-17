@@ -1,6 +1,6 @@
 # {ink}lusive, Training
 
-## Code Coventions
+## Code Conventions
 Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 
 ### Naamgeving
@@ -55,3 +55,24 @@ Gebasseerd op https://docs.fdnd.nl/conventies.html#code-conventies
 * Deze eenheden kunnen samengevoegd worden in de vorm van clamps. Voor een gemakkelijk responsive design.
 * Er is altijd genoeg ruimte tussen tekst en eventuele border
 
+<br>
+
+## Bronnenlijst
+- Gebaren: https://i.fbcd.co/products/original/common-asl-words-lbc-db-thumb-3407d0efc18489eb02e9ffc8e4de0df05f1aa88768f43cdcf27342bd3729ae82.jpg
+- https://utopia.fyi/clamp/calculator 
+- https://gsap.com/docs/v3/Plugins/Draggable/
+- https://docs.astro.build/en/basics/astro-components/#component-props
+- https://docs.astro.build/en/guides/view-transitions/
+- https://docs.astro.build/en/guides/images/
+- https://docs.astro.build/en/reference/api-reference/
+- https://docs.astro.build/en/guides/prefetch/
+
+#### AI gebruik binnen team
+Code
+- Alle specifieke stukken aangegeven in code zelf
+
+- Claude waar gebruikt staat in code, overig enkel uitleg van bepaalde dingen (Leerdoel Justin)
+- Gemini + copilot (autocomplete) voor hulp in code
+
+Afbeeldingen
+- Afbeelding voor motorische minigame gegenereerd
