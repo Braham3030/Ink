@@ -260,6 +260,14 @@ function init() {
     }
   };
 
+  // Een deel van de code is gegeneerd door AI
+  // Meerdere prompts waren nodig, maar dit was de eerste
+  // Prompt: I am working in astro and am making a speech disability game. During this game you 
+  // have a dialogue with someone who wants to extend their passport. But we got feedback that 
+  // the player wanted some sort of indication for how long the dialogue will still last. So we 
+  // thought up a checklist system. During the dialogue for extending a passport to have to check 
+  // off certain things. Like checking data and such. We could use this to show to player how long 
+  // the dialogue will still last because they can see all the things that still need to be checked of.
   function createChecklist() {
     if (!checklistContainer) return;
 

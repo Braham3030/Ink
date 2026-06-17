@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+// Bron voor GSAP Draggable: https://gsap.com/docs/v3/Plugins/Draggable/
+
 // Help popup content
 window.helpContext = {
   text: "Het is handig om de basiskennis van gebarentaal te hebben als u moet communiceren met iemand die doof is. Hierbij moet u gebruikmaken van uw handen, en minder uitgaan van wat u zegt.",
