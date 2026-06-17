@@ -85,6 +85,8 @@ import HelpButton from "../components/HelpButton.astro";
 </html>
 
 <style>
+  /* Claude - gebruik dvh om bug op te lossen dat elementen onnodig veel ruimte innemen op pagina waardoor er onnodige scroll ruimte onstaat
+  (fix voor mobiele versie site) */
   body {
     box-sizing: border-box;
     margin: 0;
@@ -104,6 +106,7 @@ import HelpButton from "../components/HelpButton.astro";
     overflow-x: hidden;
   }
 
+  /* Onderdeel bugfix */
   main {
     flex: 1;
     padding-top: 2rem;
