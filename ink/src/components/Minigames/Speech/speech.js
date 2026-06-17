@@ -2,7 +2,7 @@
 
 // Help popup content
 window.helpContext = {
-  text: "Mensen met een spraakgebrek vinden het vaak fijner als ze u ze uit laat praten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
+  text: "Mensen met een spraakgebrek vinden het vaak fijner als u ze laat uitpraten en ze niet onderbreekt door hun zinnen voor hen af te maken.",
 };
 
 // Closing popup
@@ -36,12 +36,12 @@ const CONFIG = {
 
 function init() {
   // Load dialogue data injected from Astro
-  const scenario = window.speechData?.[0]
+  const scenario = window.speechData?.[0];
 
-  const conversation = scenario?.dialogue
-  const checklist = scenario?.checklist || []
+  const conversation = scenario?.dialogue;
+  const checklist = scenario?.checklist || [];
 
-  if (!conversation) return
+  if (!conversation) return;
 
   // Current position in dialogue array
   let index = 0;
@@ -59,20 +59,25 @@ function init() {
   let interruptUsedThisLine = false;
 
   // DOM elements
-  const speakerName = document.getElementById("speaker-name")
-  const dialogueText = document.getElementById("dialogue-text")
-  const interruptBtn = document.getElementById("interrupt-button")
-  const startBtn = document.getElementById("start-button")
-  const speakerImage = document.getElementById("speaker-image")
+  const speakerName = document.getElementById("speaker-name");
+  const dialogueText = document.getElementById("dialogue-text");
+  const interruptBtn = document.getElementById("interrupt-button");
+  const startBtn = document.getElementById("start-button");
+  const speakerImage = document.getElementById("speaker-image");
 
-  const checklistContainer =
-    document.getElementById("checklist-items")
+  const checklistContainer = document.getElementById("checklist-items");
 
-  const checklistWrapper =
-    document.getElementById("checklist")
+  const checklistWrapper = document.getElementById("checklist");
 
-  if (!speakerName || !dialogueText || !interruptBtn || !startBtn || !speakerImage) return
-  const checklistElements = {}
+  if (
+    !speakerName ||
+    !dialogueText ||
+    !interruptBtn ||
+    !startBtn ||
+    !speakerImage
+  )
+    return;
+  const checklistElements = {};
 
   // Enables or disables the talk/interrupt button
   function setInterruptEnabled(enabled) {
@@ -159,7 +164,7 @@ function init() {
     await renderLine(line);
 
     if (line.checklistItem) {
-      completeChecklistItem(line.checklistItem)
+      completeChecklistItem(line.checklistItem);
     }
 
     // Final line check
@@ -218,13 +223,13 @@ function init() {
 
     started = true;
 
-    createChecklist()
-    checklistWrapper?.classList.remove("hidden")
+    createChecklist();
+    checklistWrapper?.classList.remove("hidden");
 
-    const dialogueContainer = document.getElementById("dialogue")
-    dialogueContainer.classList.remove("hidden")
-    startBtn.classList.add("hidden")
-    interruptBtn.classList.remove("hidden")
+    const dialogueContainer = document.getElementById("dialogue");
+    dialogueContainer.classList.remove("hidden");
+    startBtn.classList.add("hidden");
+    interruptBtn.classList.remove("hidden");
 
     nextLine();
   };
@@ -256,36 +261,35 @@ function init() {
   };
 
   function createChecklist() {
-    if (!checklistContainer) return
+    if (!checklistContainer) return;
 
-    checklistContainer.innerHTML = ""
+    checklistContainer.innerHTML = "";
 
-    checklist.forEach(item => {
-      const li = document.createElement("li")
+    checklist.forEach((item) => {
+      const li = document.createElement("li");
 
       // item is already the text string
-      li.textContent = item
-      li.classList.add("checklist-item")
+      li.textContent = item;
+      li.classList.add("checklist-item");
 
-      checklistContainer.appendChild(li)
+      checklistContainer.appendChild(li);
 
       // Use the checklist text itself as the key
-      checklistElements[item] = li
-    })
+      checklistElements[item] = li;
+    });
   }
 
   function completeChecklistItem(itemName) {
-    const item = checklistElements[itemName]
+    const item = checklistElements[itemName];
 
-    if (!item) return
+    if (!item) return;
 
-    item.classList.add("completed")
+    item.classList.add("completed");
   }
 
   // Initial state: button disabled
   setInterruptEnabled(false);
 }
-
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", init);
@@ -294,4 +298,4 @@ if (document.readyState === "loading") {
 }
 
 // Re-initialize on Astro page navigation
-document.addEventListener("astro:page-load", init)
+document.addEventListener("astro:page-load", init);
