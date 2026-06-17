@@ -1,3 +1,5 @@
+// Source handgestures: https://i.fbcd.co/products/original/common-asl-words-lbc-db-thumb-3407d0efc18489eb02e9ffc8e4de0df05f1aa88768f43cdcf27342bd3729ae82.jpg
+
 export const blindItems = [
   {
     id: 1,
