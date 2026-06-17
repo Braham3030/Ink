@@ -76,3 +76,6 @@ Code
 
 Afbeeldingen
 - Afbeelding voor motorische minigame gegenereerd
+
+Spelling/Grammatica
+- Algemeen controleren + bijdrage formelere teksten schrijven
